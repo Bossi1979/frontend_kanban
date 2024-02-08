@@ -1,0 +1,37 @@
+<header class="loginHeader">
+    <div class="logo">
+        <img src="../../assets/login/join_logo.png" alt="">
+    </div>
+    
+
+    <div class="signUp">
+        <span>Not a Join user?</span>
+        <button>Sign up</button>
+    </div>
+</header>
+
+<div class="loginContent">
+    <form (ngSubmit)="login()">
+        <h3>Log in</h3>
+        <div class="inputsDiv">
+            <div class="loginInputs">
+                <div class="loginInput">
+                    <input type="email" placeholder="Email" [(ngModel)]="email" name="email">
+                    <img src="../../assets/login/mail.png" alt="">
+                </div>
+                <div class="loginInput">
+                    <input type="password" placeholder="Password" [(ngModel)]="password" name="password">
+                    <img src="../../assets/login/lock.png" alt="">
+                </div>
+            </div>
+            <div class="remember">
+                <input type="checkbox"> <span>Remember me</span>
+            </div>
+        </div>
+        <div class="btnDiv">
+            <button class="loginBtn">Log in</button>
+            <button class="guestBtn">Guest Log in</button>
+        </div>
+
+    </form>
+</div>

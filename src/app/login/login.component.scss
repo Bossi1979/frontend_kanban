@@ -1,0 +1,184 @@
+.loginHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 80px 77px;
+
+    .logo{
+        width: 100px;
+        height: 122px;
+
+        img{
+            width: 100px;
+            height: auto;
+        }
+    }
+
+    .signUp{
+        display: flex;
+        // width: 279px;
+        gap: 35px;
+
+        span{
+            font-family: Inter;
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 24px;
+            letter-spacing: 0em;
+            text-align: left;
+        }
+
+        button{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            height: 48px;
+            padding: 15px 16px 15px 16px;
+            border-radius: 8px;
+            background-color: #2A3647;
+            font-family: Inter;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 19px;
+            letter-spacing: 0em;
+            text-align: left;
+            color: white;
+
+        }
+    }
+}
+
+.loginContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    form{ 
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        width: 652px;
+        height: 493px;
+        border-radius: 30px;
+        padding: 48px 115px 48px 115px;
+        box-sizing: border-box;
+        background-color: white;
+        box-shadow: 0px 0px 14px 3px #0000000A;
+
+        h3{
+            font-family: Inter;
+            font-size: 61px;
+            font-weight: 700;
+            line-height: 73px;
+            letter-spacing: 0em;
+            text-align: center;
+            color: black;
+            margin-block-start: 0px;
+            margin-block-end: 0px;
+        }
+
+        .inputsDiv{
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+
+            .loginInputs{
+                display: flex;
+                width: 100%;
+                flex-direction: column;
+                gap: 20px;
+
+                .loginInput{
+                    display: flex;
+                    width: 100%;
+                    border: 1px solid #D1D1D1;
+                    border-radius: 10px;
+                    padding: 12px 21px;
+                    box-sizing: border-box;
+                    
+                    input{
+                        display: flex;
+                        width: calc(100% - 24px);
+                        font-family: Inter;
+                        font-size: 20px;
+                        font-weight: 400;
+                        line-height: 24px;
+                        letter-spacing: 0em;
+                        text-align: left;
+                        border: none;
+                        outline: none;
+                    }
+
+                    img{
+                        width: auto;
+                        height: 24px;
+                    }
+                }
+
+            }
+
+            .remember{
+                display: flex;
+                gap: 8px;
+                margin-left: 39px;
+                width: 100%;
+
+                span{
+                    font-family: Inter;
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: 19px;
+                    letter-spacing: 0em;
+                    text-align: left;
+                }
+            }
+        }
+
+        .btnDiv{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 35px;
+
+            .loginBtn{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 15px 24px;
+                border-radius: 8px;
+                font-family: Inter;
+                font-size: 21px;
+                font-weight: 700;
+                line-height: 25px;
+                letter-spacing: 0em;
+                text-align: left;
+                color: white;
+                background-color: black;
+
+
+            }
+
+            .guestBtn{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 15px 24px;
+                border-radius: 8px;
+                font-family: Inter;
+                font-size: 21px;
+                font-weight: 700;
+                line-height: 25px;
+                letter-spacing: 0em;
+                text-align: left;
+                color: black;
+                background-color: white;
+                border: 1px solid black;
+
+            }
+        }
+    }
+}
