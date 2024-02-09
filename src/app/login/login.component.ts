@@ -10,15 +10,18 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  loginFailed = false;
 
   loginForm: FormGroup = new FormGroup({
     email: new FormControl('', [
       Validators.required,
-      Validators.email,
       Validators.pattern(
         '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\.[a-zA-Z]{2,}$'
       ),]),
-    password: new FormControl('', [Validators.required])
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ])
   });
 
 
@@ -33,8 +36,12 @@ export class LoginComponent {
       localStorage.setItem('username', response['username']);
       localStorage.setItem('email', response['email']);
       console.log(response);
-
-      this.router.navigateByUrl('/join');
+      if(response['token'] != "undefined"){
+        this.router.navigateByUrl('/join');
+      } else if (response['error'] == 'Login failed'){
+        this.loginFailed = true;
+      }
+      
 
     } catch(e){
       console.error(e);
@@ -45,6 +52,11 @@ export class LoginComponent {
 
   signup():void {
     this.router.navigateByUrl('/signup');
+  }
+
+
+  resetWarning():void {
+    this.loginFailed = false;
   }
 
 }

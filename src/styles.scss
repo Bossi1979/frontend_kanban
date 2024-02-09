@@ -38,6 +38,25 @@ body {
   }
 }
 
+.disabledBtn{
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 24px;
+  border-radius: 8px;
+  font-family: Inter;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 25px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+  background-color: gray;
+  border: none;
+  outline: none;
+}
+
 .secondaryBtn {
   display: flex;
   align-items: center;
@@ -71,6 +90,7 @@ body {
   
   .authInput {
     display: flex;
+    position: relative;
     width: 100%;
     border: 1px solid #d1d1d1;
     border-radius: 10px;
@@ -95,4 +115,28 @@ body {
       height: 24px;
     }
   }
+}
+
+.warnContainer{
+  display: flex;
+  position: absolute;
+  top: 50px;
+  color: rgba(237, 30, 121, 1);
+  font-family: "Nunito";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19.1px;
+  
+}
+
+.warnContainer2{
+  display: flex;
+  position: absolute;
+  top: 25px;
+  color: rgba(237, 30, 121, 1);
+  font-family: "Nunito";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19.1px;
+  
 }

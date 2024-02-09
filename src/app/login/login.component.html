@@ -21,20 +21,35 @@
             <div class="inputsDiv">
                 <div class="authInputs">
                     <div class="authInput">
-                        <input type="email" placeholder="Email"  name="email" formControlName="email">
+                        <input type="email" placeholder="Email"  name="email" formControlName="email" (keyup)="resetWarning()">
                         <img src="../../assets/img/login/mail.png" alt="">
+                        <div *ngIf="loginForm.controls['email'].dirty && loginForm.controls['email'].touched" class="warnContainer">
+                            <span *ngIf="loginForm.controls['email'].errors">
+                                *Unfortunately, this email address is invalid.
+                            </span>
+                        </div>
                     </div>
                     <div class="authInput">
-                        <input type="password" placeholder="Password" name="password" formControlName="password">
+                        <input type="password" placeholder="Password" name="password" formControlName="password" (keyup)="resetWarning()">
                         <img src="../../assets/img/login/lock.png" alt="">
+                        <div *ngIf="loginForm.controls['password'].dirty && loginForm.controls['password'].touched" class="warnContainer">
+                            <span *ngIf="loginForm.controls['password'].errors">
+                                *The password must consist of at least 6 characters.
+                            </span>
+                        </div>
                     </div>
                 </div>
-                <div class="remember">
+                <div class="remember" style="position:relative">
                     <input type="checkbox"> <span>Remember me</span>
+                    <div *ngIf="loginFailed" class="warnContainer2">
+                        <span>
+                            *Email and/or Password wrong.
+                        </span>
+                    </div>
                 </div>
             </div>
             <div class="btnDiv">
-                <button class="primaryBtn">Log in</button>
+                <button [disabled]="!loginForm.valid" [class.disabledBtn]="!loginForm.valid" [class.primaryBtn]="loginForm.valid">Log in</button>
                 <button class="secondaryBtn">Guest Log in</button>
             </div>
     

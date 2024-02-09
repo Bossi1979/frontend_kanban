@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -22,10 +23,26 @@ export class SignupComponent {
     cPassword: new FormControl('', [Validators.required])
   })
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private as: AuthService){}
 
 
   backToLogin(): void {
     this.router.navigateByUrl('/login');
+  }
+
+
+  async signup(): Promise<void> {
+    const firstname = this.signupForm.value.firstname;
+    const lastname = this.signupForm.value.lastname;
+    const email = this.signupForm.value.email;
+    const password = this.signupForm.value.password;
+    const cPassword = this.signupForm.value.cPassword;
+    const username = firstname + ' ' + lastname;
+    try {
+      let response = await this.as.signup(firstname, lastname, email, password, cPassword, username);
+      console.log(response);
+    } catch (err) {
+      alert('Signup failed: ');
+    }
   }
 }

@@ -10,7 +10,7 @@ export class JoinComponent {
 
   constructor(router: Router) {
     const token = localStorage.getItem('token');
-    if (!token) {
+    if (token == "undefined") {
       router.navigateByUrl('/login');
     }
   }

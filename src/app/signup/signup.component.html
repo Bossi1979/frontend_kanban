@@ -3,7 +3,7 @@
         <img src="../../assets/img/login/join_logo.png" alt="">
     </header>
 
-    <form [formGroup]="signupForm">
+    <form [formGroup]="signupForm" (submit)="signup()">
         <div class="signupHead">
             <span class="material-symbols-outlined" (click)="backToLogin()">
                 arrow_left_alt
@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="btnDiv">
-            <button class="primaryBtn">Signup</button>
+            <button class="primaryBtn" type="submit">Signup</button>
         </div>
         
 
