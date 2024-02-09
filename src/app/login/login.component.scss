@@ -115,41 +115,6 @@
             align-items: center;
             gap: 20px;
 
-            .loginInputs{
-                display: flex;
-                width: 100%;
-                flex-direction: column;
-                gap: 20px;
-
-                .loginInput{
-                    display: flex;
-                    width: 100%;
-                    border: 1px solid #D1D1D1;
-                    border-radius: 10px;
-                    padding: 12px 21px;
-                    box-sizing: border-box;
-                    
-                    input{
-                        display: flex;
-                        width: calc(100% - 24px);
-                        font-family: Inter;
-                        font-size: 20px;
-                        font-weight: 400;
-                        line-height: 24px;
-                        letter-spacing: 0em;
-                        text-align: left;
-                        border: none;
-                        outline: none;
-                    }
-
-                    img{
-                        width: auto;
-                        height: 24px;
-                    }
-                }
-
-            }
-
             .remember{
                 display: flex;
                 gap: 8px;
@@ -172,57 +137,6 @@
             flex-direction: row;
             justify-content: center;
             gap: 35px;
-
-            .loginBtn{
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 15px 24px;
-                border-radius: 8px;
-                font-family: Inter;
-                font-size: 21px;
-                font-weight: 700;
-                line-height: 25px;
-                letter-spacing: 0em;
-                text-align: left;
-                color: white;
-                background-color: black;
-                border: none;
-                outline: none;
-                cursor: pointer;
-
-                &:hover{
-                    transition: background-color 100ms ease-in-out;
-                    background-color: #29ABE2;
-                }
-
-
-            }
-
-            .guestBtn{
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 15px 24px;
-                border-radius: 8px;
-                font-family: Inter;
-                font-size: 21px;
-                font-weight: 700;
-                line-height: 25px;
-                letter-spacing: 0em;
-                text-align: left;
-                color: black;
-                background-color: white;
-                border: 1px solid black;
-                cursor: pointer;
-
-                &:hover{
-                    transition: color 100ms ease-in-out;
-                    transition: border 100ms ease-in-out;
-                    color: #29ABE2;
-                    border:1px solid #29ABE2;
-                }
-            }
         }
     }
 }

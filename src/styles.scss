@@ -1,17 +1,98 @@
 /* You can add global styles to this file, and also import other style files */
 
 body {
-    margin: 0px;
-    background-color: #F6F7F8;
+  margin: 0px;
+  background-color: #f6f7f8;
 }
-
 
 .material-symbols-outlined {
   font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 24
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
 }
 
+.primaryBtn {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 24px;
+  border-radius: 8px;
+  font-family: Inter;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 25px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+  background-color: black;
+  border: none;
+  outline: none;
+  cursor: pointer;
 
+  &:hover {
+    transition: background-color 100ms ease-in-out;
+    background-color: #29abe2;
+  }
+}
+
+.secondaryBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 24px;
+  border-radius: 8px;
+  font-family: Inter;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 25px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+  cursor: pointer;
+
+  &:hover {
+    transition: color 100ms ease-in-out;
+    transition: border 100ms ease-in-out;
+    color: #29abe2;
+    border: 1px solid #29abe2;
+  }
+}
+
+.authInputs {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 20px;
+  
+  .authInput {
+    display: flex;
+    width: 100%;
+    border: 1px solid #d1d1d1;
+    border-radius: 10px;
+    padding: 12px 21px;
+    box-sizing: border-box;
+
+    input {
+      display: flex;
+      width: calc(100% - 24px);
+      font-family: Inter;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 24px;
+      letter-spacing: 0em;
+      text-align: left;
+      border: none;
+      outline: none;
+    }
+
+    img {
+      width: auto;
+      height: 24px;
+    }
+  }
+}
