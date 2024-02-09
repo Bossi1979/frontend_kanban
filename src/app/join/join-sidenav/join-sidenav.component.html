@@ -1,0 +1,35 @@
+<div class="sidenav">
+    <div class="sidenavTop">
+        <div class="logo">
+            <img src="../../../assets/sidenav/logo.png" alt="">
+        </div>
+    
+        <div class="menu">
+            <div class="menuItem" (mouseenter)="mouseEnter(1)" (mouseleave)="mouseLeave(1)" (click)="selectMenu(1)" [class.selected]="data.selectedMenu == 1">
+                <img [src]="summaryScr">
+                <span>Summary</span>
+            </div>
+            <div class="menuItem" (mouseenter)="mouseEnter(2)" (mouseleave)="mouseLeave(2)" (click)="selectMenu(2)" [class.selected]="data.selectedMenu == 2">
+                <img [src]="addScr">
+                <span>Add Task</span>
+            </div>
+            <div class="menuItem" (mouseenter)="mouseEnter(3)" (mouseleave)="mouseLeave(3)" (click)="selectMenu(3)" [class.selected]="data.selectedMenu == 3">
+                <img [src]="boardScr">
+                <span>Board</span>
+            </div>
+            <div class="menuItem" (mouseenter)="mouseEnter(4)" (mouseleave)="mouseLeave(4)" (click)="selectMenu(4)" [class.selected]="data.selectedMenu == 4">
+                <img [src]="contactsScr">
+                <span>Contacts</span>
+            </div>
+        </div>
+
+
+    </div>
+
+    <footer>
+        <span>Privacy Policy</span>
+        <span>Legal Notice</span>
+    </footer>
+    
+
+</div>

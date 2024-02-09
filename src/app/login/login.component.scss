@@ -1,3 +1,13 @@
+.loginPage{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 1024px;
+    width: 100%;
+
+}
+
+
 .loginHeader{
     display: flex;
     flex-direction: row;
@@ -44,7 +54,14 @@
             letter-spacing: 0em;
             text-align: left;
             color: white;
+            border: none;
+            outline: none;
+            cursor: pointer;
 
+            &:hover{
+                transition: background-color 100ms ease-in-out;
+                background-color: #29ABE2;
+            }
         }
     }
 }
@@ -76,6 +93,18 @@
             color: black;
             margin-block-start: 0px;
             margin-block-end: 0px;
+        }
+
+        .lineOuter{
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: -32px;
+
+            .line{
+                width: 150px;
+                border: 3px solid #29ABE2;
+            }
         }
 
         .inputsDiv{
@@ -158,6 +187,14 @@
                 text-align: left;
                 color: white;
                 background-color: black;
+                border: none;
+                outline: none;
+                cursor: pointer;
+
+                &:hover{
+                    transition: background-color 100ms ease-in-out;
+                    background-color: #29ABE2;
+                }
 
 
             }
@@ -177,8 +214,40 @@
                 color: black;
                 background-color: white;
                 border: 1px solid black;
+                cursor: pointer;
 
+                &:hover{
+                    transition: color 100ms ease-in-out;
+                    transition: border 100ms ease-in-out;
+                    color: #29ABE2;
+                    border:1px solid #29ABE2;
+                }
             }
+        }
+    }
+}
+
+footer{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 80px 0px;
+    gap: 16px;
+
+    span{
+        //styleName: Version 2/body;
+        font-family: Inter;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 19px;
+        letter-spacing: 0em;
+        text-align: left;
+        color: #A8A8A8;
+        cursor: pointer;
+
+        &:hover{
+            transition: color 100ms ease-in-out;
+            color: #29ABE2;
         }
     }
 }
