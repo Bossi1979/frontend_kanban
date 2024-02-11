@@ -37,6 +37,7 @@ export class LoginComponent {
         this.router.navigateByUrl('/join');
         await this.setLocalStorage(response);
         await this.data.setLoggedUserData();
+        await this.data.getContacts();
       } else if (response['error'] == 'Login failed'){
         this.loginFailed = true;
       }

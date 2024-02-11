@@ -32,6 +32,11 @@ export class AuthService {
       "username": username
     };
     return lastValueFrom(this.http.post(url, body));
+  }
 
+  
+  public async getAllContacts(){
+    const url = environment.baseUrl + "/contacts/";
+    return lastValueFrom(this.http.get(url));
   }
 }

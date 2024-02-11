@@ -1,5 +1,8 @@
 .padding{
     display: flex;
-    padding: 100px 96px;
+    padding: 10vh 10.16vw;
+    height: calc(100vh - 136px);
     box-sizing: border-box;
+    overflow: hidden;
+    overflow-y: scroll;
 }

@@ -40,6 +40,15 @@ export class JoinSidenavComponent {
       this.mouseLeave(4);
     } 
     console.log(this.data.selectedMenu);
+    this.loadData(menuNo);
+  }
+
+
+  async loadData(menuNo: number): Promise<void> {
+    if (menuNo == 2){
+      await this.data.getContacts();
+      this.data.getUserColors();
+    } 
   }
 
 
