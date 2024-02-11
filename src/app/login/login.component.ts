@@ -32,12 +32,11 @@ export class LoginComponent {
     try {
       let response = await this.as.loginWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password);
       
-      localStorage.setItem('token', response['token']);
-      localStorage.setItem('username', response['username']);
-      localStorage.setItem('email', response['email']);
       console.log(response);
       if(response['token'] != "undefined"){
         this.router.navigateByUrl('/join');
+        await this.setLocalStorage(response);
+        await this.data.setLoggedUserData();
       } else if (response['error'] == 'Login failed'){
         this.loginFailed = true;
       }
@@ -48,6 +47,17 @@ export class LoginComponent {
       alert('Login failed');
     }
   }
+
+
+  async setLocalStorage(response: any): Promise<void> {
+    localStorage.setItem('token', response['token']);
+    localStorage.setItem('username', response['username']);
+    localStorage.setItem('email', response['email']);
+    localStorage.setItem('firstname', response['firstname']);
+    localStorage.setItem('lastname', response['lastname']);
+  }
+
+
 
 
   signup():void {

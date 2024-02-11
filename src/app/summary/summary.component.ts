@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-summary',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class SummaryComponent {
 
+  constructor(public data: DataService) {}
 }

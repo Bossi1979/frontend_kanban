@@ -14,7 +14,7 @@ export class AuthService {
   public  async loginWithEmailAndPassword(email: string, password: string): Promise<any> {
     const url = environment.baseUrl + "/login/";
     const body = {
-      "email": email,
+      "email": email.toLowerCase(),
       "password": password,
     };
     return lastValueFrom(this.http.post(url, body));

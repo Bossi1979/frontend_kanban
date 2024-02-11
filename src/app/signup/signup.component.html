@@ -18,30 +18,55 @@
                 <div class="authInput">
                     <input type="text" placeholder="Firstname"  name="firstname" formControlName="firstname">
                     <img src="../../assets/img/signup/person.png" alt="">
+                    <div *ngIf="signupForm.controls['firstname'].dirty && signupForm.controls['firstname'].touched" class="warnContainer">
+                        <span *ngIf="signupForm.controls['firstname'].errors">
+                            *The firstname must consist of at least 2 characters.
+                        </span>
+                    </div>
                 </div>
                 <div class="authInput">
                     <input type="text" placeholder="Lastname"  name="lastname" formControlName="lastname">
                     <img src="../../assets/img/signup/person.png" alt="">
+                    <div *ngIf="signupForm.controls['lastname'].dirty && signupForm.controls['lastname'].touched" class="warnContainer">
+                        <span *ngIf="signupForm.controls['lastname'].errors">
+                            *The lastname must consist of at least 2 characters.
+                        </span>
+                    </div>
                 </div>
                 <div class="authInput">
                     <input type="email" placeholder="Email"  name="email" formControlName="email">
                     <img src="../../assets/img/signup/mail.png" alt="">
+                    <div *ngIf="signupForm.controls['email'].dirty && signupForm.controls['email'].touched" class="warnContainer">
+                        <span *ngIf="signupForm.controls['email'].errors">
+                            *Unfortunately, this email address is invalid.
+                        </span>
+                    </div>
                 </div>
                 <div class="authInput">
                     <input type="password" placeholder="Password"  name="password" formControlName="password">
                     <img src="../../assets/img/signup/lock.png" alt="">
+                    <div *ngIf="signupForm.controls['password'].dirty && signupForm.controls['password'].touched" class="warnContainer">
+                        <span *ngIf="signupForm.controls['password'].errors">
+                            *The password must consist of at least 6 characters.
+                        </span>
+                    </div>
                 </div>
                 <div class="authInput">
                     <input type="password" placeholder="Confirm Password"  name="cPassword" formControlName="cPassword">
                     <img src="../../assets/img/signup/lock.png" alt="">
+                    <div *ngIf="signupForm.controls['cPassword'].dirty && signupForm.controls['cPassword'].touched" class="warnContainer">
+                        <span *ngIf="signupForm.get('password')?.value != signupForm.get('cPassword')?.value">
+                            *The confirm password must be identical with password.
+                        </span>
+                    </div>
                 </div>
                 <div class="remember">
-                    <input type="checkbox"> <span>I accept the</span><span class="link">Privacy policy</span>
+                    <input type="checkbox" formControlName="agreeTerms"> <span>I accept the</span><span class="link">Privacy policy</span>
                 </div>
             </div>
         </div>
         <div class="btnDiv">
-            <button class="primaryBtn" type="submit">Signup</button>
+            <button  type="submit" [disabled]="!signupForm.valid || (signupForm.get('password')?.value != signupForm.get('cPassword')?.value)" [class.disabledBtn]="!signupForm.valid || (signupForm.get('password')?.value != signupForm.get('cPassword')?.value)" [class.primaryBtn]="signupForm.valid && (signupForm.get('password')?.value == signupForm.get('cPassword')?.value)">Signup</button>
         </div>
         
 
