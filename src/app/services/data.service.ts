@@ -42,6 +42,10 @@ export class DataService {
     "ß": 4230,
 };
 
+
+// Varialblen für AddTask
+assignedToList: any[] = [];
+
   constructor(private as: AuthService) { 
     if (localStorage.getItem('userData')){
       this.loggedUserData = JSON.parse(localStorage.getItem('userData'));
@@ -56,13 +60,15 @@ export class DataService {
     const firstname = localStorage.getItem('firstname');
     const lastname = localStorage.getItem('lastname');
     const nameAbbreviation = firstname[0] + lastname[0];
+    const id = localStorage.getItem('id');
     
     const json = {
       "username": username,
       "email": email,
       "firstname": firstname,
       "lastname": lastname,
-      "nameAbbreviation": nameAbbreviation
+      "nameAbbreviation": nameAbbreviation,
+      'id': id,
     }
     this.loggedUserData[0] = json;
     localStorage.setItem('userData', JSON.stringify(this.loggedUserData));
@@ -111,6 +117,16 @@ export class DataService {
     return hexString;
 }
 
+
+// für AddTask
+
+async generatedAssignedList(): Promise<void> {
+  this.assignedToList = this.allContacts.slice();
+  this.assignedToList.forEach(contact => {
+    contact['checked'] = false;
+  });
+  console.log('dataService assignedToList: ', this.assignedToList);
+}
 
 
 

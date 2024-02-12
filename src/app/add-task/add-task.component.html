@@ -1,47 +1,56 @@
 <div class="addTask">
     <header>
         <h3>Add Task</h3>
-    </header>
-    <form>
+    </header >
+    <form (submit)="createTask()" [formGroup]="addForm">
         <div class="formular">
             <div class="formLeft">
                 <div class="formField">
                     <span>Title<span>*</span></span>
                     <div class="formInputs">
                         <div class="formInput">
-                            <input type="text" placeholder="Password" class="width100">
+                            <input type="text" placeholder="Password" class="width100" formControlName="title">
                         </div>
                     </div>
                 </div>
     
                 <div class="formField">
                     <span>Description</span>
-                    <textarea class="formTextarea" placeholder="Enter a Desription"></textarea>
+                    <textarea class="formTextarea" placeholder="Enter a Desription" formControlName="description"></textarea>
                 </div>
                 <div class="formField">
                     <span>Assigned to</span>
                     <div class="formInputs">
                         <div class="formInput">
-                            <input type="text"  value="Select contacts to assign"  *ngIf="assignBtnDisabled" (click)="asignToClicked()">
-                            <input type="text" *ngIf="!assignBtnDisabled">
-                            <img src="../../assets/img/add_task/arrow_drop_downaa.png" [class.rotate180deg]="!assignBtnDisabled" style="cursor: pointer;" (click)="asignBack()">
+                            <input type="text"  value="Select contacts to assign"  *ngIf="assignBtnDisabled"  (focus)="openAssignToDropdown()" formControlName="assignTo">
+                            <input type="text" *ngIf="!assignBtnDisabled" formControlName="assignToSelect">
+                            <img src="../../assets/img/add_task/arrow_drop_downaa.png" [class.rotate180deg]="!assignBtnDisabled" style="cursor: pointer;" (click)="toggleAssignToDropdown()">
                             <div class="dropAssign" *ngIf="!assignBtnDisabled">
-                                <div *ngFor="let contact of data.allContacts">
+                                <div *ngFor="let contact of data.assignedToList; let i = index;">
                                     <div class="contactLine">
                                         <div class="contactLineLeft">
                                             <div class="bage" [style.background-color]="contact.backgroundColor">
                                                 <span>{{contact.nameAbbreviation}}</span>
                                             </div>
                                             <p>
-                                                {{contact.username}}
+                                                {{contact.username}} <span *ngIf="data.loggedUserData[0].id == contact.id">(Du)</span>
                                             </p>    
                                         </div>
-                                         <input type="checkbox">
+                                         <input type="checkbox" [id]="'checked' + i" (click)="selectionCheckbox('checked' + i, i)" [checked]="data.assignedToList[i].checked">
                                     </div>
                                     
                                 </div>
                             </div>
                         </div>
+
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction:row; margin-top: -30px; margin-left: 2px; width: 100%; gap: 8px;">
+                    <div *ngFor="let contact of data.assignedToList; let i = index;">
+                        <div class="bageList" [style.background-color]="contact.backgroundColor" *ngIf="contact.checked">
+                            <span>{{contact.nameAbbreviation}}</span>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -51,7 +60,7 @@
                     <span>Due Date<span>*</span></span>
                     <div class="formInputs">
                         <div class="formInput">
-                            <input type="date" placeholder="text" class="width100">
+                            <input type="date" placeholder="text" class="width100" formControlName="dueDate">
                         </div>
                     </div>
                 </div>
@@ -81,7 +90,7 @@
                     <span>Category<span>*</span></span>
                     <div class="formInputs">
                         <div class="formInput">
-                            <input type="text" placeholder="Select task categora">
+                            <input type="text" placeholder="Select task category" formControlName="category">
                             <img src="../../assets/img/add_task/arrow_drop_downaa.png" alt="">
                         </div>
                     </div>
@@ -90,7 +99,7 @@
                     <span>Subtask</span>
                     <div class="formInputs">
                         <div class="formInput">
-                            <input type="text" placeholder="Add new subtask">
+                            <input type="text" placeholder="Add new subtask" formControlName="subtask">
                             <img src="../../assets/img/add_task/add.png" alt="">
                         </div>
                     </div>
@@ -109,7 +118,7 @@
                         close
                     </span>
                 </button>
-                <button class="primaryBtn">
+                <button  type="submit" [disabled]="!addForm.valid" [class.primaryBtn]="addForm.valid"  [class.disabledBtn]="!addForm.valid">
                     Create Task
                     <span class="material-symbols-outlined">
                         done

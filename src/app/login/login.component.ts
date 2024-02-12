@@ -34,10 +34,11 @@ export class LoginComponent {
       
       console.log(response);
       if(response['token'] != "undefined"){
-        this.router.navigateByUrl('/join');
         await this.setLocalStorage(response);
         await this.data.setLoggedUserData();
         await this.data.getContacts();
+        await this.data.generatedAssignedList();
+        this.router.navigateByUrl('/join');
       } else if (response['error'] == 'Login failed'){
         this.loginFailed = true;
       }
@@ -56,6 +57,7 @@ export class LoginComponent {
     localStorage.setItem('email', response['email']);
     localStorage.setItem('firstname', response['firstname']);
     localStorage.setItem('lastname', response['lastname']);
+    localStorage.setItem('id', response['id']);
   }
 
 

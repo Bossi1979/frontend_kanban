@@ -47,7 +47,8 @@ export class JoinSidenavComponent {
   async loadData(menuNo: number): Promise<void> {
     if (menuNo == 2){
       await this.data.getContacts();
-      this.data.getUserColors();
+      await this.data.getUserColors();
+      await this.data.generatedAssignedList();
     } 
   }
 
