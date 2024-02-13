@@ -37,13 +37,10 @@ export class LoginComponent {
         await this.setLocalStorage(response);
         await this.data.setLoggedUserData();
         await this.data.getContacts();
-        await this.data.generatedAssignedList();
         this.router.navigateByUrl('/join');
       } else if (response['error'] == 'Login failed'){
         this.loginFailed = true;
       }
-      
-
     } catch(e){
       console.error(e);
       alert('Login failed');
@@ -59,8 +56,6 @@ export class LoginComponent {
     localStorage.setItem('lastname', response['lastname']);
     localStorage.setItem('id', response['id']);
   }
-
-
 
 
   signup():void {

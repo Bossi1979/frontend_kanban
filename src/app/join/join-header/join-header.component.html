@@ -3,7 +3,7 @@
 
     <div class="headerRight">
         <img src="../../../assets/img/header/help.png" alt="">
-        <div class="userIcon" [style.background-color]="data.userBackgroundColor">
+        <div class="userIcon" [style.background-color]="data.userBackgroundColor" (click)="logout()">
             <span>{{data.loggedUserData[0].nameAbbreviation}}</span>
         </div>
 

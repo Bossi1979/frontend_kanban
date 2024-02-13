@@ -21,6 +21,12 @@ export class AuthService {
   }
 
 
+  public async logout(): Promise<any> {
+    const url = environment.baseUrl + "/logout/";
+    return lastValueFrom(this.http.get(url));
+  }
+
+
   public async signup(firstname: string, lastname: string, email: string, password: string, cPassword: string, username: string): Promise<any>{
     const url = environment.baseUrl + "/register/";
     const body = {
@@ -38,5 +44,11 @@ export class AuthService {
   public async getAllContacts(){
     const url = environment.baseUrl + "/contacts/";
     return lastValueFrom(this.http.get(url));
+  }
+
+
+  public async saveTask(task: any[]): Promise<any>{
+    const url = environment.baseUrl + "/add_task/";
+    return lastValueFrom(this.http.post(url, task));
   }
 }

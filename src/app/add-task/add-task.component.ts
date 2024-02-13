@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -40,6 +41,7 @@ export class AddTaskComponent {
 
   constructor(
     public data: DataService,
+    private as: AuthService,
     ) { }
 
 
@@ -191,6 +193,7 @@ export class AddTaskComponent {
     this.resetPrio();
     this.addForm.reset();
     this.resetAssignTo();
+    this.subtasksList = [];
   }
 
   
@@ -213,7 +216,8 @@ export class AddTaskComponent {
    */
   async saveTask(): Promise<void> {
     const taskData: any = await this.createTaskDataForSave();
-    console.log(taskData);
+    let response = await this.as.saveTask(taskData);
+    console.log(response);
   }
 
 
@@ -229,8 +233,9 @@ export class AddTaskComponent {
       assignTo: await this.createAssignToForSave(),
       dueDate: this.addForm.get('dueDate').value,
       category: this.addForm.get('category').value,
-      subtask: this.addForm.get('subtask').value,
+      subtask: this.subtasksList,
       prio: this.selectedPrioBtn,
+      processingStatus: 0,
     };
     return taskData;
   }
@@ -258,6 +263,75 @@ export class AddTaskComponent {
    */
   contactMarkedAsAssignedTo(assignedToStatus: boolean): boolean {
     return assignedToStatus;
+  }
+
+
+  // category
+  categoryDropdown: boolean = false;
+  subtaskEdit: boolean = false;
+  @ViewChild('subtaskInput') subtaskInput!: ElementRef;
+  subtasksList: any[] = [];
+
+
+  toogleCategoryDropdown(): void {
+    this.categoryDropdown =!this.categoryDropdown;
+    if (!this.categoryDropdown) this.addForm.get('category').enable();
+    else this.addForm.get('category').disable();
+  }
+
+  setCategory(category: string): void{
+    this.addForm.get('category').setValue(category);
+    this.toogleCategoryDropdown();
+  }
+
+  subtaskSelection(){
+    this.subtaskEdit = true;
+  }
+
+  subtaskLeave(){
+    this.subtaskEdit = false;
+  }
+
+  activatedSubtaskEdit(){
+    console.log('activatedSubtaskEdit');
+    this.subtaskEdit = true;
+    this.subtaskInput.nativeElement.focus();
+  }
+
+  addSubtask(){
+    // (blur)="subtaskLeave()" 
+    let subtask: string = this.addForm.get('subtask').value;
+    if (subtask.trim().length > 0) {
+      let newSubtask: string = subtask.trim();
+      let checked: boolean = false;
+      this.subtasksList.push({subtask: newSubtask, checked: checked});
+      console.log('subtaskList: ', this.subtasksList);
+      this.addForm.get('subtask').setValue('');
+      this.activatedSubtaskEdit();
+    }
+  }
+
+  closeAddSubtask(){
+    this.addForm.get('subtask').setValue('');
+    this.subtaskLeave();
+    this.subtaskInput.nativeElement.blur();
+  }
+
+  btnPressed(event: any){
+    if (event.keyCode == 13) {
+      this.addSubtask();
+    }
+    if (event.keyCode == 27) {
+      this.closeAddSubtask();
+    }
+  }
+
+
+  enabledEdit: boolean = false;
+  backg: string = '#f6f7f8';
+  enableEdit(){
+    this.enabledEdit = true;
+    this.backg = '#FFFFFF';
   }
 
 
