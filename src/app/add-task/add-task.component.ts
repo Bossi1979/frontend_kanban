@@ -284,22 +284,26 @@ export class AddTaskComponent {
     this.toogleCategoryDropdown();
   }
 
-  subtaskSelection(){
+
+  subtaskSelection(): void{
     this.subtaskEdit = true;
   }
 
-  subtaskLeave(){
+
+
+  subtaskLeave(): void{
     this.subtaskEdit = false;
   }
 
-  activatedSubtaskEdit(){
+  activatedSubtaskEdit(): void{
     console.log('activatedSubtaskEdit');
     this.subtaskEdit = true;
     this.subtaskInput.nativeElement.focus();
   }
 
-  addSubtask(){
+  addSubtask():void{
     // (blur)="subtaskLeave()" 
+    event.preventDefault();
     let subtask: string = this.addForm.get('subtask').value;
     if (subtask.trim().length > 0) {
       let newSubtask: string = subtask.trim();
@@ -311,7 +315,7 @@ export class AddTaskComponent {
     }
   }
 
-  closeAddSubtask(){
+  closeAddSubtask(): void{
     this.addForm.get('subtask').setValue('');
     this.subtaskLeave();
     this.subtaskInput.nativeElement.blur();
@@ -332,6 +336,11 @@ export class AddTaskComponent {
   enableEdit(){
     this.enabledEdit = true;
     this.backg = '#FFFFFF';
+  }
+
+  leaveItemEdit(): void{
+    this.enabledEdit = false;
+    this.backg = '#f6f7f8';
   }
 
 

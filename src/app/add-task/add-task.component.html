@@ -132,11 +132,11 @@
                         </div>
                     </div>
                     <div class="subtaskList">
-                        <div class="subtaskItem" *ngFor="let item of subtasksList" (dblclick)="enableEdit()" [style.background-color]="backg">
+                        <div class="subtaskItem" *ngFor="let item of subtasksList; let i= index;" (dblclick)="enableEdit()" [style.background-color]="backg">
                             <li *ngIf="!enabledEdit">
                                 <span >{{item.subtask}}</span>
                             </li>
-                            <input type="text" [value]="item.subtask" *ngIf="enabledEdit">
+                            <input type="text" [value]="item.subtask" *ngIf="enabledEdit" [id]="'subInput' + i" (blur)="leaveItemEdit()">
                             <div class="icons" [style.background-color]="backg" *ngIf="enabledEdit">
                                 <span class="material-symbols-outlined">edit</span>
                                 <div class="subtaskDivider"></div>
