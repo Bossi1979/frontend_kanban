@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild, QueryList, ViewChildren } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
@@ -42,6 +42,8 @@ export class AddTaskComponent {
   constructor(
     public data: DataService,
     private as: AuthService,
+    private renderer: Renderer2, 
+    private elementRef: ElementRef
     ) { }
 
 
@@ -331,16 +333,42 @@ export class AddTaskComponent {
   }
 
 
-  enabledEdit: boolean = false;
+  enabledEdit: number = -1;
   backg: string = '#f6f7f8';
-  enableEdit(){
-    this.enabledEdit = true;
+  iconView: number = -1;
+  enableEdit(index: number): void {
+
+    this.enabledEdit = index;
     this.backg = '#FFFFFF';
   }
 
   leaveItemEdit(): void{
-    this.enabledEdit = false;
+    this.enabledEdit = -1;
     this.backg = '#f6f7f8';
+  }
+
+
+  @ViewChildren('subItem') subItems: QueryList<ElementRef>;
+
+  subtaskItemMouseover(id: number): void {
+    this.iconView = id;
+    this.subItems.forEach((item, index) => {
+      if (index === id) {
+        this.renderer.setStyle(item.nativeElement, 'background-color', '#FFFFFF');
+      }
+    });
+    console.log('mouseover');
+    
+  }
+
+  subtaskItemMouseout(id: any): void {
+    this.iconView = -1;
+    this.subItems.forEach((item, index) => {
+      if (index === id) {
+        this.renderer.setStyle(item.nativeElement, 'background-color', 'unset');
+      }
+    });
+    console.log('mouseleave');
   }
 
 
