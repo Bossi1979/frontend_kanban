@@ -476,6 +476,10 @@
         padding: 4px 16px; 
         box-sizing: border-box;
 
+        &:hover{
+            background-color: white;
+        }
+
         li{
             font-family: Inter;
             font-size: 16px;
@@ -513,6 +517,22 @@
         .icons{
             display: flex; 
             gap: 4px;
+
+            .iconPen{
+                &:hover{
+                    transition: color 100ms ease-in-out;
+                    color: #29abe2;
+                }
+                cursor: pointer;
+            }
+
+            .iconTrash{
+                &:hover{
+                    transition: color 100ms ease-in-out;
+                    color: #29abe2;
+                }
+                cursor: pointer;
+            }
 
             .subtaskDivider{
                 height: 24px; 

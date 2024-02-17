@@ -1,7 +1,8 @@
-import { Component, ElementRef, Renderer2, ViewChild, QueryList, ViewChildren } from '@angular/core';
+import { Component, ElementRef, ViewChild} from '@angular/core';
 import { DataService } from '../services/data.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { AddTaskService } from '../services/add-task.service';
+import { SubtasksService } from '../services/subtasks.service';
 
 
 @Component({
@@ -16,35 +17,14 @@ export class AddTaskComponent {
   selectedPrioBtn: number = 0;
   assignBtnDisabled = true;
   isSaving: boolean = false;
-  addForm: FormGroup = new FormGroup({
-    title: new FormControl('', [
-      Validators.required,
-      Validators.minLength(2),
-      Validators.maxLength(30)
-    ]),
-    description: new FormControl('', []),
-    assignTo: new FormControl('Select contacts to assign', []),
-    assignToSelect: new FormControl('', []),
-    dueDate: new FormControl('', [
-      Validators.required,
-      Validators.minLength(10),
-      Validators.maxLength(10),
-    ]),
-    category: new FormControl('', [
-      Validators.required,
-      Validators.minLength(2),
-      Validators.maxLength(30)
-    ]),
-    subtask: new FormControl('', []),
-  });
-
+  
 
   constructor(
     public data: DataService,
     private as: AuthService,
-    private renderer: Renderer2, 
-    private elementRef: ElementRef
-    ) { }
+    public addTaskService: AddTaskService,
+    public subtaskService: SubtasksService,
+  ) { }
 
 
   /**
@@ -72,11 +52,11 @@ export class AddTaskComponent {
 
 
 
- /**
-   * Disables the button for the specified priority.
-   * 
-   * @param {number} prio - The priority for which the button should be disabled.
-   */
+  /**
+    * Disables the button for the specified priority.
+    * 
+    * @param {number} prio - The priority for which the button should be disabled.
+    */
   disablePrioBtn(prio: number): void {
     if (prio == 1) this.urgentSelected = !this.urgentSelected;
     if (prio == 2) this.mediumSelected = !this.mediumSelected;
@@ -171,7 +151,7 @@ export class AddTaskComponent {
   userListedAsAssignedTo(index: number): boolean {
     return this.data.assignedToList[index].checked;
   }
-  
+
 
   /**
    * Asynchronously creates a task, handles the saving process, and clears the form afterwards.
@@ -180,11 +160,11 @@ export class AddTaskComponent {
    */
   async createTask(): Promise<void> {
     this.isSaving = true;
-    this.addForm.disable();
+    this.addTaskService.addForm.disable();
     await this.saveTask();
     this.clearForm();
     this.isSaving = false;
-    this.addForm.enable();
+    this.addTaskService.addForm.enable();
   }
 
 
@@ -193,18 +173,18 @@ export class AddTaskComponent {
    */
   clearForm(): void {
     this.resetPrio();
-    this.addForm.reset();
+    this.addTaskService.addForm.reset();
     this.resetAssignTo();
-    this.subtasksList = [];
+    this.subtaskService.subtasksList = [];
   }
 
-  
+
   /**
    * Resets the assigned contacts to their initial state and disables the assignment button.
    */
   resetAssignTo(): void {
     this.assignBtnDisabled = true;
-    this.addForm.get('assignTo').setValue('Select contacts to assign');
+    this.addTaskService.addForm.get('assignTo').setValue('Select contacts to assign');
     this.data.assignedToList.forEach(contact => {
       contact.checked = false;
     });
@@ -230,12 +210,12 @@ export class AddTaskComponent {
    */
   async createTaskDataForSave(): Promise<any> {
     const taskData: any = {
-      title: this.addForm.get('title').value,
-      description: this.addForm.get('description').value,
+      title: this.addTaskService.addForm.get('title').value,
+      description: this.addTaskService.addForm.get('description').value,
       assignTo: await this.createAssignToForSave(),
-      dueDate: this.addForm.get('dueDate').value,
-      category: this.addForm.get('category').value,
-      subtask: this.subtasksList,
+      dueDate: this.addTaskService.addForm.get('dueDate').value,
+      category: this.addTaskService.addForm.get('category').value,
+      subtask: this.subtaskService.subtasksList,
       prio: this.selectedPrioBtn,
       processingStatus: 0,
     };
@@ -270,107 +250,55 @@ export class AddTaskComponent {
 
   // category
   categoryDropdown: boolean = false;
-  subtaskEdit: boolean = false;
-  @ViewChild('subtaskInput') subtaskInput!: ElementRef;
-  subtasksList: any[] = [];
+  
 
-
+  /**
+   * Toggles the category dropdown state.
+   * 
+   * @returns {void}
+   */
   toogleCategoryDropdown(): void {
-    this.categoryDropdown =!this.categoryDropdown;
-    if (!this.categoryDropdown) this.addForm.get('category').enable();
-    else this.addForm.get('category').disable();
+    this.categoryDropdown = !this.categoryDropdown;
+    if (!this.categoryDropdown) this.addTaskService.addForm.get('category').enable();
+    else this.addTaskService.addForm.get('category').disable();
   }
 
-  setCategory(category: string): void{
-    this.addForm.get('category').setValue(category);
+
+  /**
+   * Sets the category value and toggles the category dropdown state.
+   * @param {string} category - The category to set.
+   * 
+   * @returns {void}
+   */
+  setCategory(category: string): void {
+    this.addTaskService.addForm.get('category').setValue(category);
     this.toogleCategoryDropdown();
   }
 
+  // subtask functions
 
-  subtaskSelection(): void{
-    this.subtaskEdit = true;
-  }
+  @ViewChild('subtaskInput') subtaskInput!: ElementRef;
 
-
-
-  subtaskLeave(): void{
-    this.subtaskEdit = false;
-  }
-
-  activatedSubtaskEdit(): void{
-    console.log('activatedSubtaskEdit');
-    this.subtaskEdit = true;
+  activatedSubtaskEdit(): void {
+    this.subtaskService.activatedSubtaskEdit();
     this.subtaskInput.nativeElement.focus();
   }
 
-  addSubtask():void{
-    // (blur)="subtaskLeave()" 
-    event.preventDefault();
-    let subtask: string = this.addForm.get('subtask').value;
-    if (subtask.trim().length > 0) {
-      let newSubtask: string = subtask.trim();
-      let checked: boolean = false;
-      this.subtasksList.push({subtask: newSubtask, checked: checked});
-      console.log('subtaskList: ', this.subtasksList);
-      this.addForm.get('subtask').setValue('');
-      this.activatedSubtaskEdit();
-    }
-  }
 
-  closeAddSubtask(): void{
-    this.addForm.get('subtask').setValue('');
-    this.subtaskLeave();
+  /**
+   * Closes the add subtask mode.
+   * 
+   * @returns {void}
+   */
+  closeAddSubtask(): void {
+    this.subtaskService.closeAddSubtask();
     this.subtaskInput.nativeElement.blur();
   }
 
-  btnPressed(event: any){
-    if (event.keyCode == 13) {
-      this.addSubtask();
-    }
-    if (event.keyCode == 27) {
-      this.closeAddSubtask();
-    }
-  }
-
-
-  enabledEdit: number = -1;
-  backg: string = '#f6f7f8';
-  iconView: number = -1;
-  enableEdit(index: number): void {
-
-    this.enabledEdit = index;
-    this.backg = '#FFFFFF';
-  }
-
-  leaveItemEdit(): void{
-    this.enabledEdit = -1;
-    this.backg = '#f6f7f8';
-  }
-
-
-  @ViewChildren('subItem') subItems: QueryList<ElementRef>;
-
-  subtaskItemMouseover(id: number): void {
-    this.iconView = id;
-    this.subItems.forEach((item, index) => {
-      if (index === id) {
-        this.renderer.setStyle(item.nativeElement, 'background-color', '#FFFFFF');
-      }
-    });
-    console.log('mouseover');
-    
-  }
-
-  subtaskItemMouseout(id: any): void {
-    this.iconView = -1;
-    this.subItems.forEach((item, index) => {
-      if (index === id) {
-        this.renderer.setStyle(item.nativeElement, 'background-color', 'unset');
-      }
-    });
-    console.log('mouseleave');
-  }
-
-
-
 }
+
+
+
+
+
+

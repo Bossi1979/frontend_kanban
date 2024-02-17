@@ -2,7 +2,7 @@
     <header>
         <h3>Add Task</h3>
     </header>
-    <form [formGroup]="addForm">
+    <form [formGroup]="addTaskService.addForm">
         <div class="formular">
             <div class="formLeft">
                 <div class="formField">
@@ -117,30 +117,33 @@
                 <div class="formField">
                     <span class="head">Subtask</span>
                     <div class="formInputs">
-                        <div class="formInput" >
-                            <input type="text" placeholder="Add new subtask" formControlName="subtask" (focus)="subtaskSelection()" #subtaskInput (keyup)="btnPressed($event)">
-                            <span class="material-symbols-outlined subtask" *ngIf="!subtaskEdit" (click)="activatedSubtaskEdit()">
+                        <div class="formInput">
+                            <input type="text" placeholder="Add new subtask" formControlName="subtask" (focus)="subtaskService.subtaskSelection()" #subtaskInput (keyup)="subtaskService.btnPressed($event)" [id]="subtaskInput">
+                            <span class="material-symbols-outlined subtask" *ngIf="!subtaskService.subtaskEdit" (click)="activatedSubtaskEdit()">
                                 add
                             </span>
-                            <span class="material-symbols-outlined closeSubtask" *ngIf="subtaskEdit" (click)="closeAddSubtask()">
+                            <span class="material-symbols-outlined closeSubtask" *ngIf="subtaskService.subtaskEdit" (click)="closeAddSubtask()">
                                 close
                             </span>
-                            <div class="subtaskDivider" style="height: 24px; border-left: 1px solid #D1D1D1" *ngIf="subtaskEdit"></div>
-                            <span class="material-symbols-outlined addSubtask" *ngIf="subtaskEdit" (click)="addSubtask()">
+                            <div class="subtaskDivider" style="height: 24px; border-left: 1px solid #D1D1D1" *ngIf="subtaskService.subtaskEdit"></div>
+                            <span class="material-symbols-outlined addSubtask" *ngIf="subtaskService.subtaskEdit" (click)="subtaskService.addSubtask()">
                                 done
                             </span>
                         </div>
                     </div>
                     <div class="subtaskList">
-                        <div class="subtaskItem" *ngFor="let item of subtasksList; let i= index;" (dblclick)="enableEdit(i)" [style.background-color]="backg"  #subItem  (mouseover)="subtaskItemMouseover(i)" (mouseleave)="subtaskItemMouseout(i)">
-                            <li *ngIf="enabledEdit != i">
+                        <div class="subtaskItem" *ngFor="let item of subtaskService.subtasksList; let i= index;" (mouseenter)="subtaskService.subtaskHovered(i)" (mouseleave)="subtaskService.subtaskNotHovered()" (dblclick)="subtaskService.doubleClick(i)">
+                            <li *ngIf="subtaskService.subtaskListEditActive != i">
                                 <span >{{item.subtask}}</span>
                             </li>
-                            <input type="text" [value]="item.subtask" *ngIf="enabledEdit == i" [id]="'subInput' + i" (blur)="leaveItemEdit()">
-                            <div class="icons" [style.background-color]="backg" *ngIf="enabledEdit || iconView == i">
-                                <span class="material-symbols-outlined" >edit</span>
+                            <input type="text" [value]="item.subtask" *ngIf="subtaskService.subtaskListEditActive == i" (blur)="subtaskService.leaveSubtaskListEdit(i)" formControlName="subListItem" [id]="'subtaskListItem' + i" (keyup)="subtaskService.subtaskItemListBtnPressed($event, i)">
+                            <div class="icons" *ngIf="subtaskService.hoveredSubtask == i && subtaskService.subtaskListEditActive != i">
+                                <span class="material-symbols-outlined iconPen" (click)="subtaskService.editSubtaskList(i)">edit</span>
                                 <div class="subtaskDivider" ></div>
-                                <span class="material-symbols-outlined" >delete</span>
+                                <span class="material-symbols-outlined iconTrash" (click)="subtaskService.deleteSubTaskItem(i)">delete</span>
+                            </div>
+                            <div class="icons" *ngIf="subtaskService.subtaskListEditActive == i">
+                                <span class="material-symbols-outlined iconTrash">done</span>
                             </div>
                         </div>
                         
@@ -160,8 +163,8 @@
                         close
                     </span>
                 </button>
-                <button type="button" [disabled]="!addForm.valid" [class.primaryBtn]="addForm.valid"
-                    [class.disabledBtn]="!addForm.valid" (click)="createTask()">
+                <button type="button" [disabled]="!addTaskService.addForm.valid" [class.primaryBtn]="addTaskService.addForm.valid"
+                    [class.disabledBtn]="!addTaskService.addForm.valid" (click)="createTask()">
                     Create Task
                     <span class="material-symbols-outlined">
                         done
