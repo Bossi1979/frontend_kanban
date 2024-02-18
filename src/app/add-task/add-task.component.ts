@@ -3,6 +3,7 @@ import { DataService } from '../services/data.service';
 import { AuthService } from '../services/auth.service';
 import { AddTaskService } from '../services/add-task.service';
 import { SubtasksService } from '../services/subtasks.service';
+import { Task } from '../models/task.model';
 
 
 @Component({
@@ -17,6 +18,8 @@ export class AddTaskComponent {
   selectedPrioBtn: number = 0;
   assignBtnDisabled = true;
   isSaving: boolean = false;
+  categoryDropdown: boolean = false;
+  @ViewChild('subtaskInput') subtaskInput!: ElementRef;
   
 
   constructor(
@@ -199,7 +202,6 @@ export class AddTaskComponent {
   async saveTask(): Promise<void> {
     const taskData: any = await this.createTaskDataForSave();
     let response = await this.as.saveTask(taskData);
-    console.log(response);
   }
 
 
@@ -209,17 +211,15 @@ export class AddTaskComponent {
    * @returns {Promise<any>} - A Promise that resolves with the task data for saving.
    */
   async createTaskDataForSave(): Promise<any> {
-    const taskData: any = {
-      title: this.addTaskService.addForm.get('title').value,
-      description: this.addTaskService.addForm.get('description').value,
-      assignTo: await this.createAssignToForSave(),
-      dueDate: this.addTaskService.addForm.get('dueDate').value,
-      category: this.addTaskService.addForm.get('category').value,
-      subtask: this.subtaskService.subtasksList,
-      prio: this.selectedPrioBtn,
-      processingStatus: 0,
-    };
-    return taskData;
+    let task: Task = new Task();
+    task.title = this.addTaskService.addForm.get('title').value;
+    task.description = this.addTaskService.addForm.get('description').value;
+    task.assignTo = await this.createAssignToForSave();
+    task.dueDate = this.addTaskService.addForm.get('dueDate').value;
+    task.category = this.addTaskService.addForm.get('category').value;
+    task.subtask = this.subtaskService.subtasksList;
+    task.prio = this.selectedPrioBtn;
+    return task.createTaskObject();
   }
 
 
@@ -248,10 +248,6 @@ export class AddTaskComponent {
   }
 
 
-  // category
-  categoryDropdown: boolean = false;
-  
-
   /**
    * Toggles the category dropdown state.
    * 
@@ -274,10 +270,7 @@ export class AddTaskComponent {
     this.addTaskService.addForm.get('category').setValue(category);
     this.toogleCategoryDropdown();
   }
-
-  // subtask functions
-
-  @ViewChild('subtaskInput') subtaskInput!: ElementRef;
+  
 
   activatedSubtaskEdit(): void {
     this.subtaskService.activatedSubtaskEdit();
@@ -294,7 +287,6 @@ export class AddTaskComponent {
     this.subtaskService.closeAddSubtask();
     this.subtaskInput.nativeElement.blur();
   }
-
 }
 
 

@@ -1,1 +1,32 @@
-<p>contacts works!</p>
+<div class="contactsList">
+    <div *ngFor="let contact of data.allContacts; let i = index;">
+
+        <div class="contactBox" *ngIf="i == 0">
+            <button class="addContactBtn">
+                Add new contact
+                <span class="material-symbols-outlined">
+                    person_add
+                </span>
+            </button>
+        </div>
+        <div class="contactBox" *ngIf="i == 0 || (data.allContacts[i].name_abbreviation[1] != data.allContacts[i - 1].name_abbreviation[1])">
+            <div class="contactItem">
+                <p class="alphabet">{{contact.name_abbreviation[1]}}</p>
+            </div>
+        </div>
+        <div class="contactBox">
+            <div class="contactItem">
+                <div class="bageItem" [style.background-color]="contact.background_color">
+                    <span>{{contact.name_abbreviation}}</span>
+                </div>
+                <div class="contactData">
+                    <p class="username">{{contact.firstname}} {{contact.lastname}}</p>
+                    <a href="" class="email">{{contact.email}}</a>
+                </div>   
+            </div>
+        </div>
+
+    </div>
+    
+
+</div>

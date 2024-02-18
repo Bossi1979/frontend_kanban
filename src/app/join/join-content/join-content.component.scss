@@ -6,3 +6,12 @@
     overflow: hidden;
     overflow-y: scroll;
 }
+
+
+.paddingContacts{
+    display: flex;
+    height: calc(100vh - 96px);
+    box-sizing: border-box;
+    overflow: hidden;
+    overflow-y: scroll;
+}
