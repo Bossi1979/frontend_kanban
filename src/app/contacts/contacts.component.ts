@@ -7,7 +7,15 @@ import { DataService } from '../services/data.service';
   styleUrl: './contacts.component.scss'
 })
 export class ContactsComponent {
+  selectedContact: number = -1;
+
 
   constructor(public data: DataService) { }
+
+
+  selectContact(index: number) {
+    this.selectedContact = index;
+    
+  }
 
 }

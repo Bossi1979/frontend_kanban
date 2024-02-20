@@ -1,7 +1,7 @@
 <div class="contactsList">
     <div *ngFor="let contact of data.allContacts; let i = index;">
 
-        <div class="contactBox" *ngIf="i == 0">
+        <div class="contactBox sticky" *ngIf="i == 0">
             <button class="addContactBtn">
                 Add new contact
                 <span class="material-symbols-outlined">
@@ -15,18 +15,75 @@
             </div>
         </div>
         <div class="contactBox">
-            <div class="contactItem">
+            <div class="contactItem" (click)="selectContact(i)" [class.hover]="selectedContact != i" [class.selected]="selectedContact == i">
                 <div class="bageItem" [style.background-color]="contact.background_color">
-                    <span>{{contact.name_abbreviation}}</span>
+                    <span >{{contact.name_abbreviation}}</span>
                 </div>
                 <div class="contactData">
-                    <p class="username">{{contact.firstname}} {{contact.lastname}}</p>
-                    <a href="" class="email">{{contact.email}}</a>
+                    <p class="username" [class.nameSelected]="selectedContact == i">{{contact.firstname}} {{contact.lastname}}</p>
+                    <p href="" class="email">{{contact.email}}</p>
                 </div>   
             </div>
         </div>
 
     </div>
-    
+</div>
+
+<div class="detailView">
+    <header>
+        <h3>Contacts</h3>
+        <div class="divider"></div>
+        <span>Better with a team</span>
+    </header>
+
+    <div class="contactDetails" *ngIf="selectedContact != -1">
+        <div class="headline">
+            <div class="bageItem" [style.background-color]="data.allContacts[selectedContact].background_color">
+                <span>{{data.allContacts[selectedContact].name_abbreviation}}</span>
+            </div>
+            <div class="contactDetail">
+                <div class="contactName">
+                    <p>{{data.allContacts[selectedContact].firstname}} {{data.allContacts[selectedContact].lastname}}</p>
+                </div>
+                <div class="contactOptions">
+                    <div class="btnEdit">
+                        <span class="material-symbols-outlined icon">
+                            edit
+                        </span>
+                        <p>Edit</p>
+                    </div>
+                    <div class="btnDelete">
+                        <span class="material-symbols-outlined icon">
+                            delete
+                        </span>
+                        <p>Delete</p>
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+
+        <h4>Contact Information</h4>
+
+        <div class="emailPhone">
+            <div class="info">
+                <h5>Email</h5>
+                <span href="" class="email">{{data.allContacts[selectedContact].email}}</span>
+            </div>
+            <div class="info">
+                <h5>Phone</h5>
+                <p>+49 023565483154</p>
+            </div>
+            
+            
+        </div>
+
+
+
+    </div>
+
+
+
 
 </div>
