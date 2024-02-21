@@ -2,7 +2,7 @@
     <div *ngFor="let contact of data.allContacts; let i = index;">
 
         <div class="contactBox sticky" *ngIf="i == 0">
-            <button class="addContactBtn">
+            <button class="addContactBtn" (click)="startShadowView()">
                 Add new contact
                 <span class="material-symbols-outlined">
                     person_add
@@ -15,12 +15,12 @@
             </div>
         </div>
         <div class="contactBox">
-            <div class="contactItem" (click)="selectContact(i)" [class.hover]="selectedContact != i" [class.selected]="selectedContact == i">
+            <div class="contactItem" (click)="selectContact(i)" [class.hover]="data.selectedContact != i" [class.selected]="data.selectedContact == i">
                 <div class="bageItem" [style.background-color]="contact.background_color">
                     <span >{{contact.name_abbreviation}}</span>
                 </div>
                 <div class="contactData">
-                    <p class="username" [class.nameSelected]="selectedContact == i">{{contact.firstname}} {{contact.lastname}}</p>
+                    <p class="username" [class.nameSelected]="data.selectedContact == i">{{contact.firstname}} {{contact.lastname}}</p>
                     <p href="" class="email">{{contact.email}}</p>
                 </div>   
             </div>
@@ -36,17 +36,17 @@
         <span>Better with a team</span>
     </header>
 
-    <div class="contactDetails" *ngIf="selectedContact != -1">
+    <div class="contactDetails" *ngIf="data.selectedContact != -1">
         <div class="headline">
-            <div class="bageItem" [style.background-color]="data.allContacts[selectedContact].background_color">
-                <span>{{data.allContacts[selectedContact].name_abbreviation}}</span>
+            <div class="bageItem" [style.background-color]="data.allContacts[data.selectedContact].background_color">
+                <span>{{data.allContacts[data.selectedContact].name_abbreviation}}</span>
             </div>
             <div class="contactDetail">
                 <div class="contactName">
-                    <p>{{data.allContacts[selectedContact].firstname}} {{data.allContacts[selectedContact].lastname}}</p>
+                    <p>{{data.allContacts[data.selectedContact].firstname}} {{data.allContacts[data.selectedContact].lastname}}</p>
                 </div>
                 <div class="contactOptions">
-                    <div class="btnEdit">
+                    <div class="btnEdit" (click)="startEditContactView()">
                         <span class="material-symbols-outlined icon">
                             edit
                         </span>
@@ -69,11 +69,11 @@
         <div class="emailPhone">
             <div class="info">
                 <h5>Email</h5>
-                <span href="" class="email">{{data.allContacts[selectedContact].email}}</span>
+                <span href="" class="email">{{data.allContacts[data.selectedContact].email}}</span>
             </div>
             <div class="info">
                 <h5>Phone</h5>
-                <p>+49 023565483154</p>
+                <p *ngIf="data.allContacts[data.selectedContact].phone != 0">{{data.allContacts[data.selectedContact].phone}}</p>
             </div>
             
             

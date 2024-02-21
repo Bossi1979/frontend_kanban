@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
+import { Contact } from '../models/contact.model';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,11 @@ export class AuthService {
   public async getAllContacts(){
     const url = environment.baseUrl + "/contacts/";
     return lastValueFrom(this.http.get(url));
+  }
+
+  public async addNewContact(newContact: Contact){
+    const url = environment.baseUrl + "/add_contact/";
+    return lastValueFrom(this.http.post(url, newContact.createContactObject()));
   }
 
 

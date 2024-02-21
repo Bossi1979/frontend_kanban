@@ -1,0 +1,82 @@
+<div class="editContactPopup">
+    <div class="leftContainer">
+        <img src="../../assets/img/sidenav/logo.png" alt="">
+        <div class="title">
+            <h3>Edit Contact</h3>
+        </div>
+        <div class="line"></div>
+    </div>
+    <div class="rightContainer">
+        <div class="closeDiv">
+            <span  class="material-symbols-outlined closeIcon" (click)="closeEditContactView()">
+                close
+            </span>
+        </div>
+        <div class="content">
+            <div class="contentLeft">
+                <div class="personIcon">
+                    <span  class="material-symbols-outlined">
+                        person
+                    </span>
+                </div>
+            </div>
+            <div class="contentRight">
+                <form [formGroup]="editContactForm">
+                    <div class="authInputs topMargin">
+                        <div class="authInput">
+                            <input type="text" placeholder="Firstname" formControlName="firstname">
+                            <img src="../../assets/img/signup/person.png" alt="">
+                            <div  class="warnContainer" *ngIf="editContactForm.controls['firstname'].dirty && editContactForm.controls['firstname'].touched">
+                                <span *ngIf="editContactForm.controls['firstname'].errors">
+                                    *The firstname must consist of at least 2 characters.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="authInput">
+                            <input type="text" placeholder="Lastname" formControlName="lastname">
+                            <img src="../../assets/img/signup/person.png" alt="">
+                            <div  class="warnContainer" *ngIf="editContactForm.controls['lastname'].dirty && editContactForm.controls['lastname'].touched">
+                                <span *ngIf="editContactForm.controls['lastname'].errors">
+                                    *The lastname must consist of at least 2 characters.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="authInput">
+                            <input type="email" placeholder="Email" formControlName="email">
+                            <img src="../../assets/img/signup/mail.png" alt="">
+                            <div  class="warnContainer" *ngIf="editContactForm.controls['email'].dirty && editContactForm.controls['email'].touched">
+                                <span *ngIf="editContactForm.controls['email'].errors">
+                                    *Unfortunately, this email address is invalid.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="authInput">
+                            <input type="text" placeholder="Phone" formControlName="phone">
+                            <img src="../../assets/img/signup/call.png" alt="">
+                            <div  class="warnContainer" *ngIf="editContactForm.controls['phone'].dirty && editContactForm.controls['phone'].touched">
+                                <span *ngIf="editContactForm.controls['phone'].errors">
+                                    *Unfortunately, this phonenumber is invalid.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btnDiv">
+                        <button type="button" class="secondaryBtn">
+                            Delete
+                        </button>
+
+                        <button type="button" class="primaryBtn" [disabled]="!editContactForm.valid" [class.disabledBtn]="!editContactForm.valid">
+                            Save
+                        </button>
+                        
+                    </div>
+                </form>
+
+            </div>    
+        </div>
+        
+
+    </div>
+
+
+</div>

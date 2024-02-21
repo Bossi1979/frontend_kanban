@@ -5,9 +5,9 @@ body {
   background-color: #f6f7f8;
 }
 
-::-webkit-scrollbar{
-  width: 0px;
-}
+// ::-webkit-scrollbar{
+//   width: 0px;
+// }
 
 .material-symbols-outlined {
   font-variation-settings:
@@ -112,6 +112,7 @@ body {
       text-align: left;
       border: none;
       outline: none;
+
     }
 
     img {

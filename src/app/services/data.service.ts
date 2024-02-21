@@ -10,8 +10,14 @@ export class DataService {
   allContacts: any[] = [];
   allContacts$: any = [];
 
-// Varialblen für AddTask
-assignedToList: any[] = [];
+  // Varialblen für AddTask
+  assignedToList: any[] = [];
+
+  //contacts Variablen
+  shadowView: boolean = false;
+  startAddContactView: boolean = false;
+  startEditContactView: boolean = false;
+  selectedContact: number = -1;
 
   constructor(private as: AuthService) { 
     if (localStorage.getItem('userData')){

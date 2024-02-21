@@ -17,6 +17,8 @@ import { AddTaskComponent } from './add-task/add-task.component';
 import { BoardComponent } from './board/board.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { SignupComponent } from './signup/signup.component';
+import { OverlayAddContactComponent } from './overlay-add-contact/overlay-add-contact.component';
+import { OverlayEditContactComponent } from './overlay-edit-contact/overlay-edit-contact.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { SignupComponent } from './signup/signup.component';
     AddTaskComponent,
     BoardComponent,
     ContactsComponent,
-    SignupComponent
+    SignupComponent,
+    OverlayAddContactComponent,
+    OverlayEditContactComponent
   ],
   imports: [
     BrowserModule,

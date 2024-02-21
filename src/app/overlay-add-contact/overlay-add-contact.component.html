@@ -1,0 +1,92 @@
+<div class="addContactPopup">
+    <div class="leftContainer">
+        <img src="../../assets/img/sidenav/logo.png" alt="">
+        <div class="title">
+            <h3>Add Contact</h3>
+            <p>Task are better with a team!</p>
+        </div>
+        <div class="line"></div>
+    </div>
+    <div class="rightContainer">
+        <div class="closeDiv">
+            <span  class="material-symbols-outlined closeIcon" (click)="closeAddContactView()">
+                close
+            </span>
+        </div>
+        <div class="content">
+            <div class="contentLeft">
+                <div class="personIcon">
+                    <span  class="material-symbols-outlined">
+                        person
+                    </span>
+                </div>
+            </div>
+            <div class="contentRight">
+                <form [formGroup]="addContactForm" (submit)="createNewContact()">
+                    <div class="authInputs topMargin">
+                        <div class="authInput">
+                            <input type="text" placeholder="Firstname" formControlName="firstname">
+                            <img src="../../assets/img/signup/person.png" alt="">
+                            <div  class="warnContainer" *ngIf="addContactForm.controls['firstname'].dirty && addContactForm.controls['firstname'].touched">
+                                <span *ngIf="addContactForm.controls['firstname'].errors">
+                                    *The firstname must consist of at least 2 characters.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="authInput">
+                            <input type="text" placeholder="Lastname" formControlName="lastname">
+                            <img src="../../assets/img/signup/person.png" alt="">
+                            <div  class="warnContainer" *ngIf="addContactForm.controls['lastname'].dirty && addContactForm.controls['lastname'].touched">
+                                <span *ngIf="addContactForm.controls['lastname'].errors">
+                                    *The lastname must consist of at least 2 characters.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="authInput">
+                            <input type="email" placeholder="Email" formControlName="email">
+                            <img src="../../assets/img/signup/mail.png" alt="">
+                            <div  class="warnContainer" *ngIf="addContactForm.controls['email'].dirty && addContactForm.controls['email'].touched">
+                                <span *ngIf="addContactForm.controls['email'].errors">
+                                    *Unfortunately, this email address is invalid.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="authInput">
+                            <input type="text" placeholder="Phone" formControlName="phone">
+                            <img src="../../assets/img/signup/call.png" alt="">
+                            <div  class="warnContainer" *ngIf="addContactForm.controls['phone'].dirty && addContactForm.controls['phone'].touched">
+                                <span *ngIf="addContactForm.controls['phone'].errors">
+                                    *Unfortunately, this phonenumber is invalid.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btnDiv">
+                        <button type="button" class="secondaryBtn">
+                            Cancel
+                            <span class="material-symbols-outlined">
+                                close
+                            </span>
+                        </button>
+
+                        <button type="submit" class="primaryBtn" [disabled]="!addContactForm.valid" [class.disabledBtn]="!addContactForm.valid">
+                            Create contact
+                            <span class="material-symbols-outlined">
+                                done
+                            </span>
+                        </button>
+                        
+                    </div>
+                </form>
+
+            </div>    
+        </div>
+        
+
+    </div>
+
+
+</div>
+
+
+

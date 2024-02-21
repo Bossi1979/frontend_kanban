@@ -7,5 +7,13 @@
         <app-join-header></app-join-header>
         <app-join-content></app-join-content>
     </div>
+
+    <div class="popupShadow" *ngIf="data.shadowView">
+        <app-overlay-add-contact *ngIf="data.startAddContactView"></app-overlay-add-contact>
+        <app-overlay-edit-contact *ngIf="data.startEditContactView"></app-overlay-edit-contact>
+        
+    </div>
+
+
 </div>
 

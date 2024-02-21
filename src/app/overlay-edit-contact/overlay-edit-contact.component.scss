@@ -1,0 +1,156 @@
+.editContactPopup {
+    display: flex;
+    width: 1212px;
+    height: 592px;
+    border-radius: 30px;
+    // background-color: white;
+    animation: slideIn 500ms ease-in;
+
+    .leftContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 467px;
+        height: 100%;
+        gap: 12px;
+        background-color: #2a3647;
+        border-radius: 30px 0px 0px 30px;
+        padding: 66px 48px 66px 48px;
+        box-sizing: border-box;
+
+        img {
+            display: flex;
+            width: 55.6px;
+            height: 66.48px;
+        }
+
+        .title {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+
+            h3 {
+                font-family: Inter;
+                font-size: 61px;
+                font-weight: 700;
+                line-height: 73px;
+                letter-spacing: 0em;
+                text-align: left;
+                color: white;
+                margin-block-start: 0px;
+                margin-block-end: 0px;
+            }
+
+            p {
+                font-family: Inter;
+                font-size: 27px;
+                font-weight: 400;
+                line-height: 32px;
+                letter-spacing: 0em;
+                text-align: left;
+                color: white;
+                margin-block-start: 0px;
+                margin-block-end: 0px;
+            }
+        }
+
+        .line {
+            display: flex;
+            width: 90px;
+            border-top: 3px solid #29abe2;
+        }
+    }
+
+    .rightContainer {
+        display: flex;
+        flex-direction: column;
+        width: calc(100% - 467px);
+        border-radius: 0px 30px 30px 0px;
+        background-color: white;
+        padding: 48px 48px 0px 0px;
+        box-sizing: border-box;
+
+        .closeDiv {
+            display: flex;
+            justify-content: flex-end;
+
+            .closeIcon {
+                font-size: 32px;
+
+                &:hover {
+                    cursor: pointer;
+                    color: #29abe2;
+                    transition: color 100ms ease-in-out;
+                }
+            }
+        }
+
+        .content {
+            display: flex;
+
+            .contentLeft {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 286px;
+                height: 512px;
+                margin-top: -32px;
+
+
+                .personIcon {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 100%;
+                    background-color: #d1d1d1;
+
+                    span{
+                        font-size: 64px;
+                        color: white;
+                    }
+                }
+            }
+
+            .contentRight {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                width: 422px;
+                
+
+                form{
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    gap: 48px;
+
+                    .topMargin{
+                        margin-top: -32px !important;
+                    }
+
+                    .btnDiv {
+                        display: flex;
+                        gap: 24px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(+200vw);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
