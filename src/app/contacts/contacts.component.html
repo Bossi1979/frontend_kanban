@@ -46,14 +46,16 @@
                     <p>{{data.allContacts[data.selectedContact].firstname}} {{data.allContacts[data.selectedContact].lastname}}</p>
                 </div>
                 <div class="contactOptions">
-                    <div class="btnEdit" (click)="startEditContactView()">
+                    <div class="btnEdit" (click)="startEditContactView()" 
+                    *ngIf="data.allContacts[this.data.selectedContact].id_user == data.loggedUserData[0].id || 
+                    !this.data.allContacts[this.data.selectedContact].has_account">
                         <span class="material-symbols-outlined icon">
                             edit
                         </span>
                         <p>Edit</p>
                     </div>
-                    <div class="btnDelete">
-                        <span class="material-symbols-outlined icon">
+                    <div class="btnDelete" *ngIf="!data.allContacts[data.selectedContact].has_account">
+                        <span class="material-symbols-outlined icon" (click)="startAddContactDoneView()">
                             delete
                         </span>
                         <p>Delete</p>

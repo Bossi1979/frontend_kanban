@@ -16,6 +16,8 @@ export class DataService {
   //contacts Variablen
   shadowView: boolean = false;
   startAddContactView: boolean = false;
+  messageOverlayView: boolean = false;
+  addContactDoneView: boolean = false;
   startEditContactView: boolean = false;
   selectedContact: number = -1;
 

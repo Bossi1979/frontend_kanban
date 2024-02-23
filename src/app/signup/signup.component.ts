@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { Signup } from '../models/signup.model';
 
 @Component({
   selector: 'app-signup',
@@ -40,6 +41,8 @@ export class SignupComponent {
     agreeTerms: new FormControl(false, [Validators.requiredTrue])
   })
 
+  signupData: Signup = new Signup();
+
 
   constructor(private router: Router, private as: AuthService){}
 
@@ -51,39 +54,49 @@ export class SignupComponent {
 
   async signup(): Promise<void> {
     await this.trimInputs();
-    const firstname = this.signupForm.value.firstname;
-    const lastname = this.signupForm.value.lastname;
-    const email = this.signupForm.value.email.toLowerCase();
-    const password = this.signupForm.value.password;
-    const cPassword = this.signupForm.value.cPassword;
-    const username = firstname + ' ' + lastname;
-    if(this.signupForm.valid && (password == cPassword)){
+    await this.setSignupDataValues();
+    if(this.signupForm.valid && (this.signupData.password == this.signupData.cPassword)){
       try {
-      let response = await this.as.signup(firstname, lastname, email, password, cPassword, username);
+      let response = await this.as.signup(this.signupData);
       console.log(response);
       if (response['error'] == 'none'){
         this.router.navigateByUrl('/login');
+        this.signupData = new Signup();
+        console.log(this.signupData);
       }
     } catch (err) {
       alert('Signup failed! Please try again later.');
+      this.signupData = new Signup();
+      console.log(this.signupData);
     }
     }
     
   }
 
 
+  async setSignupDataValues(): Promise<void> {
+    this.signupData.firstname = this.firstLetterToUpperCase(this.signupForm.value.firstname);
+    this.signupData.lastname = this.firstLetterToUpperCase(this.signupForm.value.lastname);
+    this.signupData.email = this.signupForm.value.email.toLowerCase();
+    this.signupData.password = this.signupForm.value.password;
+    this.signupData.cPassword = this.signupForm.value.cPassword;
+    this.signupData.username = this.signupData.firstname + ' ' + this.signupData.lastname;
+  }
+
+
   async trimInputs(): Promise<void> {
-    console.log(this.signupForm.value.firstname.length);
-    let firstnameValue: string = this.signupForm.get('firstname')?.value;
-    let lastnameValue: string = this.signupForm.get('lastname')?.value;
-    let emailValue: string = this.signupForm.get('email')?.value;
-    let passwordValue: string = this.signupForm.get('password')?.value;
-    let cPasswordValue: string = this.signupForm.get('cPassword')?.value;
-    this.signupForm.get('firstname')?.setValue(firstnameValue.trim());
-    this.signupForm.get('lastname')?.setValue(lastnameValue.trim());
-    this.signupForm.get('email')?.setValue(emailValue.trim());
-    this.signupForm.get('password')?.setValue(passwordValue.trim());
-    this.signupForm.get('cPassword')?.setValue(cPasswordValue.trim());
+    this.signupForm.get('firstname').setValue(this.signupForm.value.firstname.trim())
+    this.signupForm.get('lastname').setValue(this.signupForm.value.lastname.trim());
+    this.signupForm.get('email').setValue(this.signupForm.value.email.trim());
+    this.signupForm.get('password').setValue(this.signupForm.value.password.trim());
+    this.signupForm.get('cPassword').setValue(this.signupForm.value.cPassword.trim());
+  }
+
+
+  firstLetterToUpperCase(value: string): string {
+    value = value.replace(value[0], value[0].toUpperCase());
+    console.log('uppercase: ', value);
+    return value;
   }
 
 

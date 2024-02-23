@@ -22,4 +22,18 @@
         background-color: rgba(0, 0, 0, 0.3);
         overflow: hidden; 
     }
+
+    .messageOverlay{
+        display: flex; 
+        position: absolute;
+        top: 0px; 
+        left: 0px;
+        justify-content: center; 
+        align-items: flex-end; 
+        width: 100vw; 
+        height: 100vh; 
+        overflow: hidden;
+        padding-bottom: 14vh;
+        box-sizing: border-box; 
+    }
 }

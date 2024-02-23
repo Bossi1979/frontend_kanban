@@ -34,12 +34,30 @@ export class OverlayEditContactComponent {
 
 
   constructor(public data: DataService, private auth: AuthService) {
-
+    
+    this.checkForContactEdit();
   }
 
   closeEditContactView() {
     this.data.startEditContactView = false;
     this.data.shadowView = false;
+  }
+
+  checkForContactEdit(){
+    const checkValue = (this.data.allContacts[this.data.selectedContact].id_user == this.data.loggedUserData[0].id) || !this.data.allContacts[this.data.selectedContact].has_account;
+    if(checkValue){
+      this.editContactForm.controls['firstname'].enable();
+      this.editContactForm.controls['lastname'].enable();
+      this.editContactForm.controls['email'].enable();
+      this.editContactForm.controls['phone'].enable();
+      
+    } else {
+      
+      this.editContactForm.controls['firstname'].disable();
+      this.editContactForm.controls['lastname'].disable();
+      this.editContactForm.controls['email'].disable();
+      this.editContactForm.controls['phone'].disable();
+    }
   }
 
 }

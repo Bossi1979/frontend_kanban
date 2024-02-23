@@ -1,0 +1,45 @@
+.doneMessage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 326px;
+    height: 74px;
+    background-color: #2a3647;
+    box-shadow: 0px 0px 4px 0px #0000001a;
+    border-radius: 20px;
+    color: white;
+    transform: translateX(+200vw);
+    animation: slideInOut 2400ms forwards 800ms ease-in-out;
+
+    span {
+        font-family: Inter;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+}
+
+
+@keyframes slideInOut {
+    0% {
+        opacity: 0;
+        transform: translateX(+200vw);
+    }
+
+    30% {
+        opacity: 1;
+        transform: translateX(0)
+    }
+
+    80%{
+        opacity: 1;
+        transform: translateX(0)
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(+200vw);
+    }
+}

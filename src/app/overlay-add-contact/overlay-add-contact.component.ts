@@ -32,7 +32,7 @@ export class OverlayAddContactComponent {
     ])
   });
 
-  newContact: Contact;
+  newContact: Contact = new Contact();
 
   constructor(public data: DataService, private auth: AuthService) {
 
@@ -50,28 +50,46 @@ export class OverlayAddContactComponent {
   }
 
   async saveNewContact(): Promise<void> {
-    this.newContact = new Contact();
     if (this.addContactForm.valid) {
-      await this.setNewContactValues();
-      this.addContactForm.disable();
-      const response: any = await this.auth.addNewContact(this.newContact);
-      console.log('newContactAdd:', response);
-      this.data.allContacts = response;
-      await this.data.generatedAssignedList();
-      this.addContactForm.reset();
-      this.closeAddContactView();
-      this.addContactForm.enable();
+      try{
+        await this.setNewContactValues();
+        this.addContactForm.disable();
+        const response: any = await this.auth.addNewContact(this.newContact);
+        console.log('newContactAdd:', response);
+        this.data.allContacts = response;
+        await this.data.generatedAssignedList();
+        this.resetValues();
+      } catch (err) {
+        console.log('failed to save newContact');
+      }
     }
   }
 
 
+  resetValues(): void {
+    this.addContactForm.reset();
+    this.closeAddContactView();
+    this.addContactForm.enable();
+    this.startAddContactDoneView();
+    this.newContact = new Contact();
+  }
+
+
   async setNewContactValues(): Promise<any> {
-    this.newContact.firstname = this.addContactForm.value.firstname;
-    this.newContact.lastname = this.addContactForm.value.lastname;
-    this.newContact.email = this.addContactForm.value.email;
+    this.newContact.firstname = this.firstLetterToUpperCase(this.addContactForm.value.firstname);
+    this.newContact.lastname = this.firstLetterToUpperCase(this.addContactForm.value.lastname);
+    this.newContact.email = this.addContactForm.value.email.toLowerCase();
     this.newContact.phone = this.addContactForm.value.phone;
-    this.newContact.username = this.addContactForm.value.firstname + ' ' + this.addContactForm.value.lastname;
+    this.newContact.username = this.newContact.firstname + ' ' + this.newContact.lastname;
     this.newContact.nameAbbreviation = this.addContactForm.value.firstname.substring(0, 1) + this.addContactForm.value.lastname.substring(0, 1);
+    console.log(this.newContact);
+  }
+
+
+  firstLetterToUpperCase(value: string): string {
+    value = value.replace(value[0], value[0].toUpperCase());
+    console.log('uppercase: ', value);
+    return value;
   }
 
 
@@ -80,6 +98,16 @@ export class OverlayAddContactComponent {
     this.addContactForm.get('lastname').setValue(this.addContactForm.value.lastname.trim());
     this.addContactForm.get('email').setValue(this.addContactForm.value.email.trim());
     this.addContactForm.get('phone').setValue(this.addContactForm.value.phone.trim());
+  }
+
+
+  startAddContactDoneView(): void {
+    this.data.messageOverlayView = true;
+    this.data.addContactDoneView = true;
+    setTimeout(() => {
+      this.data.addContactDoneView = false;
+      this.data.messageOverlayView = false;
+    }, 2600);
   }
 
 }

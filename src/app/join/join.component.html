@@ -11,7 +11,10 @@
     <div class="popupShadow" *ngIf="data.shadowView">
         <app-overlay-add-contact *ngIf="data.startAddContactView"></app-overlay-add-contact>
         <app-overlay-edit-contact *ngIf="data.startEditContactView"></app-overlay-edit-contact>
-        
+    </div>
+
+    <div class="messageOverlay" *ngIf="data.messageOverlayView">
+        <app-overlay-add-contact-done *ngIf="data.addContactDoneView"></app-overlay-add-contact-done>
     </div>
 
 

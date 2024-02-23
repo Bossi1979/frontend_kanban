@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { Contact } from '../models/contact.model';
+import { Signup } from '../models/signup.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,16 +29,9 @@ export class AuthService {
   }
 
 
-  public async signup(firstname: string, lastname: string, email: string, password: string, cPassword: string, username: string): Promise<any>{
+  public async signup(signupData: Signup): Promise<any>{
     const url = environment.baseUrl + "/register/";
-    const body = {
-      "firstname": firstname,
-      "lastname": lastname,
-      "email": email,
-      "password": password,
-      "cPassword": cPassword,
-      "username": username
-    };
+    const body = signupData.createSignupObject();
     return lastValueFrom(this.http.post(url, body));
   }
 
@@ -49,7 +43,8 @@ export class AuthService {
 
   public async addNewContact(newContact: Contact){
     const url = environment.baseUrl + "/add_contact/";
-    return lastValueFrom(this.http.post(url, newContact.createContactObject()));
+    const body = newContact.createContactObject();
+    return lastValueFrom(this.http.post(url, body));
   }
 
 

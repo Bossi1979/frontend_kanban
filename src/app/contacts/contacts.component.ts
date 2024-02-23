@@ -28,5 +28,11 @@ export class ContactsComponent {
   }
 
 
+  startAddContactDoneView(){
+    this.data.messageOverlayView= true;
+    this.data.addContactDoneView = true;
+  }
+
+
 
 }

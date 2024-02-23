@@ -19,6 +19,8 @@ import { ContactsComponent } from './contacts/contacts.component';
 import { SignupComponent } from './signup/signup.component';
 import { OverlayAddContactComponent } from './overlay-add-contact/overlay-add-contact.component';
 import { OverlayEditContactComponent } from './overlay-edit-contact/overlay-edit-contact.component';
+import { OverlayAddContactDoneComponent } from './overlay-add-contact-done/overlay-add-contact-done.component';
+import { OverlayEditContactDoneComponent } from './overlay-edit-contact-done/overlay-edit-contact-done.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { OverlayEditContactComponent } from './overlay-edit-contact/overlay-edit
     ContactsComponent,
     SignupComponent,
     OverlayAddContactComponent,
-    OverlayEditContactComponent
+    OverlayEditContactComponent,
+    OverlayAddContactDoneComponent,
+    OverlayEditContactDoneComponent
   ],
   imports: [
     BrowserModule,
