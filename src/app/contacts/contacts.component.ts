@@ -14,10 +14,11 @@ export class ContactsComponent {
 
   /**
    * Selects a contact by setting the index of the selected contact in the data object.
+   * 
    * @param {number} index - The index of the contact to be selected.
    * @returns {void}
    */
-  selectContact(index: number) {
+  selectContact(index: number): void {
     this.data.selectedContact = index;
   }
 

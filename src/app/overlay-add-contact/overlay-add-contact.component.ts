@@ -105,7 +105,7 @@ export class OverlayAddContactComponent {
     this.newContact.email = this.addContactForm.value.email.toLowerCase();
     this.newContact.phone = this.addContactForm.value.phone;
     this.newContact.username = this.newContact.firstname + ' ' + this.newContact.lastname;
-    this.newContact.nameAbbreviation = this.addContactForm.value.firstname.substring(0, 1) + this.addContactForm.value.lastname.substring(0, 1);
+    this.newContact.nameAbbreviation = this.newContact.firstname.substring(0, 1) + this.newContact.lastname.substring(0, 1);
   }
 
 
