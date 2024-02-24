@@ -8,6 +8,7 @@ export class Task {
     prio: number;
     processingStatus: number;
 
+
     constructor(obj?: any){
         this.title = obj ? obj.title : '';
         this.description = obj ? obj.description : '';
@@ -18,6 +19,7 @@ export class Task {
         this.prio = obj ? obj.prio : 0;
         this.processingStatus = obj ? obj.processingStatus : 0;
     }
+
 
     createTaskObject(){
         return {
@@ -31,5 +33,4 @@ export class Task {
             processingStatus: this.processingStatus
         }
     }
-
 }

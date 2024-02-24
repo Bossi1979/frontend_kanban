@@ -6,6 +6,7 @@ export class Signup {
     password: string;
     cPassword: string;
 
+
     constructor(obj?: any){
         this.firstname = obj ? obj.firstname : '';
         this.lastname = obj ? obj.lastname : '';
@@ -14,6 +15,7 @@ export class Signup {
         this.password = obj ? obj.password : '';
         this.cPassword = obj ? obj.cPassword: '';
     }
+    
 
     createSignupObject(){
         return {

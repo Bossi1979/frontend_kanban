@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,7 +12,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class LoginComponent {
   loginFailed = false;
-
   loginForm: FormGroup = new FormGroup({
     email: new FormControl('', [
       Validators.required,
@@ -31,7 +31,6 @@ export class LoginComponent {
   async login(): Promise<any> {
     try {
       let response = await this.as.loginWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password);
-      
       console.log(response);
       if(response['token'] != "undefined"){
         await this.setLocalStorage(response);
@@ -42,7 +41,6 @@ export class LoginComponent {
         this.loginFailed = true;
       }
     } catch(e){
-      console.error(e);
       alert('Login failed');
     }
   }
@@ -66,5 +64,4 @@ export class LoginComponent {
   resetWarning():void {
     this.loginFailed = false;
   }
-
 }

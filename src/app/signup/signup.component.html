@@ -2,7 +2,6 @@
     <header>
         <img src="../../assets/img/login/join_logo.png" alt="">
     </header>
-
     <form [formGroup]="signupForm" (submit)="signup()">
         <div class="signupHead">
             <span class="material-symbols-outlined" (click)="backToLogin()">
@@ -68,16 +67,9 @@
         <div class="btnDiv">
             <button  type="submit" [disabled]="!signupForm.valid || (signupForm.get('password')?.value != signupForm.get('cPassword')?.value)" [class.disabledBtn]="!signupForm.valid || (signupForm.get('password')?.value != signupForm.get('cPassword')?.value)" [class.primaryBtn]="signupForm.valid && (signupForm.get('password')?.value == signupForm.get('cPassword')?.value)">Signup</button>
         </div>
-        
-
     </form>
-
     <footer>
         <span>Privacy Policy</span>
         <span>Legal Notice</span>
     </footer>
-
-
-
-
 </div>

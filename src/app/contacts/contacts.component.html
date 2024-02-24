@@ -1,6 +1,5 @@
 <div class="contactsList">
     <div *ngFor="let contact of data.allContacts; let i = index;">
-
         <div class="contactBox sticky" *ngIf="i == 0">
             <button class="addContactBtn" (click)="startShadowView()">
                 Add new contact
@@ -28,14 +27,12 @@
 
     </div>
 </div>
-
 <div class="detailView">
     <header>
         <h3>Contacts</h3>
         <div class="divider"></div>
         <span>Better with a team</span>
     </header>
-
     <div class="contactDetails" *ngIf="data.selectedContact != -1">
         <div class="headline">
             <div class="bageItem" [style.background-color]="data.allContacts[data.selectedContact].background_color">
@@ -61,13 +58,9 @@
                         <p>Delete</p>
                     </div>
                 </div>
-
             </div>
-            
         </div>
-
         <h4>Contact Information</h4>
-
         <div class="emailPhone">
             <div class="info">
                 <h5>Email</h5>
@@ -76,16 +69,7 @@
             <div class="info">
                 <h5>Phone</h5>
                 <p *ngIf="data.allContacts[data.selectedContact].phone != 0">{{data.allContacts[data.selectedContact].phone}}</p>
-            </div>
-            
-            
+            </div>  
         </div>
-
-
-
     </div>
-
-
-
-
 </div>

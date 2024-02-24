@@ -9,7 +9,6 @@
     overflow: hidden;
     overflow-y: auto;
 
-
     div {
         .sticky {
             position: fixed;
@@ -154,34 +153,6 @@
             }
         }
     }
-
-    // .addContactBtn {
-    //     display: flex;
-    //     justify-content: center;
-    //     align-items: center;
-    //     width: 352px;
-    //     height: 56px;
-    //     padding: 12px 0px 12px 0px;
-    //     border-radius: 10px;
-    //     border: 1px solid #2a3647;
-    //     background-color: #2a3647;
-    //     gap: 16px;
-    //     font-family: Inter;
-    //     font-size: 21px;
-    //     font-weight: 700;
-    //     line-height: 25px;
-    //     letter-spacing: 0em;
-    //     text-align: left;
-    //     color: white;
-
-    //     &:hover {
-    //         background-color: #29ABE2;
-    //         box-shadow: 0px 4px 4px 0px #00000040;
-    //         cursor: pointer;
-    //         transition: background-color 100ms ease-in-out;
-    //         transition: box-shadow 100ms ease-in-out;
-    //     }
-    // }
 }
 
 .detailView {

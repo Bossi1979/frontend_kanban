@@ -9,6 +9,7 @@ export class Contact {
     phone: string;
     hasAccount: boolean;
 
+
     constructor(obj?: any){
         this.firstname = obj ? obj.firstname : '';
         this.lastname = obj ? obj.lastname : '';
@@ -20,6 +21,7 @@ export class Contact {
         this.phone = obj ? obj.phone : '';
         this.hasAccount = obj ? obj.hasAccount : false;
     }
+
 
     createContactObject(){
         return {
@@ -34,5 +36,4 @@ export class Contact {
             hasAccount: this.hasAccount
         }
     }
-
 }

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,15 +23,16 @@ export class DataService {
   startEditContactView: boolean = false;
   selectedContact: number = -1;
 
-  constructor(private as: AuthService) { 
-    if (localStorage.getItem('userData')){
+
+  constructor(private as: AuthService) {
+    if (localStorage.getItem('userData')) {
       this.loggedUserData = JSON.parse(localStorage.getItem('userData'));
       this.loadDatas();
     }
   }
 
 
-  async loadDatas(){
+  async loadDatas() {
     console.log('Loading data...');
     await this.getContacts();
     await this.generatedAssignedList();
@@ -43,7 +46,6 @@ export class DataService {
     const lastname = localStorage.getItem('lastname');
     const nameAbbreviation = firstname[0] + lastname[0];
     const id = localStorage.getItem('id');
-    
     const json = {
       "username": username,
       "email": email,
@@ -66,24 +68,21 @@ export class DataService {
 
 
   userBackgroundColor: string = '#000000';
-  
+
   setUserBackgroundColor(): void {
     const searchedId = this.loggedUserData[0].id
     const contactIndex = this.allContacts.findIndex(contact => contact.id_user == searchedId);
-    if(contactIndex >= 0){
+    if (contactIndex >= 0) {
       this.userBackgroundColor = this.allContacts[contactIndex].background_color;
     }
-    console.log('contact Index: ',contactIndex)
+    console.log('contact Index: ', contactIndex)
   }
 
 
-// für AddTask
+  // für AddTask
 
-async generatedAssignedList(): Promise<void> {
-  this.assignedToList = this.allContacts.slice();
-  console.log('assigned to list: ', this.assignedToList);
-}
-
-
-
+  async generatedAssignedList(): Promise<void> {
+    this.assignedToList = this.allContacts.slice();
+    console.log('assigned to list: ', this.assignedToList);
+  }
 }

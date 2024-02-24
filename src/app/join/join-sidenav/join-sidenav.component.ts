@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DataService } from '../../services/data.service';
 
+
 @Component({
   selector: 'app-join-sidenav',
   templateUrl: './join-sidenav.component.html',
@@ -17,6 +18,12 @@ export class JoinSidenavComponent {
   constructor(public data: DataService){}
 
 
+  /**
+   * Handles mouse enter event for menu items by updating corresponding image sources.
+   * 
+   * @param {number} number - The menu number.
+   * @returns {void}
+   */
   mouseEnter(number: number): void {
     if (number === 1 && this.data.selectedMenu != 1) this.summaryScr = "../../../assets/img/sidenav/summary_white.png";
     else if (number === 2 && this.data.selectedMenu != 2) this.addScr = "../../../assets/img/sidenav/add_task_white.png";
@@ -24,6 +31,13 @@ export class JoinSidenavComponent {
     else if (number === 4 && this.data.selectedMenu != 4) this.contactsScr = "../../../assets/img/sidenav/contacts_white.png";
   }
 
+
+  /**
+   * Handles mouse leave event for menu items by updating corresponding image sources.
+   * 
+   * @param {number} number - The menu number.
+   * @returns {void}
+   */
   mouseLeave(number: number): void {
     if (number === 1 && this.data.selectedMenu != 1) this.summaryScr = "../../../assets/img/sidenav/summary.png";
     else if (number === 2 && this.data.selectedMenu != 2) this.addScr = "../../../assets/img/sidenav/add_task.png";
@@ -31,6 +45,13 @@ export class JoinSidenavComponent {
     else if (number === 4 && this.data.selectedMenu != 4) this.contactsScr = "../../../assets/img/sidenav/contacts.png";
   }
 
+
+  /**
+   * Selects a menu item by updating the selected menu in the data object.
+   * 
+   * @param {number} menuNo - The menu number to select.
+   * @returns {void}
+   */  
   selectMenu(menuNo: number): void {
     if (this.selectedMenu !== menuNo){
       this.data.selectedMenu = menuNo;
@@ -39,17 +60,19 @@ export class JoinSidenavComponent {
       this.mouseLeave(3);
       this.mouseLeave(4);
     } 
-    console.log(this.data.selectedMenu);
     this.loadData(menuNo);
   }
 
 
+  /**
+   * Loads data based on the selected menu number.
+   * 
+   * @param {number} menuNo - The menu number to load data for.
+   * @returns {Promise<void>}
+   */
   async loadData(menuNo: number): Promise<void> {
     if (menuNo == 2 && this.data.allContacts.length != this.data.assignedToList.length){
-      // await this.data.getContacts();
       await this.data.generatedAssignedList();
     } 
   }
-
-
 }

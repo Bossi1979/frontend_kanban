@@ -5,15 +5,17 @@ import { lastValueFrom } from 'rxjs';
 import { Contact } from '../models/contact.model';
 import { Signup } from '../models/signup.model';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+
   constructor(private http: HttpClient) { }
 
 
-  public  async loginWithEmailAndPassword(email: string, password: string): Promise<any> {
+  public async loginWithEmailAndPassword(email: string, password: string): Promise<any> {
     const url = environment.baseUrl + "/login/";
     const body = {
       "email": email.toLowerCase(),
@@ -23,32 +25,61 @@ export class AuthService {
   }
 
 
+  /**
+   * Logs out the user by sending a GET request to the logout endpoint.
+   * 
+   * @returns {Promise<any>} A promise that resolves with the result of the logout request.
+   */
   public async logout(): Promise<any> {
     const url = environment.baseUrl + "/logout/";
     return lastValueFrom(this.http.get(url));
   }
 
 
-  public async signup(signupData: Signup): Promise<any>{
+  /**
+   * Signs up a new user by sending a POST request to the register endpoint.
+   * 
+   * @param {Signup} signupData - The signup data to be sent in the request body.
+   * @returns {Promise<any>} A promise that resolves with the result of the signup request.
+   */
+  public async signup(signupData: Signup): Promise<any> {
     const url = environment.baseUrl + "/register/";
     const body = signupData.createSignupObject();
     return lastValueFrom(this.http.post(url, body));
   }
 
-  
-  public async getAllContacts(){
+
+  /**
+   * Retrieves all contacts by sending a GET request to the contacts endpoint.
+   * 
+   * @returns {Promise<any>} A promise that resolves with the result of the get all contacts request.
+   */
+  public async getAllContacts(): Promise<any> {
     const url = environment.baseUrl + "/contacts/";
     return lastValueFrom(this.http.get(url));
   }
 
-  public async addNewContact(newContact: Contact){
+
+  /**
+   * Adds a new contact by sending a POST request to the add contact endpoint.
+   * 
+   * @param {Contact} newContact - The new contact object to be added.
+   * @returns {Promise<any>} A promise that resolves with the result of the add new contact request.
+   */
+  public async addNewContact(newContact: Contact): Promise<any> {
     const url = environment.baseUrl + "/add_contact/";
     const body = newContact.createContactObject();
     return lastValueFrom(this.http.post(url, body));
   }
 
 
-  public async saveTask(task: any[]): Promise<any>{
+  /**
+   * Saves a task by sending a POST request to the add task endpoint.
+   * 
+   * @param {any[]} task - The task data to be saved.
+   * @returns {Promise<any>} A promise that resolves with the result of the save task request.
+   */
+  public async saveTask(task: any[]): Promise<any> {
     const url = environment.baseUrl + "/add_task/";
     return lastValueFrom(this.http.post(url, task));
   }

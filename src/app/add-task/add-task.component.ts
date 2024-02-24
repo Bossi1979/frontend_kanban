@@ -272,6 +272,13 @@ export class AddTaskComponent {
   }
   
 
+  /**
+   * Activates subtask editing by focusing on the subtask input element.
+   * This method triggers the 'activatedSubtaskEdit' method of the subtask service
+   * and focuses on the native subtask input element.
+   * 
+   * @returns {void}
+   */
   activatedSubtaskEdit(): void {
     this.subtaskService.activatedSubtaskEdit();
     this.subtaskInput.nativeElement.focus();

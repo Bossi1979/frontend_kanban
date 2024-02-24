@@ -3,10 +3,12 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, catchError, throwError } from 'rxjs';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthInterceptorService {
+
 
   constructor(private router: Router) { }
 
@@ -27,7 +29,6 @@ export class AuthInterceptorService {
           }
         }
         return throwError(() => err);
-
       })
     );
   }
