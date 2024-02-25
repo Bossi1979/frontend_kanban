@@ -94,7 +94,7 @@ export class SignupComponent {
    */
   signupErrorAction(error: any): void {
     alert('Signup failed! Please try again later.');
-    this.signupData = new Signup();
+    // this.signupData = new Signup();
   }
 
 

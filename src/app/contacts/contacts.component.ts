@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService } from '../services/data.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-contacts',
@@ -9,7 +10,7 @@ import { DataService } from '../services/data.service';
 export class ContactsComponent {
 
 
-  constructor(public data: DataService) { }
+  constructor(public data: DataService, private auth: AuthService) { }
 
 
   /**
@@ -54,4 +55,18 @@ export class ContactsComponent {
     this.data.messageOverlayView= true;
     this.data.addContactDoneView = true;
   }
+
+
+  async deleteContact(id: number, index: number): Promise<void> {
+    const response = await this.auth.deleteContact(id);
+    console.log(response);
+    if (response.error == 'none'){
+      this.data.allContacts.splice(index, 1);
+      this.data.assignedToList.splice(index, 1);
+      console.log(this.data.allContacts);
+    }
+  }
+
+
+  
 }

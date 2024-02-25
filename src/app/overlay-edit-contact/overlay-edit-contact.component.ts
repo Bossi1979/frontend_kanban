@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DataService } from '../services/data.service';
 import { AuthService } from '../services/auth.service';
 import { Contact } from '../models/contact.model';
+import { ContactService } from '../services/contact.service';
 
 
 @Component({
@@ -30,10 +31,10 @@ export class OverlayEditContactComponent {
       Validators.pattern('^\\+?\\d+$'),
     ])
   });
-  newContact: Contact;
+  contact: Contact = new Contact();
 
 
-  constructor(public data: DataService, private auth: AuthService) {
+  constructor(public data: DataService, private auth: AuthService, private contactService: ContactService) {
     this.checkForContactEdit();
   }
 
@@ -56,7 +57,44 @@ export class OverlayEditContactComponent {
    */
   checkForContactEdit(): void {
     const checkValue = (this.data.allContacts[this.data.selectedContact].id_user == this.data.loggedUserData[0].id) || !this.data.allContacts[this.data.selectedContact].has_account;
-    if(checkValue) this.editContactForm.enable();
+    if (checkValue) this.editContactForm.enable();
     else this.editContactForm.disable();
   }
+
+
+
+
+  async saveEditContact(): Promise<void> {
+    await this.contactService.trimInputs(this.editContactForm);
+    await this.editContact(this.contact);
+    this.closeEditContactView();
+  }
+
+
+
+  /**
+   * Asynchronously edits a contact.
+   * 
+   * @param {Contact} contact - The contact object to be edited.
+   * @returns {Promise<void>} A promise that resolves once the editing process is complete.
+   */
+  async editContact(contact: Contact): Promise<void> {
+    if (this.editContactForm.valid) {
+      try {
+        this.contact.id = this.data.allContacts[this.data.selectedContact].id;
+        this.contact.hasAccount = this.data.allContacts[this.data.selectedContact].has_account;
+        await this.contactService.setContactValues(this.contact, this.editContactForm);
+        const response = await this.auth.editContact(this.contact);
+        console.log('Edit successful: ' + response);
+        this.data.allContacts = response;
+        await this.data.generatedAssignedList();
+      } catch {
+        console.log('failed to edit contact');
+      }
+    }
+  }
+
+
+
+
 }

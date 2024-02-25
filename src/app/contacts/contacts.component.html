@@ -8,7 +8,7 @@
                 </span>
             </button>
         </div>
-        <div class="contactBox" *ngIf="i == 0 || (data.allContacts[i].name_abbreviation[1] != data.allContacts[i - 1].name_abbreviation[1])">
+        <div class="contactBox" *ngIf="i == 0 || (data.allContacts[i].name_abbreviation[1] != data.allContacts[i - 1].name_abbreviation[1])" [class.topMargin]="i == 0">
             <div class="contactItem">
                 <p class="alphabet">{{contact.name_abbreviation[1]}}</p>
             </div>
@@ -51,7 +51,7 @@
                         </span>
                         <p>Edit</p>
                     </div>
-                    <div class="btnDelete" *ngIf="!data.allContacts[data.selectedContact].has_account">
+                    <div class="btnDelete" *ngIf="!data.allContacts[data.selectedContact].has_account" (click)="deleteContact(data.allContacts[data.selectedContact].id, data.selectedContact)">
                         <span class="material-symbols-outlined icon" (click)="startAddContactDoneView()">
                             delete
                         </span>

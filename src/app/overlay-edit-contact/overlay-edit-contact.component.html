@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="contentRight">
-                <form [formGroup]="editContactForm">
+                <form [formGroup]="editContactForm" (submit)="saveEditContact()">
                     <div class="authInputs topMargin">
                         <div class="authInput">
                             <input type="text" placeholder="Firstname" formControlName="firstname">
@@ -64,7 +64,7 @@
                         <button type="button" class="secondaryBtn">
                             Delete
                         </button>
-                        <button type="button" class="primaryBtn" [disabled]="!editContactForm.valid" [class.disabledBtn]="!editContactForm.valid">
+                        <button type="submit" class="primaryBtn" [disabled]="!editContactForm.valid" [class.disabledBtn]="!editContactForm.valid">
                             Save
                         </button>           
                     </div>

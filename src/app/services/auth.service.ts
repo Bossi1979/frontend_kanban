@@ -74,6 +74,31 @@ export class AuthService {
 
 
   /**
+   * Asynchronously deletes a contact with the specified ID.
+   * 
+   * @param {number} contactId - The ID of the contact to be deleted.
+   * @returns {Promise<any>} A promise that resolves with the result of the delete operation.
+   */
+  public async deleteContact(contactId: number): Promise<any> {
+    const url = `${environment.baseUrl}/contacts/${contactId}`;
+    return lastValueFrom(this.http.delete(url));
+  }
+
+
+  /**
+   * Asynchronously updates a contact with the provided data.
+   * 
+   * @param {Contact} toEditContact - The contact object containing the updated data.
+   * @returns {Promise<any>} A promise that resolves with the result of the edit operation.
+   */
+  public async editContact(toEditContact: Contact): Promise<any> {
+    const url = environment.baseUrl + "/contacts/";
+    const body = toEditContact.createContactObject();
+    return lastValueFrom(this.http.patch(url, body));
+  }
+
+
+  /**
    * Saves a task by sending a POST request to the add task endpoint.
    * 
    * @param {any[]} task - The task data to be saved.
@@ -83,4 +108,7 @@ export class AuthService {
     const url = environment.baseUrl + "/add_task/";
     return lastValueFrom(this.http.post(url, task));
   }
+
+
+
 }

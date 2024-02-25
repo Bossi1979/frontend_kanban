@@ -4,6 +4,7 @@ import { DataService } from '../services/data.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Contact } from '../models/contact.model';
 import { AuthService } from '../services/auth.service';
+import { ContactService } from '../services/contact.service';
 
 
 @Component({
@@ -34,7 +35,7 @@ export class OverlayAddContactComponent {
   newContact: Contact = new Contact();
 
 
-  constructor(public data: DataService, private auth: AuthService) { }
+  constructor(public data: DataService, private auth: AuthService, private contactService: ContactService) { }
 
 
   /**
@@ -54,7 +55,7 @@ export class OverlayAddContactComponent {
    * @returns {Promise<void>}
    */
   async createNewContact(): Promise<void> {
-    await this.trimInputs();
+    await this.contactService.trimInputs(this.addContactForm);
     await this.saveNewContact();
   }
 
@@ -67,7 +68,7 @@ export class OverlayAddContactComponent {
   async saveNewContact(): Promise<void> {
     if (this.addContactForm.valid) {
       try{
-        await this.setNewContactValues();
+        await this.contactService.setContactValues(this.newContact, this.addContactForm);
         this.addContactForm.disable();
         const response: any = await this.auth.addNewContact(this.newContact);
         this.data.allContacts = response;
@@ -99,14 +100,14 @@ export class OverlayAddContactComponent {
    * 
    * @returns {Promise<any>}
    */
-  async setNewContactValues(): Promise<any> {
-    this.newContact.firstname = this.firstLetterToUpperCase(this.addContactForm.value.firstname);
-    this.newContact.lastname = this.firstLetterToUpperCase(this.addContactForm.value.lastname);
-    this.newContact.email = this.addContactForm.value.email.toLowerCase();
-    this.newContact.phone = this.addContactForm.value.phone;
-    this.newContact.username = this.newContact.firstname + ' ' + this.newContact.lastname;
-    this.newContact.nameAbbreviation = this.newContact.firstname.substring(0, 1) + this.newContact.lastname.substring(0, 1);
-  }
+  // async setNewContactValues(): Promise<any> {
+  //   this.newContact.firstname = this.firstLetterToUpperCase(this.addContactForm.value.firstname);
+  //   this.newContact.lastname = this.firstLetterToUpperCase(this.addContactForm.value.lastname);
+  //   this.newContact.email = this.addContactForm.value.email.toLowerCase();
+  //   this.newContact.phone = this.addContactForm.value.phone;
+  //   this.newContact.username = this.newContact.firstname + ' ' + this.newContact.lastname;
+  //   this.newContact.nameAbbreviation = this.newContact.firstname.substring(0, 1) + this.newContact.lastname.substring(0, 1);
+  // }
 
 
   /**
@@ -115,10 +116,10 @@ export class OverlayAddContactComponent {
    * @param {string} value - The string value to convert.
    * @returns {string} The string with the first letter converted to uppercase.
    */
-  firstLetterToUpperCase(value: string): string {
-    value = value.replace(value[0], value[0].toUpperCase());
-    return value;
-  }
+  // firstLetterToUpperCase(value: string): string {
+  //   value = value.replace(value[0], value[0].toUpperCase());
+  //   return value;
+  // }
 
 
   /**
@@ -126,12 +127,12 @@ export class OverlayAddContactComponent {
    * 
    * @returns {Promise<void>}
    */
-  async trimInputs(): Promise<void> {
-    this.addContactForm.get('firstname').setValue(this.addContactForm.value.firstname.trim())
-    this.addContactForm.get('lastname').setValue(this.addContactForm.value.lastname.trim());
-    this.addContactForm.get('email').setValue(this.addContactForm.value.email.trim());
-    this.addContactForm.get('phone').setValue(this.addContactForm.value.phone.trim());
-  }
+  // async trimInputs(): Promise<void> {
+  //   this.addContactForm.get('firstname').setValue(this.addContactForm.value.firstname.trim())
+  //   this.addContactForm.get('lastname').setValue(this.addContactForm.value.lastname.trim());
+  //   this.addContactForm.get('email').setValue(this.addContactForm.value.email.trim());
+  //   this.addContactForm.get('phone').setValue(this.addContactForm.value.phone.trim());
+  // }
 
 
   /**

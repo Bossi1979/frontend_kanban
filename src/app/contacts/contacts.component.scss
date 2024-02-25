@@ -7,7 +7,7 @@
     background-color: white;
     box-shadow: 4px 0px 6px 0px #00000014;
     overflow: hidden;
-    overflow-y: auto;
+    overflow-y: scroll;
 
     div {
         .sticky {
@@ -17,6 +17,10 @@
             background-color: white;
             // width: 456px !important;
             width: 432px !important;
+        }
+
+        .topMargin{
+            margin-top: 101px;
         }
 
         .contactBox {

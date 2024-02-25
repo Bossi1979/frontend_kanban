@@ -8,6 +8,7 @@ export class Contact {
     checked: boolean;
     phone: string;
     hasAccount: boolean;
+    id: number;
 
 
     constructor(obj?: any){
@@ -20,6 +21,7 @@ export class Contact {
         this.checked = obj ? obj.checked : false;
         this.phone = obj ? obj.phone : '';
         this.hasAccount = obj ? obj.hasAccount : false;
+        this.id = obj? obj.id : 0;
     }
 
 
@@ -33,7 +35,8 @@ export class Contact {
             backgroundColor: this.backgroundColor,
             checked: this.checked,
             phone: this.phone,
-            hasAccount: this.hasAccount
+            hasAccount: this.hasAccount,
+            id: this.id,
         }
     }
 }
