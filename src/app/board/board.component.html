@@ -1,1 +1,249 @@
-<p>board works!</p>
+<div class="board">
+    <div class="headline">
+        <h3>
+            Board
+        </h3>
+        <div class="subheadline">
+            <div class="authInputs">
+                <div class="authInput">
+                    <input type="text" placeholder="Find task">
+                    <img src="../../assets/img/board/search.png" alt="">
+                </div>
+            </div>
+
+            <button type="button" class="primaryBtn" style="width: 226px !important;">
+                Add Task
+                <span class="material-symbols-outlined">
+                    add
+                </span>
+            </button>
+        </div>
+    </div>
+    <div class="boardContent">
+        <div class="tasksContainer">
+            <header>
+                <h5>ToDo</h5>
+                <span class="material-symbols-outlined addCross">
+                    add
+                </span>
+            </header>
+            <div class="tasksList" (drop)="drop(0)" (dragover)="allowDrop($event); enableHigligthedDopArea(0)" (dragleave)="disableHighligthedDopArea()" [style.background-color]="highligtedProcessingIndex == 0 ? 'rgba(0, 0, 0, 0.1)' : 'unset'">
+                <div *ngFor="let task of data.taskList; let i=index;">
+                    <div class="task" 
+                    (click)="clickTaskCard(i)"
+                    draggable="true" 
+                    (dragstart)="startDragging(i)"
+                     *ngIf="task.processing_status == 0">
+                        <p class="category backgroundA" *ngIf="task.category == 'Technical Task'">{{task.category}}</p>
+                        <p class="category backgroundB" *ngIf="task.category == 'User Story'">{{task.category}}</p>
+                        <div class="text">
+                            <h6 class="title">
+                                {{task.title}}
+                            </h6>
+                            <p class="description">
+                                {{task.description}}
+                            </p>
+                        </div>
+                        <div class="progress" *ngIf="task.subtask.length > 0">
+                            <div class="barOuter">
+                                <div class="progressBar" [style.width]="calculateDoneBarWidth(i)"></div>
+                            </div>
+                            <span class="subtasks">
+                                {{countSubtasksDone(i)}}/{{task.subtask.length}} Subtasks
+                            </span>
+                        </div>
+                        <div class="bagesAndPrio">
+                            <div class="bages">
+                                <div class="bage" *ngFor="let assigned of task.assigned_to; let x = index"
+                                    [style.background-color]="assigned.background_color"
+                                    [style.margin-left]="x !=0 ? '-10px' : '0px'">
+                                    <span>{{assigned.name_abbreviation}}</span>
+                                </div>
+                            </div>
+                            <div class="prio">
+                                <span class="material-symbols-outlined urgent" *ngIf="task.prio == 1">
+                                    keyboard_double_arrow_up
+                                </span>
+                                <span class="material-symbols-outlined medium" *ngIf="task.prio == 2">
+                                    equal
+                                </span>
+                                <span class="material-symbols-outlined low" *ngIf="task.prio == 3">
+                                    keyboard_double_arrow_down
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tasksContainer">
+            <header>
+                <h5>In progress</h5>
+                <span class="material-symbols-outlined addCross">
+                    add
+                </span>
+            </header>
+            <div class="tasksList" (drop)="drop(1)" (dragover)="allowDrop($event); enableHigligthedDopArea(1)" (dragleave)="disableHighligthedDopArea()" [style.background-color]="highligtedProcessingIndex == 1 ? 'rgba(0, 0, 0, 0.1)' : 'unset'">
+                <div *ngFor="let task of data.taskList; let i=index;">
+                    <div class="task" 
+                    (click)="clickTaskCard(i)" 
+                    draggable="true" 
+                    (dragstart)="startDragging(i)"
+                    *ngIf="task.processing_status == 1">
+                        <p class="category backgroundA" *ngIf="task.category == 'Technical Task'">{{task.category}}</p>
+                        <p class="category backgroundB" *ngIf="task.category == 'User Story'">{{task.category}}</p>
+                        <div class="text">
+                            <h6 class="title">
+                                {{task.title}}
+                            </h6>
+                            <p class="description">
+                                {{task.description}}
+                            </p>
+                        </div>
+                        <div class="progress" *ngIf="task.subtask.length > 0">
+                            <div class="barOuter">
+                                <div class="progressBar" [style.width]="calculateDoneBarWidth(i)"></div>
+                            </div>
+                            <span class="subtasks">
+                                {{countSubtasksDone(i)}}/{{task.subtask.length}} Subtasks
+                            </span>
+                        </div>
+                        <div class="bagesAndPrio">
+                            <div class="bages">
+                                <div class="bage" *ngFor="let assigned of task.assigned_to; let x = index"
+                                    [style.background-color]="assigned.background_color"
+                                    [style.margin-left]="x !=0 ? '-10px' : '0px'">
+                                    <span>{{assigned.name_abbreviation}}</span>
+                                </div>
+                            </div>
+                            <div class="prio">
+                                <span class="material-symbols-outlined urgent" *ngIf="task.prio == 1">
+                                    keyboard_double_arrow_up
+                                </span>
+                                <span class="material-symbols-outlined medium" *ngIf="task.prio == 2">
+                                    equal
+                                </span>
+                                <span class="material-symbols-outlined low" *ngIf="task.prio == 3">
+                                    keyboard_double_arrow_down
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tasksContainer">
+            <header>
+                <h5>Awaiting Feedback</h5>
+                <span class="material-symbols-outlined addCross">
+                    add
+                </span>
+            </header>
+            <div class="tasksList" (drop)="drop(2)" (dragover)="allowDrop($event); enableHigligthedDopArea(2)" (dragleave)="disableHighligthedDopArea()" [style.background-color]="highligtedProcessingIndex == 2 ? 'rgba(0, 0, 0, 0.1)' : 'unset'">
+                <div *ngFor="let task of data.taskList; let i=index;">
+                    <div class="task" 
+                    (click)="clickTaskCard(i)"
+                    draggable="true" 
+                    (dragstart)="startDragging(i)" 
+                    *ngIf="task.processing_status == 2">
+                        <p class="category backgroundA" *ngIf="task.category == 'Technical Task'">{{task.category}}</p>
+                        <p class="category backgroundB" *ngIf="task.category == 'User Story'">{{task.category}}</p>
+                        <div class="text">
+                            <h6 class="title">
+                                {{task.title}}
+                            </h6>
+                            <p class="description">
+                                {{task.description}}
+                            </p>
+                        </div>
+                        <div class="progress" *ngIf="task.subtask.length > 0">
+                            <div class="barOuter">
+                                <div class="progressBar" [style.width]="calculateDoneBarWidth(i)"></div>
+                            </div>
+                            <span class="subtasks">
+                                {{countSubtasksDone(i)}}/{{task.subtask.length}} Subtasks
+                            </span>
+                        </div>
+                        <div class="bagesAndPrio">
+                            <div class="bages">
+                                <div class="bage" *ngFor="let assigned of task.assigned_to; let x = index"
+                                    [style.background-color]="assigned.background_color"
+                                    [style.margin-left]="x !=0 ? '-10px' : '0px'">
+                                    <span>{{assigned.name_abbreviation}}</span>
+                                </div>
+                            </div>
+                            <div class="prio">
+                                <span class="material-symbols-outlined urgent" *ngIf="task.prio == 1">
+                                    keyboard_double_arrow_up
+                                </span>
+                                <span class="material-symbols-outlined medium" *ngIf="task.prio == 2">
+                                    equal
+                                </span>
+                                <span class="material-symbols-outlined low" *ngIf="task.prio == 3">
+                                    keyboard_double_arrow_down
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tasksContainer">
+            <header>
+                <h5>Done</h5>
+                <span class="material-symbols-outlined addCross">
+                    add
+                </span>
+            </header>
+            <div class="tasksList" (drop)="drop(3)" (dragover)="allowDrop($event); enableHigligthedDopArea(3)" (dragleave)="disableHighligthedDopArea()" [style.background-color]="highligtedProcessingIndex == 3 ? 'rgba(0, 0, 0, 0.1)' : 'unset'">
+                <div *ngFor="let task of data.taskList; let i=index;">
+                    <div class="task"
+                    (click)="clickTaskCard(i)"
+                    draggable="true" 
+                    (dragstart)="startDragging(i)"
+                    *ngIf="task.processing_status == 3">
+                        <p class="category backgroundA" *ngIf="task.category == 'Technical Task'">{{task.category}}</p>
+                        <p class="category backgroundB" *ngIf="task.category == 'User Story'">{{task.category}}</p>
+                        <div class="text">
+                            <h6 class="title">
+                                {{task.title}}
+                            </h6>
+                            <p class="description">
+                                {{task.description}}
+                            </p>
+                        </div>
+                        <div class="progress" *ngIf="task.subtask.length > 0">
+                            <div class="barOuter">
+                                <div class="progressBar" [style.width]="calculateDoneBarWidth(i)"></div>
+                            </div>
+                            <span class="subtasks">
+                                {{countSubtasksDone(i)}}/{{task.subtask.length}} Subtasks
+                            </span>
+                        </div>
+                        <div class="bagesAndPrio">
+                            <div class="bages">
+                                <div class="bage" *ngFor="let assigned of task.assigned_to; let x = index"
+                                    [style.background-color]="assigned.background_color"
+                                    [style.margin-left]="x !=0 ? '-10px' : '0px'">
+                                    <span>{{assigned.name_abbreviation}}</span>
+                                </div>
+                            </div>
+                            <div class="prio">
+                                <span class="material-symbols-outlined urgent" *ngIf="task.prio == 1">
+                                    keyboard_double_arrow_up
+                                </span>
+                                <span class="material-symbols-outlined medium" *ngIf="task.prio == 2">
+                                    equal
+                                </span>
+                                <span class="material-symbols-outlined low" *ngIf="task.prio == 3">
+                                    keyboard_double_arrow_down
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

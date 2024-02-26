@@ -60,6 +60,12 @@ export class AuthService {
   }
 
 
+  public async getAllTasks(): Promise<any> {
+    const url = environment.baseUrl + "/add_task/";
+    return lastValueFrom(this.http.get(url));
+  }
+
+
   /**
    * Adds a new contact by sending a POST request to the add contact endpoint.
    * 
@@ -67,7 +73,7 @@ export class AuthService {
    * @returns {Promise<any>} A promise that resolves with the result of the add new contact request.
    */
   public async addNewContact(newContact: Contact): Promise<any> {
-    const url = environment.baseUrl + "/add_contact/";
+    const url = environment.baseUrl + "/contacts/";
     const body = newContact.createContactObject();
     return lastValueFrom(this.http.post(url, body));
   }

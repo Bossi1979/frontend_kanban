@@ -64,7 +64,19 @@ export class ContactsComponent {
       this.data.allContacts.splice(index, 1);
       this.data.assignedToList.splice(index, 1);
       console.log(this.data.allContacts);
+      this.startDeleteContactDoneView();
     }
+  }
+
+
+  startDeleteContactDoneView(): void {
+    this.data.selectedMessageIndex = 2;
+    this.data.messageOverlayView = true;
+    this.data.addContactDoneView = true;
+    setTimeout(() => {
+      this.data.addContactDoneView = false;
+      this.data.messageOverlayView = false;
+    }, 2600);
   }
 
 

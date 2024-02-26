@@ -14,6 +14,7 @@ export class DataService {
 
   // Varialblen für AddTask
   assignedToList: any[] = [];
+  taskList: any[] = [];
 
   //contacts Variablen
   shadowView: boolean = false;
@@ -23,6 +24,11 @@ export class DataService {
   startEditContactView: boolean = false;
   selectedContact: number = -1;
 
+  // board Variablen
+  startEditTaskView: boolean = false;
+
+  //overlay
+  selectedMessageIndex: number = 1;
 
   constructor(private as: AuthService) {
     if (localStorage.getItem('userData')) {
@@ -36,6 +42,7 @@ export class DataService {
     console.log('Loading data...');
     await this.getContacts();
     await this.generatedAssignedList();
+    await this.generateTaskList();
   }
 
 
@@ -84,5 +91,12 @@ export class DataService {
   async generatedAssignedList(): Promise<void> {
     this.assignedToList = this.allContacts.slice();
     console.log('assigned to list: ', this.assignedToList);
+  }
+
+
+  async generateTaskList(): Promise<void> {
+    const response: any = await this.as.getAllTasks();
+    this.taskList = response;
+    console.log('task List: ', this.taskList);
   }
 }

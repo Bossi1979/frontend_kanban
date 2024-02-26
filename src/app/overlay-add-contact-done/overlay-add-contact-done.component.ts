@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DataService } from '../services/data.service';
 
 
 @Component({
@@ -8,4 +9,13 @@ import { Component } from '@angular/core';
 })
 export class OverlayAddContactDoneComponent {
 
+  messageArray: string[] = [
+    'Contact succesfully created',
+    'Contact succesfully updated',
+    'Contact succesfully deleted',
+  ];
+
+  
+
+  constructor(public data: DataService) { }
 }

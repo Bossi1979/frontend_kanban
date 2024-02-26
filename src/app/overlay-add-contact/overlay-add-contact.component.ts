@@ -141,6 +141,7 @@ export class OverlayAddContactComponent {
    * @returns {void}
    */
   startAddContactDoneView(): void {
+    this.data.selectedMessageIndex = 0;
     this.data.messageOverlayView = true;
     this.data.addContactDoneView = true;
     setTimeout(() => {

@@ -202,6 +202,7 @@ export class AddTaskComponent {
   async saveTask(): Promise<void> {
     const taskData: any = await this.createTaskDataForSave();
     let response = await this.as.saveTask(taskData);
+    await this.data.generateTaskList();
   }
 
 

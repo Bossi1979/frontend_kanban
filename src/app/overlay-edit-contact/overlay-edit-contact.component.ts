@@ -88,10 +88,22 @@ export class OverlayEditContactComponent {
         console.log('Edit successful: ' + response);
         this.data.allContacts = response;
         await this.data.generatedAssignedList();
+        this.startEditContactDoneView();
       } catch {
         console.log('failed to edit contact');
       }
     }
+  }
+
+
+  startEditContactDoneView(): void {
+    this.data.selectedMessageIndex = 1;
+    this.data.messageOverlayView = true;
+    this.data.addContactDoneView = true;
+    setTimeout(() => {
+      this.data.addContactDoneView = false;
+      this.data.messageOverlayView = false;
+    }, 2600);
   }
 
 
