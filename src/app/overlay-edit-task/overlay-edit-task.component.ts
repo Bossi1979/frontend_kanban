@@ -14,7 +14,30 @@ export class OverlayEditTaskComponent {
     description: 'Dies ist der Beschreibung von Heute',
     dueDate: '18/02/2024',
     prio: 3,
-    
+    assigned_to: [
+      {
+        background_color: '#000000',
+        name_abbreviation: 'SB',
+        username: 'Stefan Boskamp'
+      },
+      {
+        background_color: '#000000',
+        name_abbreviation: 'MB',
+        username: 'Markus Boskamp'
+      },
+      {
+        background_color: '#000000',
+        name_abbreviation: 'SB',
+        username: 'Stefan Boskamp'
+      },
+      {
+        background_color: '#000000',
+        name_abbreviation: 'MB',
+        username: 'Markus Boskamp'
+      },
+
+    ]
+
   };
 
 

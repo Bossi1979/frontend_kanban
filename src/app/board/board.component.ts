@@ -10,7 +10,7 @@ export class BoardComponent {
 
 
   constructor(public data: DataService) {
-    data.taskList.length
+    this.data.taskList.length
   }
 
 
