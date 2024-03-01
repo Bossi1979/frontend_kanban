@@ -35,6 +35,7 @@ export class DataService {
       this.loggedUserData = JSON.parse(localStorage.getItem('userData'));
       this.loadDatas();
     }
+    
   }
 
 

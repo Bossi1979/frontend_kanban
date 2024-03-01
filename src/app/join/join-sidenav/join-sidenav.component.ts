@@ -74,5 +74,8 @@ export class JoinSidenavComponent {
     if (menuNo == 2 && this.data.allContacts.length != this.data.assignedToList.length){
       await this.data.generatedAssignedList();
     } 
+    if (menuNo == 3 && this.data.taskList.length == 0){
+      await this.data.generateTaskList();
+    }
   }
 }

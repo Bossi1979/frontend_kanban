@@ -1,4 +1,64 @@
 <div class="taskCard">
+    <div>
+        <p class="category" [style.background-color]="task.category == 'Technical Task' ? '#0038ff' : '#1fd7c1'">
+            {{task.category}}</p>
+
+
+
+        <div class="closeDiv" (click)="closeTaskEditView()">
+            <span class="material-symbols-outlined closeIcon">
+                close
+            </span>
+        </div>
+
+    </div>
+
+    <h3 class="title">{{task.title}}</h3>
+
+    <p class="description">
+        {{task.description}}
+    </p>
+
+    <div class="additionalData">
+        <h6>Due Date:</h6>
+        <div class="data">
+            <p>{{task.dueDate}}</p>
+        </div>
+    </div>
+
+    <div class="additionalData">
+        <h6>Priority:</h6>
+        <div class="data">
+            <p *ngIf="task.prio == 1">Urgent</p>
+            <p *ngIf="task.prio == 2">Medium</p>
+            <p *ngIf="task.prio == 3">Low</p>
+
+
+            <span class="material-symbols-outlined urgent" *ngIf="task.prio == 1">
+                keyboard_double_arrow_up
+            </span>
+            <span class="material-symbols-outlined medium" *ngIf="task.prio == 2">
+                equal
+            </span>
+            <span class="material-symbols-outlined low" *ngIf="task.prio == 3">
+                keyboard_double_arrow_down
+            </span>
+        </div>
+    </div>
+
+    <div class="assignedTo">
+        <h6>Assigned To:</h6>
+        <div class="list">
+            <div class="contact">
+                <div class="bage">
+                    <span>SB</span>
+                </div>
+                <span class="name">Stefan Boskamp</span>
+            </div>
+        </div>
+    </div>
+
+
 
 
 
