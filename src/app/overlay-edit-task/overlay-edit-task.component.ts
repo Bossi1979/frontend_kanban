@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { DataService } from '../services/data.service';
+import { Task } from '../models/task.model';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-overlay-edit-task',
@@ -8,44 +10,25 @@ import { DataService } from '../services/data.service';
 })
 export class OverlayEditTaskComponent {
 
-  task: any = {
-    category: 'Technical Task',
-    title: 'Dies ist der Titel von Heute',
-    description: 'Dies ist der Beschreibung von Heute',
-    dueDate: '18/02/2024',
-    prio: 3,
-    assigned_to: [
-      {
-        background_color: '#000000',
-        name_abbreviation: 'SB',
-        username: 'Stefan Boskamp'
-      },
-      {
-        background_color: '#000000',
-        name_abbreviation: 'MB',
-        username: 'Markus Boskamp'
-      },
-      {
-        background_color: '#000000',
-        name_abbreviation: 'SB',
-        username: 'Stefan Boskamp'
-      },
-      {
-        background_color: '#000000',
-        name_abbreviation: 'MB',
-        username: 'Markus Boskamp'
-      },
-
-    ]
-
-  };
+  taskCard: Task = new Task();
 
 
-  constructor(private data: DataService) { }
+  constructor(private data: DataService, private auth: AuthService) {
+    this.taskCard.setTaskCardData(this.data.selectedTask);
+   }
 
 
   closeTaskEditView(): void {
     this.data.startEditTaskView = false;
     this.data.shadowView = false;
   }
+
+
+  async changeSubtaskCheckbox(subIndex: number): Promise<void> {
+    this.taskCard.subtask[subIndex].checked =!this.taskCard.subtask[subIndex].checked;
+    this.data.taskList[this.data.selectedTaskIndex].subtask[subIndex].checked = this.taskCard.subtask[subIndex].checked;
+    let response = await this.auth.updateTask(this.taskCard);
+    console.log(response);
+  }
+
 }

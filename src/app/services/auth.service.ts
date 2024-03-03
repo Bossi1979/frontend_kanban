@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { Contact } from '../models/contact.model';
 import { Signup } from '../models/signup.model';
+import { Task } from '../models/task.model';
 
 
 @Injectable({
@@ -113,6 +114,13 @@ export class AuthService {
   public async saveTask(task: any[]): Promise<any> {
     const url = environment.baseUrl + "/add_task/";
     return lastValueFrom(this.http.post(url, task));
+  }
+
+
+  public async updateTask(task: Task): Promise<any> {
+    const url = environment.baseUrl + "/add_task/";
+    const body = task.createTaskObject();
+    return lastValueFrom(this.http.patch(url, body));
   }
 
 

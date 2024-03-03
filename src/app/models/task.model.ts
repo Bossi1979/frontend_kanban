@@ -7,6 +7,7 @@ export class Task {
     subtask: any[];
     prio: number;
     processingStatus: number;
+    id: number;
 
 
     constructor(obj?: any){
@@ -18,6 +19,7 @@ export class Task {
         this.subtask = obj ? obj.subtask : '';
         this.prio = obj ? obj.prio : 0;
         this.processingStatus = obj ? obj.processingStatus : 0;
+        this.id = obj? obj.id : 0;
     }
 
 
@@ -30,7 +32,20 @@ export class Task {
             category: this.category,
             subtask: this.subtask,
             prio: this.prio,
-            processingStatus: this.processingStatus
+            processingStatus: this.processingStatus,
+            id: this.id,
         }
+    }
+
+    setTaskCardData(task: any){
+        this.title = task.title;
+        this.description = task.description;
+        this.assignTo = task.assigned_to;
+        this.dueDate = task.due_date;
+        this.category = task.category;
+        this.subtask = task.subtask;
+        this.prio = task.prio;
+        this.processingStatus = task.processing_status;
+        this.id = task.id;
     }
 }

@@ -65,6 +65,8 @@ export class BoardComponent {
 
 
   clickTaskCard(index: number): void {
+    this.data.selectedTaskIndex = index;
+    this.data.selectedTask = this.data.taskList[index];
     console.log("clickTaskCardIndex: ", index);
     this.data.startEditTaskView = true;
     this.data.shadowView = true;

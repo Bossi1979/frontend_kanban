@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
+import { Task } from '../models/task.model';
 
 
 @Injectable({
@@ -26,6 +27,9 @@ export class DataService {
 
   // board Variablen
   startEditTaskView: boolean = false;
+  selectedTaskIndex: number;
+  selectedTask: any[];
+  taskCard: Task = new Task();
 
   //overlay
   selectedMessageIndex: number = 1;
@@ -100,4 +104,5 @@ export class DataService {
     this.taskList = response;
     console.log('task List: ', this.taskList);
   }
+
 }
