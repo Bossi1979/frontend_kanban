@@ -14,6 +14,7 @@ export class JoinComponent {
   constructor(private router: Router, public data: DataService) {
     const token = localStorage.getItem('token');
     if (token == "undefined" || token == undefined || token == null) router.navigateByUrl('/login');
+    this.data.selectedMenu = 1;
   }
 
 }
