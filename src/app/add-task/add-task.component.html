@@ -23,13 +23,13 @@
                     <span>Assigned to</span>
                     <div class="formInputs">
                         <div class="formInput">
-                            <input type="text" value="Select contacts to assign" *ngIf="assignBtnDisabled"
-                                (focus)="openAssignToDropdown()" formControlName="assignTo">
-                            <input type="text" *ngIf="!assignBtnDisabled" formControlName="assignToSelect">
+                            <input type="text" value="Select contacts to assign" *ngIf="assignedToService.assignBtnDisabled"
+                                (focus)="assignedToService.openAssignToDropdown()" formControlName="assignTo">
+                            <input type="text" *ngIf="!assignedToService.assignBtnDisabled" formControlName="assignToSelect">
                             <img src="../../assets/img/add_task/arrow_drop_downaa.png"
-                                [class.rotate180deg]="!assignBtnDisabled" style="cursor: pointer;"
-                                (click)="toggleAssignToDropdown()">
-                            <div class="dropAssign" *ngIf="!assignBtnDisabled">
+                                [class.rotate180deg]="!assignedToService.assignBtnDisabled" style="cursor: pointer;"
+                                (click)="assignedToService.toggleAssignToDropdown()">
+                            <div class="dropAssign" *ngIf="!assignedToService.assignBtnDisabled">
                                 <div *ngFor="let contact of data.assignedToList; let i = index;">
                                     <div class="contactLine">
                                         <div class="contactLineLeft">
@@ -42,7 +42,7 @@
                                             </p>
                                         </div>
                                         <input type="checkbox" [id]="'checked' + i"
-                                            (click)="selectionCheckbox('checked' + i, i)"
+                                            (click)="assignedToService.selectionCheckbox('checked' + i, i)"
                                             [checked]="data.assignedToList[i].checked">
                                     </div>
 
@@ -74,20 +74,20 @@
                 <div class="prioBtnDiv">
                     <p>Prio</p>
                     <div class="prioBtnContent">
-                        <div class="prioBtn" [class.urgentBtn]="!urgentSelected"
-                            [class.urgentBtnSelected]="urgentSelected" (click)="selectedPrio(1)">
+                        <div class="prioBtn" [class.urgentBtn]="!prioBtnService.urgentSelected"
+                            [class.urgentBtnSelected]="prioBtnService.urgentSelected" (click)="prioBtnService.selectedPrio(1)">
                             <p>Urgent</p>
                             <span class="material-symbols-outlined urgent">keyboard_double_arrow_up</span>
                         </div>
-                        <div class="prioBtn" [class.mediumBtn]="!mediumSelected"
-                            [class.mediumBtnSelected]="mediumSelected" (click)="selectedPrio(2)">
+                        <div class="prioBtn" [class.mediumBtn]="!prioBtnService.mediumSelected"
+                            [class.mediumBtnSelected]="prioBtnService.mediumSelected" (click)="prioBtnService.selectedPrio(2)">
                             <p>Medium</p>
                             <span class="material-symbols-outlined medium">
                                 equal
                             </span>
                         </div>
-                        <div class="prioBtn" [class.lowBtn]="!lowSelected" [class.lowBtnSelected]="lowSelected"
-                            (click)="selectedPrio(3)">
+                        <div class="prioBtn" [class.lowBtn]="!prioBtnService.lowSelected" [class.lowBtnSelected]="prioBtnService.lowSelected"
+                            (click)="prioBtnService.selectedPrio(3)">
                             <p>Low</p>
                             <span class="material-symbols-outlined low">
                                 keyboard_double_arrow_down

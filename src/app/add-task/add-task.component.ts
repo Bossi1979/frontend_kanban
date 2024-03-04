@@ -4,6 +4,8 @@ import { AuthService } from '../services/auth.service';
 import { AddTaskService } from '../services/add-task.service';
 import { SubtasksService } from '../services/subtasks.service';
 import { Task } from '../models/task.model';
+import { PrioBtnService } from '../services/prio-btn.service';
+import { AssignedToService } from '../services/assigned-to.service';
 
 
 @Component({
@@ -12,12 +14,6 @@ import { Task } from '../models/task.model';
   styleUrl: './add-task.component.scss'
 })
 export class AddTaskComponent {
-  urgentSelected: boolean = false;
-  mediumSelected: boolean = false;
-  lowSelected: boolean = false;
-  selectedPrioBtn: number = 0;
-  assignBtnDisabled = true;
-  isSaving: boolean = false;
   categoryDropdown: boolean = false;
   @ViewChild('subtaskInput') subtaskInput!: ElementRef;
   
@@ -27,135 +23,14 @@ export class AddTaskComponent {
     private as: AuthService,
     public addTaskService: AddTaskService,
     public subtaskService: SubtasksService,
+    public prioBtnService: PrioBtnService,
+    public assignedToService: AssignedToService,
   ) {
     this.subtaskService.subtasksList = [];
+    this.subtaskService.activeForm = this.addTaskService.addForm;
+    this.prioBtnService.resetPrio();
+    console.log(this.subtaskService.activeForm);
    }
-
-
-  /**
-   * Selects the priority and updates the selection accordingly.
-   * 
-   * @param {number} prio - The priority to be selected.
-   */
-  selectedPrio(prio: number) {
-    if (!this.isSaving) {
-      if (this.prioBtnHasToBeDisabled(prio)) this.disablePrioBtn(prio);
-      else this.selectPrioBtn(prio);
-    }
-  }
-
-
-  /**
-   * Checks whether the priority button should be disabled based on the selected priority.
-   * 
-   * @param {number} prio - The priority to be checked against the selected priority button.
-   * @returns {boolean} - Returns true if the priority button should be disabled, otherwise false.
-   */
-  prioBtnHasToBeDisabled(prio: number): boolean {
-    return prio == this.selectedPrioBtn;
-  }
-
-
-
-  /**
-    * Disables the button for the specified priority.
-    * 
-    * @param {number} prio - The priority for which the button should be disabled.
-    */
-  disablePrioBtn(prio: number): void {
-    if (prio == 1) this.urgentSelected = !this.urgentSelected;
-    if (prio == 2) this.mediumSelected = !this.mediumSelected;
-    if (prio == 3) this.lowSelected = !this.lowSelected;
-    this.selectedPrioBtn = 0;
-  }
-
-
-  /**
-   * Selects the button for the specified priority.
-   * 
-   * @param {number} prio - The priority to be selected.
-   */
-  selectPrioBtn(prio: number): void {
-    this.resetPrio();
-    if (prio == 1) this.urgentSelected = true;
-    if (prio == 2) this.mediumSelected = true;
-    if (prio == 3) this.lowSelected = true;
-    this.selectedPrioBtn = prio;
-  }
-
-
-  /**
-   * Resets all priorities to their initial state.
-   */
-  resetPrio(): void {
-    this.urgentSelected = false;
-    this.mediumSelected = false;
-    this.lowSelected = false;
-    this.selectedPrioBtn = 0;
-  }
-
-
-  /**
-   * Opens the dropdown menu for assignment if not disabled.
-   */
-  openAssignToDropdown(): void {
-    if (this.assignBtnDisabled) this.assignBtnDisabled = false;
-  }
-
-
-  /**
-   * Toggles the assignment dropdown menu if not in saving mode.
-   */
-  toggleAssignToDropdown(): void {
-    if (!this.isSaving) this.assignBtnDisabled = !this.assignBtnDisabled;
-  }
-
-
-  /**
-   * Handles the selection of a checkbox by updating its status based on user assignment.
-   * 
-   * @param {string} id - The ID of the checkbox.
-   * @param {number} index - The index of the checkbox in the assignedToList array.
-   */
-  selectionCheckbox(id: string, index: number): void {
-    if (this.userIsAssignedTo(id) && this.userNotListedAsAssignedTo(index)) this.data.assignedToList[index].checked = true;
-    else if (this.userListedAsAssignedTo(index)) this.data.assignedToList[index].checked = false;
-  }
-
-
-  /**
-   * Checks if a user is assigned to a checkbox.
-   * 
-   * @param {string} id - The ID of the checkbox.
-   * @returns {boolean} - Returns true if the user is assigned to the checkbox, otherwise false.
-   */
-  userIsAssignedTo(id: string): boolean {
-    const selectedCheckbox = document.getElementById(id) as HTMLInputElement;
-    const assignedStatus = selectedCheckbox.checked;
-    return assignedStatus;
-  }
-
-
-  /**
-   * Checks if a user is not listed as assigned to a checkbox.
-   * 
-   * @param {number} index - The index of the checkbox in the assignedToList array.
-   * @returns {boolean} - Returns true if the user is not listed as assigned to the checkbox, otherwise false.
-   */
-  userNotListedAsAssignedTo(index: number): boolean {
-    return !this.data.assignedToList[index].checked
-  }
-
-
-  /**
-   * Checks if a user is listed as assigned to a checkbox.
-   * 
-   * @param {number} index - The index of the checkbox in the assignedToList array.
-   * @returns {boolean} - Returns true if the user is listed as assigned to the checkbox, otherwise false.
-   */
-  userListedAsAssignedTo(index: number): boolean {
-    return this.data.assignedToList[index].checked;
-  }
 
 
   /**
@@ -164,11 +39,12 @@ export class AddTaskComponent {
    * @returns {Promise<void>} - A Promise that resolves once the task creation process is complete.
    */
   async createTask(): Promise<void> {
-    this.isSaving = true;
+    console.log(this.subtaskService.activeForm);
+    this.prioBtnService.isSaving = true;
     this.addTaskService.addForm.disable();
     await this.saveTask();
     this.clearForm();
-    this.isSaving = false;
+    this.prioBtnService.isSaving = false;
     this.addTaskService.addForm.enable();
   }
 
@@ -177,7 +53,7 @@ export class AddTaskComponent {
    * Clears the form by resetting priority, form values, and assigned contacts.
    */
   clearForm(): void {
-    this.resetPrio();
+    this.prioBtnService.resetPrio();
     this.addTaskService.addForm.reset();
     this.resetAssignTo();
     this.subtaskService.subtasksList = [];
@@ -188,7 +64,7 @@ export class AddTaskComponent {
    * Resets the assigned contacts to their initial state and disables the assignment button.
    */
   resetAssignTo(): void {
-    this.assignBtnDisabled = true;
+    this.assignedToService.assignBtnDisabled = true;
     this.addTaskService.addForm.get('assignTo').setValue('Select contacts to assign');
     this.data.assignedToList.forEach(contact => {
       contact.checked = false;
@@ -221,7 +97,7 @@ export class AddTaskComponent {
     task.dueDate = this.addTaskService.addForm.get('dueDate').value;
     task.category = this.addTaskService.addForm.get('category').value;
     task.subtask = this.subtaskService.subtasksList;
-    task.prio = this.selectedPrioBtn;
+    task.prio = this.prioBtnService.selectedPrioBtn;
     return task.createTaskObject();
   }
 

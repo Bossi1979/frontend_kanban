@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
-import { ElementRef, ViewChild} from '@angular/core';
+import { ElementRef, ViewChild } from '@angular/core';
 import { AddTaskService } from './add-task.service';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubtasksService {
-
-  constructor(
-    private addTaskService: AddTaskService,
-  ) { }
-
   subtaskListEditActive: number = -1;
   hoveredSubtask: number = -1;
   subtaskEdit: boolean = false;
   @ViewChild('subtaskInput') subtaskInput!: ElementRef;
   subtasksList: any[] = [];
+  activeForm: FormGroup;
+  escBtnPressed: boolean = false;
+
+
+  constructor() { }
 
 
   /**
@@ -38,15 +39,14 @@ export class SubtasksService {
   }
 
 
-   /**
-    * Activates subtask edit mode and focuses on the subtask input field.
-    * 
-    * @returns {void}
-  */
-   activatedSubtaskEdit(): void {
+  /**
+   * Activates subtask edit mode and focuses on the subtask input field.
+   * 
+   * @returns {void}
+ */
+  activatedSubtaskEdit(): void {
     this.subtaskEdit = true;
   }
-  
 
 
   /**
@@ -55,14 +55,13 @@ export class SubtasksService {
    * @returns {void}
    */
   addSubtask(): void {
-    // (blur)="subtaskLeave()" 
-    let subtask: string = this.addTaskService.addForm.get('subtask').value;
+    let subtask: string = this.activeForm.get('subtask').value;
     if (subtask.trim().length > 0) {
       let newSubtask: string = subtask.trim();
       let checked: boolean = false;
       this.subtasksList.push({ subtask: newSubtask, checked: checked });
       console.log('subtaskList: ', this.subtasksList);
-      this.addTaskService.addForm.get('subtask').setValue('');
+      this.activeForm.get('subtask').setValue('');
       this.activatedSubtaskEdit();
     }
   }
@@ -73,15 +72,13 @@ export class SubtasksService {
    * 
    * @returns {void}
    */
-  editSubtask(editSubtask: string): void {
-    // (blur)="subtaskLeave()" 
-    let subtask: string = this.addTaskService.addForm.get('subtask').value;
+  editSubtask(): void {
+    let subtask: string = this.activeForm.get('subtask').value;
     if (subtask.trim().length > 0) {
       let newSubtask: string = subtask.trim();
       let checked: boolean = false;
       this.subtasksList.push({ subtask: newSubtask, checked: checked });
-      console.log('subtaskList: ', this.subtasksList);
-      this.addTaskService.addForm.get('subtask').setValue('');
+      this.activeForm.get('subtask').setValue('');
       this.activatedSubtaskEdit();
     }
   }
@@ -93,7 +90,7 @@ export class SubtasksService {
    * @returns {void}
    */
   closeAddSubtask(): void {
-    this.addTaskService.addForm.get('subtask').setValue('');
+    this.activeForm.get('subtask').setValue('');
     this.subtaskLeave();
   }
 
@@ -166,7 +163,7 @@ export class SubtasksService {
    * @returns {Promise<void>}
    */
   async setEditInputValue(index: number): Promise<void> {
-    this.addTaskService.addForm.get('subListItem').setValue(this.subtasksList[index].subtask);
+    this.activeForm.get('subListItem').setValue(this.subtasksList[index].subtask);
   }
 
 
@@ -177,7 +174,7 @@ export class SubtasksService {
    * @returns {void}
    */
   leaveSubtaskListEdit(index: number): void {
-    let editValue = this.addTaskService.addForm.get('subListItem').value;
+    let editValue = this.activeForm.get('subListItem').value;
     if (editValue.trim().length > 0 && !this.escBtnPressed) this.subtasksList[index].subtask = editValue.trim();
     else if (!this.escBtnPressed) this.deleteSubTaskItem(index);
     this.subtaskListEditActive = -1;
@@ -194,7 +191,7 @@ export class SubtasksService {
     this.subtasksList.splice(index, 1);
   }
 
-  
+
   /**
    * Handles double-click events on a subtask list item.
    * 
@@ -206,9 +203,6 @@ export class SubtasksService {
   }
 
 
-  escBtnPressed: boolean = false;
-
-
   /**
    * Handles key press events on a subtask list item.
    * 
@@ -218,7 +212,7 @@ export class SubtasksService {
    */
   subtaskItemListBtnPressed(event: any, index: number): void {
     if (this.enterBtnKeyup(event)) this.leaveSubtaskListEdit(index);
-    if (this.escBtnKeyup(event)) { 
+    if (this.escBtnKeyup(event)) {
       this.escBtnPressed = true;
       this.subtaskListEditActive = -1;
     }
@@ -234,7 +228,7 @@ export class SubtasksService {
    * @param {any} event - The key event object.
    * @returns {boolean} - True if the Enter key is pressed, otherwise false.
    */
-  enterBtnKeyup(event: any): boolean{
+  enterBtnKeyup(event: any): boolean {
     return event.keyCode == 13
   }
 
