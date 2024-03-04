@@ -26,6 +26,7 @@ export class DataService {
   selectedContact: number = -1;
 
   // board Variablen
+  startDetailTaskView: boolean = false;
   startEditTaskView: boolean = false;
   selectedTaskIndex: number;
   selectedTask: any[];

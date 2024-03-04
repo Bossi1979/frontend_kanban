@@ -1,85 +1,156 @@
-<div class="taskCard">
-    <div>
-        <p class="category" [style.background-color]="taskCard.category == 'Technical Task' ? '#0038ff' : '#1fd7c1'">
-            {{taskCard.category}}</p>
-
-
-
+<form class="taskCard" [formGroup]="editForm">
+    <div class="closeLine">
         <div class="closeDiv" (click)="closeTaskEditView()">
             <span class="material-symbols-outlined closeIcon">
                 close
             </span>
         </div>
-
     </div>
 
-    <h3 class="title">{{taskCard.title}}</h3>
-
-    <p class="description">
-        {{taskCard.description}}
-    </p>
-
-    <div class="additionalData">
-        <h6>Due Date:</h6>
-        <div class="data">
-            <p>{{taskCard.dueDate}}</p>
+    <div class="formField">
+        <span class="head">Title</span>
+        <div class="formInputs">
+            <div class="formInput">
+                <input type="text" placeholder="Title" class="width100" formControlName="title">
+            </div>
         </div>
     </div>
 
-    <div class="additionalData">
-        <h6>Priority:</h6>
-        <div class="data">
-            <p *ngIf="taskCard.prio == 1">Urgent</p>
-            <p *ngIf="taskCard.prio == 2">Medium</p>
-            <p *ngIf="taskCard.prio == 3">Low</p>
+    <div class="formField">
+        <span class="head">Description</span>
+        <textarea class="formTextarea" placeholder="Enter a Desription" formControlName="description"></textarea>
+    </div>
 
-            <span class="material-symbols-outlined urgent" *ngIf="taskCard.prio == 1">
-                keyboard_double_arrow_up
-            </span>
-            <span class="material-symbols-outlined medium" *ngIf="taskCard.prio == 2">
-                equal
-            </span>
-            <span class="material-symbols-outlined low" *ngIf="taskCard.prio == 3">
-                keyboard_double_arrow_down
-            </span>
+    <div class="formField">
+        <span class="head">Due Date</span>
+        <div class="formInputs">
+            <div class="formInput">
+                <input type="date" placeholder="text" class="width100" formControlName="dueDate"
+                    formControlName="dueDate">
+            </div>
         </div>
     </div>
 
-    <div class="assignedTo">
-        <h6>Assigned To:</h6>
-        <div class="list">
-            <div class="contact" *ngFor="let contact of taskCard.assignTo;">
-                <div class="bage" [style.background-color]="contact.background_color">
-                    <span>{{contact.name_abbreviation}}</span>
+    <div class="prioBtnDiv">
+        <p>Prio</p>
+        <div class="prioBtnContent">
+            <div class="prioBtn" [class.urgentBtn]="!urgentSelected" [class.urgentBtnSelected]="urgentSelected"
+                (click)="selectedPrio(1)">
+                <p>Urgent</p>
+                <span class="material-symbols-outlined urgent">keyboard_double_arrow_up</span>
+            </div>
+            <div class="prioBtn" [class.mediumBtn]="!mediumSelected" [class.mediumBtnSelected]="mediumSelected"
+                (click)="selectedPrio(2)">
+                <p>Medium</p>
+                <span class="material-symbols-outlined medium">
+                    equal
+                </span>
+            </div>
+            <div class="prioBtn" [class.lowBtn]="!lowSelected" [class.lowBtnSelected]="lowSelected"
+                (click)="selectedPrio(3)">
+                <p>Low</p>
+                <span class="material-symbols-outlined low">
+                    keyboard_double_arrow_down
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="formField">
+        <span class="head">Assigned to</span>
+        <div class="formInputs">
+            <div class="formInput">
+                <input type="text" value="Select contacts to assign" *ngIf="assignBtnDisabled"
+                    (focus)="openAssignToDropdown()" formControlName="assignTo">
+                <input type="text" *ngIf="!assignBtnDisabled" formControlName="assignToSelect">
+                <img src="../../assets/img/add_task/arrow_drop_downaa.png" [class.rotate180deg]="!assignBtnDisabled"
+                    style="cursor: pointer;" (click)="toggleAssignToDropdown()">
+                <div class="dropAssign" *ngIf="!assignBtnDisabled">
+                    <div *ngFor="let contact of data.assignedToList; let i = index;">
+                        <div class="contactLine">
+                            <div class="contactLineLeft">
+                                <div class="bage" [style.background-color]="contact.background_color">
+                                    <span>{{contact.name_abbreviation}}</span>
+                                </div>
+                                <p>
+                                    {{contact.username}} <span
+                                        *ngIf="data.loggedUserData[0].id == contact.id_user">(Du)</span>
+                                </p>
+                            </div>
+                            <input type="checkbox" [id]="'checked' + i" (click)="selectionCheckbox('checked' + i, i)"
+                                [checked]="data.assignedToList[i].checked">
+                        </div>
+
+                    </div>
                 </div>
-                <span class="name">{{contact.username}}</span>
+            </div>
+
+        </div>
+    </div>
+    <div class="assignToList">
+        <div *ngFor="let contact of data.assignedToList; let i = index;">
+            <div class="bageItem" [style.background-color]="contact.background_color" *ngIf="contact.checked">
+                <span>{{contact.name_abbreviation}}</span>
             </div>
         </div>
     </div>
 
-    <div class="subtasks">
-        <h6>Subtasks:</h6>
-        <div class="list">
-            <div class="item" *ngFor="let item of taskCard.subtask; let i = index">
-                <input type="checkbox" [checked]="item.checked" (click)="changeSubtaskCheckbox(i)">
-                <span>{{item.subtask}}</span>
+    <div class="formField">
+        <span class="head">Subtask</span>
+        <div class="formInputs">
+            <div class="formInput">
+                <input type="text" placeholder="Add new subtask" formControlName="subtask"
+                    (focus)="subtaskService.subtaskSelection()" #subtaskInput
+                    (keyup)="btnPressed($event)" [id]="subtaskInput">
+                <span class="material-symbols-outlined subtask" *ngIf="!subtaskService.subtaskEdit"
+                    (click)="activatedSubtaskEdit()">
+                    add
+                </span>
+                <span class="material-symbols-outlined closeSubtask" *ngIf="subtaskService.subtaskEdit"
+                    (click)="closeAddSubtask()">
+                    close
+                </span>
+                <div class="subtaskDivider" style="height: 24px; border-left: 1px solid #D1D1D1"
+                    *ngIf="subtaskService.subtaskEdit"></div>
+                <span class="material-symbols-outlined addSubtask" *ngIf="subtaskService.subtaskEdit"
+                    (click)="addSubtask()">
+                    done
+                </span>
             </div>
         </div>
+        <div class="subtaskList">
+            <div class="subtaskItem" *ngFor="let item of subtaskService.subtasksList; let i= index;"
+                (mouseenter)="subtaskService.subtaskHovered(i)" (mouseleave)="subtaskService.subtaskNotHovered()"
+                (dblclick)="editSubtaskList(i)" [style.background-color]="subtaskService.hoveredSubtask==i && subtaskService.subtaskListEditActive != i ? 'grey' : 'white'" [style.border-bottom]="subtaskService.subtaskListEditActive == i ? '2px solid #29abe2' : 'unset'">
+                <li *ngIf="subtaskService.subtaskListEditActive != i">
+                    <span>{{item.subtask}}</span>
+                </li>
+                <input type="text" [value]="item.subtask" *ngIf="subtaskService.subtaskListEditActive == i"
+                    (blur)="leaveSubtaskListEdit(i)" formControlName="subListItem"
+                    [id]="'subtaskListItem' + i" (keyup)="subtaskService.subtaskItemListBtnPressed($event, i)">
+                <div class="icons"
+                    *ngIf="subtaskService.hoveredSubtask == i && subtaskService.subtaskListEditActive != i">
+                    <span class="material-symbols-outlined iconPen"
+                        (click)="editSubtaskList(i)">edit</span>
+                    <div class="subtaskDivider"></div>
+                    <span class="material-symbols-outlined iconTrash"
+                        (click)="subtaskService.deleteSubTaskItem(i)">delete</span>
+                </div>
+                <div class="icons" *ngIf="subtaskService.subtaskListEditActive == i">
+                    <span class="material-symbols-outlined iconTrash">done</span>
+                </div>
+            </div>
+
+        </div>
     </div>
 
-    <div class="options">
-        <div class="btnEdit">
-            <span class="material-symbols-outlined icon">
-                edit
+    <div>
+        <button type="button" [class.primaryBtn]="editForm.valid" [class.disabledBtn]="!editForm.valid" (click)="saveTaskChanges()">
+            Ok
+            <span class="material-symbols-outlined">
+                done
             </span>
-            <p>Edit</p>
-        </div>
-        <div class="btnDelete">
-            <span class="material-symbols-outlined icon">
-                delete
-            </span>
-            <p>Delete</p>
-        </div>
+        </button>
     </div>
 
-</div>
+</form>

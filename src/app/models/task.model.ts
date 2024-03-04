@@ -48,4 +48,18 @@ export class Task {
         this.processingStatus = task.processing_status;
         this.id = task.id;
     }
+
+    createTaskListItem(){
+        return {
+            title: this.title,
+            description: this.description,
+            assigned_to: this.assignTo,
+            due_date: this.dueDate,
+            category: this.category,
+            subtask: this.subtask,
+            prio: this.prio,
+            processing_status: this.processingStatus,
+            id: this.id,
+        }
+    }
 }

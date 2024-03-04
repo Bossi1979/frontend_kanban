@@ -124,5 +124,11 @@ export class AuthService {
   }
 
 
+  public async deleteTask(taskId: number): Promise<any> {
+    const url = `${environment.baseUrl}/add_task/${taskId}`;
+    return lastValueFrom(this.http.delete(url));
+  }
+
+
 
 }

@@ -22,6 +22,7 @@ import { OverlayEditContactComponent } from './overlay-edit-contact/overlay-edit
 import { OverlayAddContactDoneComponent } from './overlay-add-contact-done/overlay-add-contact-done.component';
 import { OverlayEditContactDoneComponent } from './overlay-edit-contact-done/overlay-edit-contact-done.component';
 import { OverlayEditTaskComponent } from './overlay-edit-task/overlay-edit-task.component';
+import { OverlayDetailViewTaskComponent } from './overlay-detail-view-task/overlay-detail-view-task.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { OverlayEditTaskComponent } from './overlay-edit-task/overlay-edit-task.
     OverlayEditContactComponent,
     OverlayAddContactDoneComponent,
     OverlayEditContactDoneComponent,
-    OverlayEditTaskComponent
+    OverlayEditTaskComponent,
+    OverlayDetailViewTaskComponent
   ],
   imports: [
     BrowserModule,

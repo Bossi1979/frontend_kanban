@@ -27,7 +27,9 @@ export class AddTaskComponent {
     private as: AuthService,
     public addTaskService: AddTaskService,
     public subtaskService: SubtasksService,
-  ) { }
+  ) {
+    this.subtaskService.subtasksList = [];
+   }
 
 
   /**

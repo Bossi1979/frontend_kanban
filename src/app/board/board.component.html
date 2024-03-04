@@ -33,7 +33,7 @@
                     (click)="clickTaskCard(i)"
                     draggable="true" 
                     (dragstart)="startDragging(i)"
-                     *ngIf="task.processing_status == 0">
+                    *ngIf="task.processing_status == 0">
                         <p class="category backgroundA" *ngIf="task.category == 'Technical Task'">{{task.category}}</p>
                         <p class="category backgroundB" *ngIf="task.category == 'User Story'">{{task.category}}</p>
                         <div class="text">

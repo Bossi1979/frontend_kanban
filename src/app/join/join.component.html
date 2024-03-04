@@ -7,6 +7,7 @@
     <div class="popupShadow" *ngIf="data.shadowView">
         <app-overlay-add-contact *ngIf="data.startAddContactView"></app-overlay-add-contact>
         <app-overlay-edit-contact *ngIf="data.startEditContactView"></app-overlay-edit-contact>
+        <app-overlay-detail-view-task *ngIf="data.startDetailTaskView"></app-overlay-detail-view-task>
         <app-overlay-edit-task *ngIf="data.startEditTaskView"></app-overlay-edit-task>
     </div>
 

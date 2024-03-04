@@ -69,6 +69,25 @@ export class SubtasksService {
 
 
   /**
+   * Adds a new subtask to the list.
+   * 
+   * @returns {void}
+   */
+  editSubtask(editSubtask: string): void {
+    // (blur)="subtaskLeave()" 
+    let subtask: string = this.addTaskService.addForm.get('subtask').value;
+    if (subtask.trim().length > 0) {
+      let newSubtask: string = subtask.trim();
+      let checked: boolean = false;
+      this.subtasksList.push({ subtask: newSubtask, checked: checked });
+      console.log('subtaskList: ', this.subtasksList);
+      this.addTaskService.addForm.get('subtask').setValue('');
+      this.activatedSubtaskEdit();
+    }
+  }
+
+
+  /**
    * Closes the add subtask mode.
    * 
    * @returns {void}
