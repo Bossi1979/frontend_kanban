@@ -1,5 +1,7 @@
 import { Component} from '@angular/core';
 import { DataService } from '../services/data.service';
+import { Task } from '../models/task.model';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-board',
@@ -7,9 +9,10 @@ import { DataService } from '../services/data.service';
   styleUrl: './board.component.scss',
 })
 export class BoardComponent {
+  taskCard: Task = new Task();
 
 
-  constructor(public data: DataService) {
+  constructor(public data: DataService, private auth: AuthService) {
     this.data.taskList.length
   }
 
@@ -43,9 +46,12 @@ export class BoardComponent {
   }
 
 
-  drop(category: number): void {
+  async drop(category: number): Promise<void> {
     this.highligtedProcessingIndex = -1;
     this.data.taskList[this.draggedTaskIndex].processing_status = category;
+    this.taskCard.setTaskCardData(this.data.taskList[this.draggedTaskIndex]);
+    let response = await this.auth.updateTask(this.taskCard);
+    console.log(response);
   }
 
 
