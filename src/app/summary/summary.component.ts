@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService } from '../services/data.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-summary',
@@ -26,6 +27,7 @@ export class SummaryComponent {
   constructor(public data: DataService) {
     let sortedList = this.sortDataByDueDate();
     console.log(sortedList);
+    this.determineTheTimeOfDay();
   }
 
   counterToDo(): number {
@@ -96,7 +98,7 @@ export class SummaryComponent {
 
 
   deadlineReached: boolean = false;
-  
+
   upcomingDeadline(): string {
     if (this.data.taskList.length > 0) {
       let deadline: string = this.data.taskList[0].due_date;
@@ -124,14 +126,36 @@ export class SummaryComponent {
   //   }
   // }
 
-  async goToBoard():Promise<void> {
-    if (this.data.taskList.length == 0){
+  async goToBoard(): Promise<void> {
+    if (this.data.taskList.length == 0) {
       await this.data.generateTaskList();
     }
     this.data.selectedMenu = 3;
   }
 
 
-  
+  toDoEntered: boolean = false;
+  doneEntered: boolean = false;
+  greeting: string;
+
+  determineTheTimeOfDay() {
+    const actualDate: Date = new Date();
+    const actualTimeHours: number = actualDate.getHours();
+    if (actualTimeHours >= 5 && actualTimeHours < 11) {
+      console.log('Good Morning');
+      this.greeting = 'Good Morning';
+    } else if (actualTimeHours >= 11 && actualTimeHours < 18) {
+      console.log('Good afternoon');
+      this.greeting = 'Good afternoon';
+    } else if (actualTimeHours >=18 && actualTimeHours < 22){
+      console.log('Good evening');
+      this.greeting = 'Good evening';
+    } else {
+      console.log('Welcome');
+      this.greeting = 'Welcome';
+    }
+  }
+
+
 
 }

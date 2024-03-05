@@ -8,8 +8,8 @@
     <div class="content">
         <div class="overview">
             <div class="dualRow">
-                <div class="todo" (click)="goToBoard()">
-                    <span class="material-symbols-outlined icon">
+                <div class="todo" (click)="goToBoard()" (mouseover)="toDoEntered = true" (mouseleave)="toDoEntered = false">
+                    <span class="material-symbols-outlined icon" [style.background]="toDoEntered ? 'white' : 'black'" [style.color]="toDoEntered ? 'black' : 'white'">
                         edit
                     </span>
                     <div class="amount">
@@ -17,8 +17,8 @@
                         <span class="text">To-do</span>
                     </div>
                 </div>
-                <div class="todo" (click)="goToBoard()">
-                    <span class="material-symbols-outlined icon">
+                <div class="todo" (click)="goToBoard()" (mouseover)="doneEntered = true" (mouseleave)="doneEntered = false">
+                    <span class="material-symbols-outlined icon" [style.background]="doneEntered ? 'white' : 'black'" [style.color]="doneEntered ? 'black' : 'white'">
                         done
                     </span>
                     <div class="amount">
@@ -73,7 +73,7 @@
             </div>
         </div>
         <div class="greeting">
-            <span>Good Morning</span>
+            <span>{{greeting}}</span>
             <span>{{data.loggedUserData[0].username}}</span>
         </div>
     </div>

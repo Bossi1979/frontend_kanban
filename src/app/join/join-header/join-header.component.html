@@ -1,7 +1,9 @@
 <header>
     <h3>Kanban Project Management Tool</h3>
     <div class="headerRight">
-        <img src="../../../assets/img/header/help.png" alt="">
+        <div *ngIf="data.selectedMenu < 5">
+            <img src="../../../assets/img/header/help.png" alt="" (click)="openHelpDocument()">
+        </div>
         <div class="userIcon" [style.background-color]="data.userBackgroundColor" (click)="logout()">
             <span>{{data.loggedUserData[0].nameAbbreviation}}</span>
         </div>

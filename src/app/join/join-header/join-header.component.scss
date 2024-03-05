@@ -26,10 +26,24 @@ header{
         gap: 16px;
         height: 56px;
 
-        img{
-            width: auto;
-            height: 32px;
+        div{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+
+            img{
+                width: auto;
+                height: 32px;
+                cursor: pointer;
+                &:hover{
+                    height: 40px;
+                }
+            }
         }
+
+        
 
         .userIcon{
             display: flex;

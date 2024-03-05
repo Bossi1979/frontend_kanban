@@ -21,7 +21,7 @@ export class JoinSidenavComponent {
   /**
    * Handles mouse enter event for menu items by updating corresponding image sources.
    * 
-   * @param {number} number - The menu number.
+   * @param {number} number - The menu number. (1 => Summary, 2=> Add Task, 3=> Board, 4=> Contacts)
    * @returns {void}
    */
   mouseEnter(number: number): void {

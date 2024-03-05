@@ -26,4 +26,9 @@ export class JoinHeaderComponent {
     }
   }
 
+
+  openHelpDocument(){
+    this.data.selectedMenu = 7;
+  }
+
 }
