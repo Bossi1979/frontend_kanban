@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { DatePipe } from '@angular/common';
+import { MenuService } from '../services/menu.service';
 
 @Component({
   selector: 'app-summary',
@@ -8,6 +9,9 @@ import { DatePipe } from '@angular/common';
   styleUrl: './summary.component.scss'
 })
 export class SummaryComponent {
+  toDoEntered: boolean = false;
+  doneEntered: boolean = false;
+  greeting: string;
   mounthArray: string[] = [
     "unset",
     "January",
@@ -24,7 +28,10 @@ export class SummaryComponent {
     "December"
   ];
 
-  constructor(public data: DataService) {
+  constructor(
+    public data: DataService,
+    private menuService: MenuService
+    ) {
     let sortedList = this.sortDataByDueDate();
     console.log(sortedList);
     this.determineTheTimeOfDay();
@@ -130,13 +137,10 @@ export class SummaryComponent {
     if (this.data.taskList.length == 0) {
       await this.data.generateTaskList();
     }
-    this.data.selectedMenu = 3;
+    this.menuService.mouseEnter(3);
+    this.menuService.selectMenu(3);
   }
 
-
-  toDoEntered: boolean = false;
-  doneEntered: boolean = false;
-  greeting: string;
 
   determineTheTimeOfDay() {
     const actualDate: Date = new Date();

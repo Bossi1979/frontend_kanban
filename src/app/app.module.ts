@@ -24,6 +24,8 @@ import { OverlayEditContactDoneComponent } from './overlay-edit-contact-done/ove
 import { OverlayEditTaskComponent } from './overlay-edit-task/overlay-edit-task.component';
 import { OverlayDetailViewTaskComponent } from './overlay-detail-view-task/overlay-detail-view-task.component';
 import { HelpDocumentComponent } from './help-document/help-document.component';
+import { PrivacyDocumentComponent } from './privacy-document/privacy-document.component';
+import { LegalDocumentComponent } from './legal-document/legal-document.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { HelpDocumentComponent } from './help-document/help-document.component';
     OverlayEditContactDoneComponent,
     OverlayEditTaskComponent,
     OverlayDetailViewTaskComponent,
-    HelpDocumentComponent
+    HelpDocumentComponent,
+    PrivacyDocumentComponent,
+    LegalDocumentComponent
   ],
   imports: [
     BrowserModule,

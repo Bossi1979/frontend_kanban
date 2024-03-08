@@ -23,7 +23,7 @@
         </div>
     </div>
     <footer>
-        <span>Privacy Policy</span>
-        <span>Legal Notice</span>
+        <span (click)="menuService.selectMenu(5)" [class.isSelected]="data.selectedMenu == 5">Privacy Policy</span>
+        <span (click)="menuService.selectMenu(6)" [class.isSelected]="data.selectedMenu == 6">Legal Notice</span>
     </footer>
 </div>

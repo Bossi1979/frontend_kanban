@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService } from '../services/data.service';
+import { MenuService } from '../services/menu.service';
 
 @Component({
   selector: 'app-help-document',
@@ -9,10 +10,11 @@ import { DataService } from '../services/data.service';
 export class HelpDocumentComponent {
 
 
-  constructor(public data: DataService){}
+  constructor(public data: DataService, private menuService: MenuService){}
 
   backToSummary(){
-    this.data.selectedMenu = 1;
+    this.menuService.mouseEnter(1);
+    this.menuService.selectMenu(1);
   }
 
 }

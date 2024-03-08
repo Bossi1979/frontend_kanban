@@ -1,0 +1,122 @@
+.doc {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 110px 96px 0px 96px;
+    box-sizing: border-box;
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: calc(100vh - 96px);
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        // padding: 110px 96px 0px 96px;
+        // box-sizing: border-box;
+        padding-bottom: 32px;
+
+        h3 {
+            font-family: Inter;
+            font-size: 61px;
+            font-weight: 700;
+            line-height: 73px;
+            letter-spacing: 0em;
+            text-align: left;
+            margin-block-start: 0px;
+            margin-block-end: 0px;
+        }
+
+        .icon {
+            display: flex;
+            position: fixed;
+            top: 220px;
+            right: 96px;
+            font-size: 37px;
+            color: #29abe2;
+            border-radius: 100%;
+            margin: 3px;
+
+            &:hover{
+                transition: background-color 100ms ease-in-out;
+                background-color: #EEEEEE;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .docContent {
+        display: flex;
+        flex-direction: column;
+        gap: 19.2px;
+
+        h4 {
+            font-family: Inter;
+            font-size: 27px;
+            font-weight: 700;
+            line-height: 32px;
+            letter-spacing: 0em;
+            text-align: left;
+            margin-block-start: 0px;
+            margin-block-end: 0px;
+        }
+
+        p {
+            font-family: Inter;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 19px;
+            letter-spacing: 0em;
+            text-align: left;
+            margin-block-start: 0px;
+            margin-block-end: 0px;
+        }
+
+        .table {
+            display: flex;
+            flex-direction: row;
+            gap: 35px;
+
+            h4 {
+                font-family: Inter;
+                font-size: 27px;
+                font-weight: 700;
+                line-height: 32px;
+                letter-spacing: 0em;
+                text-align: left;
+                margin-block-start: 0px;
+                margin-block-end: 0px;
+            }
+
+            .text {
+
+                h5 {
+                    font-family: Inter;
+                    font-size: 20px;
+                    font-weight: 700;
+                    line-height: 21px;
+                    letter-spacing: 0em;
+                    text-align: left;
+                    margin-block-start: 0px;
+                    margin-block-end: 0px;
+                }
+
+                .text {
+                    font-family: Inter;
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: 19px;
+                    letter-spacing: 0em;
+                    text-align: left;
+                    margin-block-start: 0px;
+                    margin-block-end: 0px;
+                }
+            }
+        }
+    }
+}
+
+
+::-webkit-scrollbar{
+    width: 0px;
+}

@@ -3,7 +3,6 @@ import { DataService } from '../../services/data.service';
 import { MenuService } from '../../services/menu.service';
 
 
-
 @Component({
   selector: 'app-join-sidenav',
   templateUrl: './join-sidenav.component.html',
