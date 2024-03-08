@@ -6,7 +6,7 @@
         <div class="subheadline">
             <div class="authInputs">
                 <div class="authInput">
-                    <input type="text" placeholder="Find task">
+                    <input type="text" placeholder="Find task" [(ngModel)]="searchInput" (keyup)="findTaskCards()" [disabled]="inputDisabled">
                     <img src="../../assets/img/board/search.png" alt="">
                 </div>
             </div>
@@ -33,7 +33,7 @@
                     (click)="clickTaskCard(i)"
                     draggable="true" 
                     (dragstart)="startDragging(i)"
-                    *ngIf="task.processing_status == 0">
+                    *ngIf="task.processing_status == 0 && data.tasksFindingsList.includes(task)">
                         <p class="category backgroundA" *ngIf="task.category == 'Technical Task'">{{task.category}}</p>
                         <p class="category backgroundB" *ngIf="task.category == 'User Story'">{{task.category}}</p>
                         <div class="text">
@@ -89,7 +89,7 @@
                     (click)="clickTaskCard(i)" 
                     draggable="true" 
                     (dragstart)="startDragging(i)"
-                    *ngIf="task.processing_status == 1">
+                    *ngIf="task.processing_status == 1 && data.tasksFindingsList.includes(task)">
                         <p class="category backgroundA" *ngIf="task.category == 'Technical Task'">{{task.category}}</p>
                         <p class="category backgroundB" *ngIf="task.category == 'User Story'">{{task.category}}</p>
                         <div class="text">
@@ -145,7 +145,7 @@
                     (click)="clickTaskCard(i)"
                     draggable="true" 
                     (dragstart)="startDragging(i)" 
-                    *ngIf="task.processing_status == 2">
+                    *ngIf="task.processing_status == 2 && data.tasksFindingsList.includes(task)">
                         <p class="category backgroundA" *ngIf="task.category == 'Technical Task'">{{task.category}}</p>
                         <p class="category backgroundB" *ngIf="task.category == 'User Story'">{{task.category}}</p>
                         <div class="text">
@@ -202,7 +202,7 @@
                     (click)="clickTaskCard(i)"
                     draggable="true" 
                     (dragstart)="startDragging(i)"
-                    *ngIf="task.processing_status == 3">
+                    *ngIf="task.processing_status == 3 && data.tasksFindingsList.includes(task)">
                         <p class="category backgroundA" *ngIf="task.category == 'Technical Task'">{{task.category}}</p>
                         <p class="category backgroundB" *ngIf="task.category == 'User Story'">{{task.category}}</p>
                         <div class="text">

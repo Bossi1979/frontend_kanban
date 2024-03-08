@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
-import { Observable } from 'rxjs';
 import { Task } from '../models/task.model';
 
 
@@ -16,6 +15,7 @@ export class DataService {
   // Varialblen für AddTask
   assignedToList: any[] = [];
   taskList: any[] = [];
+  tasksFindingsList: any[] = [];
 
   //contacts Variablen
   shadowView: boolean = false;
@@ -40,7 +40,6 @@ export class DataService {
       this.loggedUserData = JSON.parse(localStorage.getItem('userData'));
       this.loadDatas();
     }
-    
   }
 
 
