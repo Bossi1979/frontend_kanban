@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { MenuService } from '../../services/menu.service';
 
 @Component({
   selector: 'app-join-header',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class JoinHeaderComponent {
 
-  constructor(public data: DataService, private as: AuthService, private router: Router){}
+  constructor(public data: DataService, private as: AuthService, private router: Router, private menuService: MenuService){}
 
 
   async logout(){
@@ -28,7 +29,7 @@ export class JoinHeaderComponent {
 
 
   openHelpDocument(){
-    this.data.selectedMenu = 7;
+    this.menuService.selectMenu(7);
   }
 
 }
