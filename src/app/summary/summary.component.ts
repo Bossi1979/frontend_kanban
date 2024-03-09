@@ -32,8 +32,8 @@ export class SummaryComponent {
     public data: DataService,
     private menuService: MenuService
     ) {
-    let sortedList = this.sortDataByDueDate();
-    console.log(sortedList);
+    this.data.generateTaskList();
+    this.sortDataByDueDate();
     this.determineTheTimeOfDay();
   }
 

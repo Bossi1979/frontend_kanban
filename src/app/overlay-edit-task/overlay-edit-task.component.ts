@@ -73,7 +73,6 @@ export class OverlayEditTaskComponent {
   closeTaskEditView(): void {
     this.data.startEditTaskView = false;
     this.data.shadowView = false;
-    console.log(this.taskCard);
   }
 
 
@@ -145,7 +144,21 @@ export class OverlayEditTaskComponent {
    * @returns {Promise<void>} - A promise indicating the completion of the operation.
    */
   async updateTaskList(): Promise<void> {
-    this.data.taskList[this.data.selectedTaskIndex] = this.taskCard.createTaskListItem();
+    let task = this.taskCard.createTaskListItem();
+    this.data.taskList[this.data.selectedTaskIndex] = task;
+    this.data.tasksFindingsList[await this.findFindingsListIndex()] = task;
+  }
+
+
+  /**
+   * Asynchronously finds the index of a task in the findings list based on its ID.
+   * 
+   * @returns {Promise<number>} A promise that resolves with the index of the task in the findings list.
+   */
+  async findFindingsListIndex(): Promise<number> {
+    const searchedId = this.data.taskList[this.data.selectedTaskIndex].id;
+    let findingsListIndex = this.data.tasksFindingsList.findIndex(task => task.id == searchedId);
+    return findingsListIndex;
   }
 
 
