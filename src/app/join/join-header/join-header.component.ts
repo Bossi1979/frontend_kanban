@@ -11,25 +11,25 @@ import { MenuService } from '../../services/menu.service';
 })
 export class JoinHeaderComponent {
 
-  constructor(public data: DataService, private as: AuthService, private router: Router, private menuService: MenuService){}
+
+  constructor(
+    public data: DataService,
+    private as: AuthService,
+    private router: Router,
+    public menuService: MenuService
+  ) { }
 
 
-  async logout(){
-    try{
+  async logout() {
+    try {
       this.router.navigateByUrl('/login');
       let response = await this.as.logout();
       console.log(response.message);
-      if(response.message == 'logout successfully'){
+      if (response.message == 'logout successfully') {
         localStorage.clear();
       }
-    } catch(err){
+    } catch (err) {
       alert('logout error');
     }
   }
-
-
-  openHelpDocument(){
-    this.menuService.selectMenu(7);
-  }
-
 }

@@ -28,6 +28,7 @@ export class DataService {
   // board Variablen
   startDetailTaskView: boolean = false;
   startEditTaskView: boolean = false;
+  startBoardAddTaskView: boolean = false;
   selectedTaskIndex: number;
   selectedTask: any[];
   taskCard: Task = new Task();

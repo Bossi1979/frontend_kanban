@@ -159,4 +159,13 @@ export class BoardComponent {
       this.indexNumber++;
     });
   }
+
+
+  openAddTaskPopup(): void {
+    this.data.startBoardAddTaskView = true;
+    this.data.shadowView = true;
+  }
+
+
+
 }

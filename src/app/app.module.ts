@@ -26,6 +26,7 @@ import { OverlayDetailViewTaskComponent } from './overlay-detail-view-task/overl
 import { HelpDocumentComponent } from './help-document/help-document.component';
 import { PrivacyDocumentComponent } from './privacy-document/privacy-document.component';
 import { LegalDocumentComponent } from './legal-document/legal-document.component';
+import { OverlayAddTaskComponent } from './overlay-add-task/overlay-add-task.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { LegalDocumentComponent } from './legal-document/legal-document.componen
     OverlayDetailViewTaskComponent,
     HelpDocumentComponent,
     PrivacyDocumentComponent,
-    LegalDocumentComponent
+    LegalDocumentComponent,
+    OverlayAddTaskComponent
   ],
   imports: [
     BrowserModule,

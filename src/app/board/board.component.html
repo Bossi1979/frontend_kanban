@@ -11,7 +11,7 @@
                 </div>
             </div>
 
-            <button type="button" class="primaryBtn" style="width: 226px !important;">
+            <button type="button" class="primaryBtn" style="width: 226px !important;" (click)="openAddTaskPopup()">
                 Add Task
                 <span class="material-symbols-outlined">
                     add
@@ -23,7 +23,7 @@
         <div class="tasksContainer">
             <header>
                 <h5>ToDo</h5>
-                <span class="material-symbols-outlined addCross">
+                <span class="material-symbols-outlined addCross" (click)="openAddTaskPopup()">
                     add
                 </span>
             </header>
@@ -79,7 +79,7 @@
         <div class="tasksContainer">
             <header>
                 <h5>In progress</h5>
-                <span class="material-symbols-outlined addCross">
+                <span class="material-symbols-outlined addCross" (click)="openAddTaskPopup()">
                     add
                 </span>
             </header>
@@ -135,7 +135,7 @@
         <div class="tasksContainer">
             <header>
                 <h5>Awaiting Feedback</h5>
-                <span class="material-symbols-outlined addCross">
+                <span class="material-symbols-outlined addCross" (click)="openAddTaskPopup()">
                     add
                 </span>
             </header>
@@ -192,7 +192,7 @@
         <div class="tasksContainer">
             <header>
                 <h5>Done</h5>
-                <span class="material-symbols-outlined addCross">
+                <span class="material-symbols-outlined addCross" (click)="openAddTaskPopup()">
                     add
                 </span>
             </header>

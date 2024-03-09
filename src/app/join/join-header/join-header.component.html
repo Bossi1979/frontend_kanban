@@ -2,10 +2,15 @@
     <h3>Kanban Project Management Tool</h3>
     <div class="headerRight">
         <div *ngIf="data.selectedMenu < 5">
-            <img src="../../../assets/img/header/help.png" alt="" (click)="openHelpDocument()">
+            <img src="../../../assets/img/header/help.png" alt="" (click)="menuService.selectMenu(7)">
         </div>
-        <div class="userIcon" [style.background-color]="data.userBackgroundColor" (click)="logout()">
+        <div class="userIcon" [style.background-color]="data.userBackgroundColor" (click)="menuService.toggleHeaderSubmenu()">
             <span>{{data.loggedUserData[0].nameAbbreviation}}</span>
+            <div class="submenu" *ngIf="menuService.headerSubmenuView">
+                <span (click)="menuService.selectMenu(5)">Privacy Policy</span>
+                <span (click)="menuService.selectMenu(6)">Legal Notice</span>
+                <span (click)="logout()">Logout</span>
+            </div>
         </div>
 
     </div>

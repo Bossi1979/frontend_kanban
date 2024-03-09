@@ -48,15 +48,15 @@ export class MenuService {
    * 
    * @param {number} menuNo - The menu number to select.
    * @returns {void}
-   */  
+   */
   selectMenu(menuNo: number): void {
-    if (this.selectedMenu !== menuNo){
+    if (this.selectedMenu !== menuNo) {
       this.data.selectedMenu = menuNo;
       this.mouseLeave(1);
       this.mouseLeave(2);
       this.mouseLeave(3);
       this.mouseLeave(4);
-    } 
+    }
     this.loadData(menuNo);
   }
 
@@ -68,11 +68,18 @@ export class MenuService {
    * @returns {Promise<void>}
    */
   async loadData(menuNo: number): Promise<void> {
-    if (menuNo == 2 && this.data.allContacts.length != this.data.assignedToList.length){
+    if (menuNo == 2 && this.data.allContacts.length != this.data.assignedToList.length) {
       await this.data.generatedAssignedList();
-    } 
-    if (menuNo == 3 && this.data.taskList.length == 0){
+    }
+    if (menuNo == 3 && this.data.taskList.length == 0) {
       await this.data.generateTaskList();
     }
+  }
+
+
+  headerSubmenuView: boolean = false;
+
+  toggleHeaderSubmenu(): void {
+    this.headerSubmenuView =!this.headerSubmenuView;
   }
 }
