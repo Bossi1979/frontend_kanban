@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,12 +22,18 @@ export class AddTaskService {
     category: new FormControl('', [
       Validators.required,
       Validators.minLength(2),
-      Validators.maxLength(30)
+      Validators.maxLength(14),
     ]),
     subtask: new FormControl('', []),
     subListItem: new FormControl(),
   });
 
 
-  constructor() { }
+  categoryDropdown: boolean = false;
+  @ViewChild('subtaskInput') subtaskInput!: ElementRef;
+
+  constructor( ){}
+
+   
+  
 }
