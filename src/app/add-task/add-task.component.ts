@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild} from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { AuthService } from '../services/auth.service';
 import { AddTaskService } from '../services/add-task.service';
@@ -16,7 +16,7 @@ import { AssignedToService } from '../services/assigned-to.service';
 export class AddTaskComponent {
   categoryDropdown: boolean = false;
   @ViewChild('subtaskInput') subtaskInput!: ElementRef;
-  
+
 
   constructor(
     public data: DataService,
@@ -30,7 +30,7 @@ export class AddTaskComponent {
     this.subtaskService.activeForm = this.addTaskService.addForm;
     this.prioBtnService.resetPrio();
     console.log(this.subtaskService.activeForm);
-   }
+  }
 
 
   /**
@@ -50,14 +50,29 @@ export class AddTaskComponent {
 
 
   /**
-   * Clears the form by resetting priority, form values, and assigned contacts.
+   * Clears the add task form and associated data.
+   * Resets priority buttons, add task form, assigned to field, subtasks list, and text fields in the form.
+   * 
+   * @returns {void} This function does not return anything.
    */
   clearForm(): void {
     this.prioBtnService.resetPrio();
     this.addTaskService.addForm.reset();
-    console.log(this.addTaskService.addForm.value);
     this.resetAssignTo();
     this.subtaskService.subtasksList = [];
+    this.resetTextFieldsInForm();
+  }
+
+
+  /**
+   * Resets the text fields in the add task form.
+   * Clears the title and description fields in the add task form.
+   * 
+   * @returns {void} This function does not return anything.
+   */
+  resetTextFieldsInForm(): void {
+    this.addTaskService.addForm.get('title').setValue('');
+    this.addTaskService.addForm.get('description').setValue('');
   }
 
 
@@ -81,21 +96,27 @@ export class AddTaskComponent {
   async saveTask(): Promise<void> {
     const taskData: any = await this.createTaskDataForSave();
     let response = await this.as.saveTask(taskData);
-    if (this.data.selectedMenu == 2){
+    if (this.data.selectedMenu == 2) {
       await this.data.generateTaskList();
       this.data.tasksFindingsList = this.data.taskList.slice();
-    } else if (this.data.selectedMenu == 3){
+    } else if (this.data.selectedMenu == 3) {
       this.closeAddTaskPopup();
       // this.data.taskList.push(taskData);
       // this.data.tasksFindingsList = this.data.taskList.slice();
       await this.data.generateTaskList();
       this.data.tasksFindingsList = this.data.taskList.slice();
     }
-    
+
   }
 
 
-  closeAddTaskPopup(): void{
+  /**
+   * Closes the add task popup window.
+   * Sets the startBoardAddTaskView and shadowView properties to false to hide the add task popup and shadow overlay.
+   * 
+   * @returns {void} This function does not return anything.
+   */
+  closeAddTaskPopup(): void {
     this.data.startBoardAddTaskView = false;
     this.data.shadowView = false;
   }
@@ -166,7 +187,7 @@ export class AddTaskComponent {
     this.addTaskService.addForm.get('category').setValue(category);
     this.toogleCategoryDropdown();
   }
-  
+
 
   /**
    * Activates subtask editing by focusing on the subtask input element.
@@ -190,8 +211,6 @@ export class AddTaskComponent {
     this.subtaskService.closeAddSubtask();
     this.subtaskInput.nativeElement.blur();
   }
-
-
 }
 
 
