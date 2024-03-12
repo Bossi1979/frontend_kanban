@@ -2,7 +2,7 @@
     <header *ngIf="!this.data.startBoardAddTaskView">
         <h3>Add Task</h3>
     </header>
-    <form [formGroup]="addTaskService.addForm">
+    <form [formGroup]="addForm">
         <div class="formular">
             <div class="formLeft">
                 <div class="formField">
@@ -11,13 +11,20 @@
                         <div class="formInput">
                             <input type="text" placeholder="Title" class="width100" formControlName="title">
                         </div>
+                        <div class="warnContainer" *ngIf="!addForm.controls['title'].valid && addForm.controls['title'].touched">
+                            *Title must be min. 2 characters, and less than 50 characters.
+                        </div>
                     </div>
                 </div>
 
                 <div class="formField">
                     <span>Description</span>
-                    <textarea class="formTextarea" placeholder="Enter a Desription"
-                        formControlName="description"></textarea>
+                    <textarea class="formTextarea" placeholder="Enter a Desription" formControlName="description"></textarea>
+                    <div style="display: flex; position:relative">
+                        <div class="warnContainer" style="top: 0px;" *ngIf="!addForm.controls['description'].valid && addForm.controls['description'].touched">
+                            *Description has to be max. 1000 characters.
+                        </div>
+                    </div>
                 </div>
                 <div class="formField">
                     <span>Assigned to</span>
@@ -69,6 +76,9 @@
                         <div class="formInput">
                             <input type="date" placeholder="text" class="width100" formControlName="dueDate">
                         </div>
+                        <div class="warnContainer" *ngIf="!addForm.controls['dueDate'].valid && addForm.controls['dueDate'].touched">
+                            *Set Date invalid
+                        </div>
                     </div>
                 </div>
                 <div class="prioBtnDiv">
@@ -105,12 +115,10 @@
                             <img src="../../assets/img/add_task/arrow_drop_downaa.png"
                                 [class.rotate180deg]="categoryDropdown" style="cursor: pointer;"
                                 (click)="toogleCategoryDropdown()">
-
                             <div class="dropCategory" *ngIf="categoryDropdown">
                                 <p (click)="setCategory('Technical Task')">Technical Task</p>
                                 <p (click)="setCategory('User Story')">User Story</p>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -163,8 +171,8 @@
                         close
                     </span>
                 </button>
-                <button type="button" [disabled]="!addTaskService.addForm.valid || this.categoryDropdown" [class.primaryBtn]="addTaskService.addForm.valid"
-                    [class.disabledBtn]="!addTaskService.addForm.valid || this.categoryDropdown" (click)="createTask()">
+                <button type="button" [disabled]="!addForm.valid || this.categoryDropdown" [class.primaryBtn]="addForm.valid"
+                    [class.disabledBtn]="!addForm.valid || this.categoryDropdown" (click)="createTask()">
                     Create Task
                     <span class="material-symbols-outlined">
                         done

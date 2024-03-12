@@ -124,6 +124,7 @@ body {
 
 .formInputs {
   display: flex;
+  position: relative;
   width: 100%;
   flex-direction: column;
   gap: 20px;
@@ -186,5 +187,4 @@ body {
   font-weight: 400;
   font-size: 16px;
   line-height: 19.1px;
-  
 }

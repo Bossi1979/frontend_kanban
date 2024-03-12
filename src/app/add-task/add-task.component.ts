@@ -1,11 +1,11 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { AuthService } from '../services/auth.service';
-import { AddTaskService } from '../services/add-task.service';
 import { SubtasksService } from '../services/subtasks.service';
 import { Task } from '../models/task.model';
 import { PrioBtnService } from '../services/prio-btn.service';
 import { AssignedToService } from '../services/assigned-to.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 @Component({
@@ -16,20 +16,42 @@ import { AssignedToService } from '../services/assigned-to.service';
 export class AddTaskComponent {
   categoryDropdown: boolean = false;
   @ViewChild('subtaskInput') subtaskInput!: ElementRef;
+  addForm: FormGroup = new FormGroup({
+    title: new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(50)
+    ]),
+    description: new FormControl('', [
+      Validators.maxLength(1000)
+    ]),
+    assignTo: new FormControl('Select contacts to assign', []),
+    assignToSelect: new FormControl('', []),
+    dueDate: new FormControl('', [
+      Validators.required,
+      Validators.minLength(10),
+      Validators.maxLength(10),
+    ]),
+    category: new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(14),
+    ]),
+    subtask: new FormControl('', []),
+    subListItem: new FormControl(),
+  });
 
 
   constructor(
     public data: DataService,
     private as: AuthService,
-    public addTaskService: AddTaskService,
     public subtaskService: SubtasksService,
     public prioBtnService: PrioBtnService,
     public assignedToService: AssignedToService,
   ) {
     this.subtaskService.subtasksList = [];
-    this.subtaskService.activeForm = this.addTaskService.addForm;
+    this.subtaskService.activeForm = this.addForm;
     this.prioBtnService.resetPrio();
-    console.log(this.subtaskService.activeForm);
   }
 
 
@@ -39,13 +61,12 @@ export class AddTaskComponent {
    * @returns {Promise<void>} - A Promise that resolves once the task creation process is complete.
    */
   async createTask(): Promise<void> {
-    console.log(this.subtaskService.activeForm);
     this.prioBtnService.isSaving = true;
-    this.addTaskService.addForm.disable();
+    this.addForm.disable();
     await this.saveTask();
     this.clearForm();
     this.prioBtnService.isSaving = false;
-    this.addTaskService.addForm.enable();
+    this.addForm.enable();
   }
 
 
@@ -57,7 +78,7 @@ export class AddTaskComponent {
    */
   clearForm(): void {
     this.prioBtnService.resetPrio();
-    this.addTaskService.addForm.reset();
+    this.addForm.reset();
     this.resetAssignTo();
     this.subtaskService.subtasksList = [];
     this.resetTextFieldsInForm();
@@ -71,8 +92,8 @@ export class AddTaskComponent {
    * @returns {void} This function does not return anything.
    */
   resetTextFieldsInForm(): void {
-    this.addTaskService.addForm.get('title').setValue('');
-    this.addTaskService.addForm.get('description').setValue('');
+    this.addForm.get('title').setValue('');
+    this.addForm.get('description').setValue('');
   }
 
 
@@ -81,7 +102,7 @@ export class AddTaskComponent {
    */
   resetAssignTo(): void {
     this.assignedToService.assignBtnDisabled = true;
-    this.addTaskService.addForm.get('assignTo').setValue('Select contacts to assign');
+    this.addForm.get('assignTo').setValue('Select contacts to assign');
     this.data.assignedToList.forEach(contact => {
       contact.checked = false;
     });
@@ -96,17 +117,15 @@ export class AddTaskComponent {
   async saveTask(): Promise<void> {
     const taskData: any = await this.createTaskDataForSave();
     let response = await this.as.saveTask(taskData);
+    console.log(response);
     if (this.data.selectedMenu == 2) {
       await this.data.generateTaskList();
       this.data.tasksFindingsList = this.data.taskList.slice();
     } else if (this.data.selectedMenu == 3) {
       this.closeAddTaskPopup();
-      // this.data.taskList.push(taskData);
-      // this.data.tasksFindingsList = this.data.taskList.slice();
       await this.data.generateTaskList();
       this.data.tasksFindingsList = this.data.taskList.slice();
     }
-
   }
 
 
@@ -129,11 +148,11 @@ export class AddTaskComponent {
    */
   async createTaskDataForSave(): Promise<any> {
     let task: Task = new Task();
-    task.title = this.addTaskService.addForm.get('title').value;
-    task.description = this.addTaskService.addForm.get('description').value;
+    task.title = this.addForm.get('title').value;
+    task.description = this.addForm.get('description').value;
     task.assignTo = await this.createAssignToForSave();
-    task.dueDate = this.addTaskService.addForm.get('dueDate').value;
-    task.category = this.addTaskService.addForm.get('category').value;
+    task.dueDate = this.addForm.get('dueDate').value;
+    task.category = this.addForm.get('category').value;
     task.subtask = this.subtaskService.subtasksList;
     task.prio = this.prioBtnService.selectedPrioBtn;
     return task.createTaskObject();
@@ -172,8 +191,8 @@ export class AddTaskComponent {
    */
   toogleCategoryDropdown(): void {
     this.categoryDropdown = !this.categoryDropdown;
-    if (!this.categoryDropdown) this.addTaskService.addForm.get('category').enable();
-    else this.addTaskService.addForm.get('category').disable();
+    if (!this.categoryDropdown) this.addForm.get('category').enable();
+    else this.addForm.get('category').disable();
   }
 
 
@@ -184,7 +203,7 @@ export class AddTaskComponent {
    * @returns {void}
    */
   setCategory(category: string): void {
-    this.addTaskService.addForm.get('category').setValue(category);
+    this.addForm.get('category').setValue(category);
     this.toogleCategoryDropdown();
   }
 

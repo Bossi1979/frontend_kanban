@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ElementRef, ViewChild } from '@angular/core';
-import { AddTaskService } from './add-task.service';
 import { FormGroup } from '@angular/forms';
 
 @Injectable({
