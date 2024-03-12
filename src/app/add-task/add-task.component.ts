@@ -55,6 +55,7 @@ export class AddTaskComponent {
   clearForm(): void {
     this.prioBtnService.resetPrio();
     this.addTaskService.addForm.reset();
+    console.log(this.addTaskService.addForm.value);
     this.resetAssignTo();
     this.subtaskService.subtasksList = [];
   }
@@ -80,7 +81,23 @@ export class AddTaskComponent {
   async saveTask(): Promise<void> {
     const taskData: any = await this.createTaskDataForSave();
     let response = await this.as.saveTask(taskData);
-    await this.data.generateTaskList();
+    if (this.data.selectedMenu == 2){
+      await this.data.generateTaskList();
+      this.data.tasksFindingsList = this.data.taskList.slice();
+    } else if (this.data.selectedMenu == 3){
+      this.closeAddTaskPopup();
+      // this.data.taskList.push(taskData);
+      // this.data.tasksFindingsList = this.data.taskList.slice();
+      await this.data.generateTaskList();
+      this.data.tasksFindingsList = this.data.taskList.slice();
+    }
+    
+  }
+
+
+  closeAddTaskPopup(): void{
+    this.data.startBoardAddTaskView = false;
+    this.data.shadowView = false;
   }
 
 
@@ -173,6 +190,8 @@ export class AddTaskComponent {
     this.subtaskService.closeAddSubtask();
     this.subtaskInput.nativeElement.blur();
   }
+
+
 }
 
 

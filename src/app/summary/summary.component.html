@@ -13,7 +13,7 @@
                         edit
                     </span>
                     <div class="amount">
-                        <span class="number">{{counterToDo()}}</span>
+                        <span class="number">{{toDoAmount}}</span>
                         <span class="text">To-do</span>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                         done
                     </span>
                     <div class="amount">
-                        <span class="number">{{counterDone()}}</span>
+                        <span class="number">{{doneAmount}}</span>
                         <span class="text">Done</span>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                         keyboard_double_arrow_up
                     </span>
                     <div class="amount">
-                        <span class="number">{{counterToDoUrgent()}}</span>
+                        <span class="number">{{toDoUrgentAmount}}</span>
                         <span class="text">To-do</span>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                 </div>
                 <div class="deadline">
                     <!-- <span class="date">Dezember 16, 2022</span> -->
-                    <span class="date">{{upcomingDeadline()}}</span>
+                    <span class="date" [class.deadlineReached]="deadlineReached">{{upcommingDeadline}}</span>
                     <span class="text">Upcoming Deadline</span>
                 </div>
                 
@@ -50,21 +50,21 @@
             <div class="tripleRow">
                 <div class="tasks" (click)="goToBoard()">
                     <div class="amount">
-                        <span class="number">{{taskInBoard()}}</span>
+                        <span class="number">{{taskAmount}}</span>
                         <span class="text">Tasks in</span>
                         <span class="text">Board</span>
                     </div>
                 </div>
                 <div class="tasks" (click)="goToBoard()">
                     <div class="amount">
-                        <span class="number">{{taskInProgress()}}</span>
+                        <span class="number">{{progressAmount}}</span>
                         <span class="text">Tasks in</span>
                         <span class="text">Progress</span>
                     </div>
                 </div>
                 <div class="tasks" (click)="goToBoard()">
                     <div class="amount">
-                        <span class="number">{{taskAwaitingFeedback()}}</span>
+                        <span class="number">{{awaitingAmount}}</span>
                         <span class="text">Awaiting</span>
                         <span class="text">Feedback</span>
                     </div>

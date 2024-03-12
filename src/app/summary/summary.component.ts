@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { DataService } from '../services/data.service';
-import { DatePipe } from '@angular/common';
 import { MenuService } from '../services/menu.service';
 
 @Component({
@@ -12,6 +11,14 @@ export class SummaryComponent {
   toDoEntered: boolean = false;
   doneEntered: boolean = false;
   greeting: string;
+  upcommingDeadline: string = 'None';
+  toDoAmount: number = 0;
+  toDoUrgentAmount: number = 0;
+  progressAmount: number = 0;
+  awaitingAmount: number = 0;
+  doneAmount: number = 0;
+  taskAmount: number = 0;
+  deadlineReached: boolean = false;
   mounthArray: string[] = [
     "unset",
     "January",
@@ -28,75 +35,129 @@ export class SummaryComponent {
     "December"
   ];
 
+
   constructor(
     public data: DataService,
     private menuService: MenuService
-    ) {
-    this.data.generateTaskList();
-    this.sortDataByDueDate();
-    this.determineTheTimeOfDay();
+  ) {
+    this.generateData();
   }
 
+
+  /**
+   * Asynchronously generates data for the application.
+   * 
+   * @returns {Promise<void>} A Promise that resolves when data generation is complete.
+   */
+  async generateData(): Promise<void> {
+    await this.data.generateTaskList();
+    await this.determineTheTimeOfDay();
+    await this.upcomingDeadline();
+    this.setTasksAmounts();
+  }
+
+
+  /**
+   * Sets the amounts of various types of tasks.
+   * 
+   * @returns {void} This function does not return anything.
+   */
+  setTasksAmounts(): void {
+    this.toDoAmount = this.counterToDo();
+    this.toDoUrgentAmount = this.counterToDoUrgent();
+    this.doneAmount = this.counterDone();
+    this.progressAmount = this.countertaskInProgress();
+    this.awaitingAmount = this.countertaskAwaitingFeedback();
+    this.taskAmount = this.countertaskInBoard();
+  }
+
+
+  
+  /**
+   * Counts the number of tasks that are still to be done.
+   * @returns {number} The number of tasks that are still to be done.
+   */
   counterToDo(): number {
-    let counter: number = 0;
+    let counter = 0;
     this.data.taskList.forEach(task => {
-      if (task.processing_status === 0) {
-        counter++;
-      }
+      if (task.processing_status === 0) counter++;
     });
     return counter;
   }
 
 
+  /**
+   * Counts the number of tasks that are done.
+   * 
+   * @returns {number} The number of tasks that are done.
+   */
   counterDone(): number {
     let counter: number = 0;
     this.data.taskList.forEach(task => {
-      if (task.processing_status === 3) {
-        counter++;
-      }
+      if (task.processing_status === 3) counter++;
     });
     return counter;
   }
 
 
+  /**
+   * Counts the number of urgent tasks that are still to be done.
+   * 
+   * @returns {number} The number of urgent tasks that are still to be done.
+   */
   counterToDoUrgent(): number {
     let counter: number = 0;
     this.data.taskList.forEach(task => {
-      if (task.processing_status === 0 && task.prio === 1) {
-        counter++;
-      }
+      if (task.processing_status === 0 && task.prio === 1) counter++;
     });
     return counter;
   }
 
 
-  taskInBoard(): number {
+  /**
+   * Counts the number of tasks currently in the board.
+   * 
+   * @returns {number} The number of tasks currently in the board.
+   */
+  countertaskInBoard(): number {
     return this.data.taskList.length;
   }
 
 
-  taskInProgress(): number {
+  /**
+   * Counts the number of tasks that are in progress.
+   * 
+   * @returns {number} The number of tasks that are in progress.
+   */
+  countertaskInProgress(): number {
     let counter: number = 0;
     this.data.taskList.forEach(task => {
-      if (task.processing_status === 1) {
-        counter++;
-      }
+      if (task.processing_status === 1) counter++;
     });
     return counter;
   }
 
 
-  taskAwaitingFeedback() {
+  /**
+   * Counts the number of tasks awaiting feedback.
+   * 
+   * @returns {number} The number of tasks awaiting feedback.
+   */
+  countertaskAwaitingFeedback() {
     let counter: number = 0;
     this.data.taskList.forEach(task => {
-      if (task.processing_status === 2) {
-        counter++;
-      }
+      if (task.processing_status === 2) counter++;
     });
     return counter;
   }
 
-  sortDataByDueDate() {
+
+  /**
+   * Sorts the task list by due date.
+   * 
+   * @returns {object[]} An ordered array of tasks sorted by due date.
+   */
+  sortDataByDueDate(): any[] {
     let orderedList = this.data.taskList.sort((a, b) => {
       return new Date(a.due_date).getTime() - new Date(b.due_date).getTime();
     });
@@ -104,62 +165,99 @@ export class SummaryComponent {
   }
 
 
-  deadlineReached: boolean = false;
-
-  upcomingDeadline(): string {
+  /**
+   * Asynchronously determines the upcoming deadline.
+   * 
+   * @returns {Promise<void>} A Promise that resolves when the upcoming deadline is determined.
+   */
+  async upcomingDeadline(): Promise<void> {
     if (this.data.taskList.length > 0) {
-      let deadline: string = this.data.taskList[0].due_date;
-      let day: string = deadline.substring(8, 10);
-      let mounthIndex: number = +deadline.substring(5, 7);
-      let mounth: string = this.mounthArray[mounthIndex];
-      let year: string = deadline.substring(0, 4);
-      let upcommingDeadline: string = mounth + ' ' + day + ', ' + year;
-      // this.checkDeadlineReached(deadline);
-      return upcommingDeadline;
-    } else {
-      return 'No actual deadline';
-    }
+      this.sortDataByDueDate();
+      const deadLineIndex = this.findUpcomingDeadlineIndex();
+      if (this.upcomingDeadlineIndexFound(deadLineIndex)) this.createUpcomingDeadLineString(deadLineIndex);
+      else this.upcommingDeadline = 'None';
+    } else this.upcommingDeadline = 'None';
   }
 
 
-  // checkDeadlineReached(deadline: string): void {
-  //   const dealineDateNumber: number = new Date(deadline).getTime();
-  //   const actualDateNumber: number = new Date().getTime();
-  //   const difference: number = actualDateNumber - dealineDateNumber;
-  //   if (difference <= 0) {
-  //     this.deadlineReached = true;
-  //   } else {
-  //     this.deadlineReached = false;
-  //   }
-  // }
+  /**
+   * Checks if the upcoming deadline index is found.
+   * 
+   * @param {number} deadLineIndex - The index of the upcoming deadline.
+   * @returns {boolean} True if the upcoming deadline index is found, otherwise false.
+   */
+  upcomingDeadlineIndexFound(deadLineIndex: number): boolean {
+    return deadLineIndex != -1;
+  }
 
+
+  /**
+   * Creates a string representation of the upcoming deadline.
+   * @param {number} deadLineIndex - The index of the upcoming deadline.
+   * 
+   * @returns {void} This function does not return anything.
+   */
+  createUpcomingDeadLineString(deadLineIndex: number) {
+    const deadline: string = this.data.taskList[deadLineIndex].due_date;
+    const day: string = deadline.substring(8, 10);
+    const mounthIndex: number = +deadline.substring(5, 7);
+    const mounth: string = this.mounthArray[mounthIndex];
+    const year: string = deadline.substring(0, 4);
+    this.upcommingDeadline = mounth + ' ' + day + ', ' + year;
+    this.checkDeadlineReached(deadline);
+  }
+
+
+  /**
+   * Finds the index of the upcoming deadline.
+   * 
+   * @returns {number} The index of the upcoming deadline.
+   */
+  findUpcomingDeadlineIndex(): number {
+    const foundIndex = this.data.taskList.findIndex(task => task.processing_status != 3);
+    return foundIndex;
+  }
+
+
+  /**
+   * Checks if the deadline is reached.
+   * @param {string} deadline - The deadline date.
+   * 
+   * @returns {void} This function does not return anything.
+   */
+  checkDeadlineReached(deadline: string): void {
+    const dealineDateNumber: number = new Date(deadline).getTime();
+    const actualDateNumber: number = new Date().getTime();
+    const difference: number = actualDateNumber - dealineDateNumber;
+    if (difference <= 0) this.deadlineReached = false;
+    else this.deadlineReached = true;
+  }
+
+
+  /**
+   * Asynchronously navigates to the board.
+   * Generates task list if it's empty and then navigates to the board.
+   * 
+   * @returns {Promise<void>} A Promise that resolves when navigation is complete.
+   */
   async goToBoard(): Promise<void> {
-    if (this.data.taskList.length == 0) {
-      await this.data.generateTaskList();
-    }
+    if (this.data.taskList.length == 0) await this.data.generateTaskList();
     this.menuService.mouseEnter(3);
     this.menuService.selectMenu(3);
   }
 
 
-  determineTheTimeOfDay() {
+  /**
+   * Asynchronously determines the time of day and sets a greeting message accordingly.
+   * 
+   * @returns {Promise<void>} A Promise that resolves when the time of day is determined.
+   */
+  async determineTheTimeOfDay(): Promise<void> {
     const actualDate: Date = new Date();
     const actualTimeHours: number = actualDate.getHours();
-    if (actualTimeHours >= 5 && actualTimeHours < 11) {
-      console.log('Good Morning');
-      this.greeting = 'Good Morning';
-    } else if (actualTimeHours >= 11 && actualTimeHours < 18) {
-      console.log('Good afternoon');
-      this.greeting = 'Good afternoon';
-    } else if (actualTimeHours >=18 && actualTimeHours < 22){
-      console.log('Good evening');
-      this.greeting = 'Good evening';
-    } else {
-      console.log('Welcome');
-      this.greeting = 'Welcome';
-    }
+    if (actualTimeHours >= 5 && actualTimeHours < 11) this.greeting = 'Good Morning';
+    else if (actualTimeHours >= 11 && actualTimeHours < 18) this.greeting = 'Good afternoon';
+    else if (actualTimeHours >= 18 && actualTimeHours < 22) this.greeting = 'Good evening';
+    else this.greeting = 'Welcome';
   }
-
-
-
 }

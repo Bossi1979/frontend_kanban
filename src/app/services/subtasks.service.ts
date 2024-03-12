@@ -92,6 +92,8 @@ export class SubtasksService {
   closeAddSubtask(): void {
     this.activeForm.get('subtask').setValue('');
     this.subtaskLeave();
+    this.activeForm.get('subtask').disable();
+    this.activeForm.get('subtask').enable();
   }
 
 
@@ -102,6 +104,7 @@ export class SubtasksService {
    * @returns {void}
    */
   btnPressed(event: any): void {
+    console.log(event.keyCode);
     if (this.enterBtnKeyup(event)) this.addSubtask();
     if (this.escBtnKeyup(event)) this.closeAddSubtask();
   }

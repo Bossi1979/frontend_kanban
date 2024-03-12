@@ -164,6 +164,8 @@ export class BoardComponent {
   openAddTaskPopup(): void {
     this.data.startBoardAddTaskView = true;
     this.data.shadowView = true;
+    this.searchInput = '';
+    this.data.tasksFindingsList = this.data.taskList.slice();
   }
 
 
