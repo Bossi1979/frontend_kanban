@@ -143,7 +143,7 @@ export class SummaryComponent {
    * 
    * @returns {number} The number of tasks awaiting feedback.
    */
-  countertaskAwaitingFeedback() {
+  countertaskAwaitingFeedback(): number {
     let counter: number = 0;
     this.data.taskList.forEach(task => {
       if (task.processing_status === 2) counter++;
@@ -197,7 +197,7 @@ export class SummaryComponent {
    * 
    * @returns {void} This function does not return anything.
    */
-  createUpcomingDeadLineString(deadLineIndex: number) {
+  createUpcomingDeadLineString(deadLineIndex: number): void {
     const deadline: string = this.data.taskList[deadLineIndex].due_date;
     const day: string = deadline.substring(8, 10);
     const mounthIndex: number = +deadline.substring(5, 7);

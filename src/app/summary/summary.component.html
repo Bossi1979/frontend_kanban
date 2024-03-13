@@ -4,12 +4,13 @@
         <div class="divider"></div>
         <span>Key Metrics at a Glance</span>
     </header>
-    
     <div class="content">
         <div class="overview">
             <div class="dualRow">
-                <div class="todo" (click)="goToBoard()" (mouseover)="toDoEntered = true" (mouseleave)="toDoEntered = false">
-                    <span class="material-symbols-outlined icon" [style.background]="toDoEntered ? 'white' : 'black'" [style.color]="toDoEntered ? 'black' : 'white'">
+                <div class="todo" (click)="goToBoard()" (mouseover)="toDoEntered = true"
+                    (mouseleave)="toDoEntered = false">
+                    <span class="material-symbols-outlined icon" [style.background]="toDoEntered ? 'white' : 'black'"
+                        [style.color]="toDoEntered ? 'black' : 'white'">
                         edit
                     </span>
                     <div class="amount">
@@ -17,8 +18,10 @@
                         <span class="text">To-do</span>
                     </div>
                 </div>
-                <div class="todo" (click)="goToBoard()" (mouseover)="doneEntered = true" (mouseleave)="doneEntered = false">
-                    <span class="material-symbols-outlined icon" [style.background]="doneEntered ? 'white' : 'black'" [style.color]="doneEntered ? 'black' : 'white'">
+                <div class="todo" (click)="goToBoard()" (mouseover)="doneEntered = true"
+                    (mouseleave)="doneEntered = false">
+                    <span class="material-symbols-outlined icon" [style.background]="doneEntered ? 'white' : 'black'"
+                        [style.color]="doneEntered ? 'black' : 'white'">
                         done
                     </span>
                     <div class="amount">
@@ -41,11 +44,9 @@
                     <div class="dividerGrey"></div>
                 </div>
                 <div class="deadline">
-                    <!-- <span class="date">Dezember 16, 2022</span> -->
                     <span class="date" [class.deadlineReached]="deadlineReached">{{upcommingDeadline}}</span>
                     <span class="text">Upcoming Deadline</span>
                 </div>
-                
             </div>
             <div class="tripleRow">
                 <div class="tasks" (click)="goToBoard()">
@@ -69,7 +70,6 @@
                         <span class="text">Feedback</span>
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="greeting">
@@ -78,5 +78,3 @@
         </div>
     </div>
 </div>
-
-

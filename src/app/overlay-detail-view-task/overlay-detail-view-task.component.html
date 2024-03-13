@@ -1,38 +1,34 @@
 <div class="taskCard">
     <div>
         <p class="category" [style.background-color]="taskCard.category == 'Technical Task' ? '#0038ff' : '#1fd7c1'">
-            {{taskCard.category}}</p>
-
-
-
+            {{taskCard.category}}
+        </p>
         <div class="closeDiv" (click)="closeTaskDetailView()">
             <span class="material-symbols-outlined closeIcon">
                 close
             </span>
         </div>
-
     </div>
-
-    <h3 class="title">{{taskCard.title}}</h3>
-
+    <h3 class="title">
+        {{taskCard.title}}
+    </h3>
     <p class="description">
         {{taskCard.description}}
     </p>
-
     <div class="additionalData">
         <h6>Due Date:</h6>
         <div class="data">
             <p>{{taskCard.dueDate}}</p>
         </div>
     </div>
-
     <div class="additionalData">
-        <h6>Priority:</h6>
+        <h6>
+            Priority:
+        </h6>
         <div class="data">
             <p *ngIf="taskCard.prio == 1">Urgent</p>
             <p *ngIf="taskCard.prio == 2">Medium</p>
             <p *ngIf="taskCard.prio == 3">Low</p>
-
             <span class="material-symbols-outlined urgent" *ngIf="taskCard.prio == 1">
                 keyboard_double_arrow_up
             </span>
@@ -44,7 +40,6 @@
             </span>
         </div>
     </div>
-
     <div class="assignedTo">
         <h6>Assigned To:</h6>
         <div class="list">
@@ -56,7 +51,6 @@
             </div>
         </div>
     </div>
-
     <div class="subtasks">
         <h6>Subtasks:</h6>
         <div class="list">
@@ -66,7 +60,6 @@
             </div>
         </div>
     </div>
-
     <div class="options">
         <div class="btnEdit" (click)="startEditTaskView()">
             <span class="material-symbols-outlined icon">
@@ -81,5 +74,4 @@
             <p>Delete</p>
         </div>
     </div>
-
 </div>

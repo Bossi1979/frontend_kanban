@@ -49,5 +49,4 @@ export class ContactService {
     form.get('email').setValue(form.value.email.trim());
     form.get('phone').setValue(form.value.phone.trim());
   }
-
 }

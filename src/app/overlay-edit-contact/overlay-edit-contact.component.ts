@@ -62,14 +62,16 @@ export class OverlayEditContactComponent {
   }
 
 
-
-
+  /**
+   * Asynchronously saves the edited contact by trimming inputs, updating the contact, and closing the edit contact view.
+   * 
+   * @returns {Promise<void>} A Promise that resolves when the edited contact is saved.
+   */
   async saveEditContact(): Promise<void> {
     await this.contactService.trimInputs(this.editContactForm);
     await this.editContact(this.contact);
     this.closeEditContactView();
   }
-
 
 
   /**
@@ -96,6 +98,11 @@ export class OverlayEditContactComponent {
   }
 
 
+  /**
+   * Starts the view for editing a contact with a edit message done overlay.
+   * 
+   * @returns {void}
+   */
   startEditContactDoneView(): void {
     this.data.selectedMessageIndex = 1;
     this.data.messageOverlayView = true;
@@ -105,8 +112,4 @@ export class OverlayEditContactComponent {
       this.data.messageOverlayView = false;
     }, 2600);
   }
-
-
-
-
 }

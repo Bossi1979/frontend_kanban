@@ -10,6 +10,7 @@
     overflow-y: scroll;
 
     div {
+
         .sticky {
             position: fixed;
             top: 94px !important;
@@ -31,6 +32,7 @@
             height: 101px;
 
             .hover {
+
                 &:hover {
                     cursor: pointer;
                     background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);
@@ -264,9 +266,6 @@
                         cursor: pointer;
                     }
 
-                    .icon {
-                    }
-
                     p {
                         font-family: Inter;
                         font-size: 16px;
@@ -299,9 +298,6 @@
                         text-align: left;
                         margin-block-start: 0px;
                         margin-block-end: 0px;
-                    }
-
-                    .icon {
                     }
                 }
             }
@@ -369,41 +365,43 @@
 
 ::-webkit-scrollbar {
   width: 24px;
-  
 }
+
 ::-webkit-scrollbar-button {
   width: 0px;
   height: 0px;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #a8a8a8;
   border: 8px solid white;
   border-radius: 50px;
   width: 10px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #323264;
   border: 8px solid grey;
 }
+
 ::-webkit-scrollbar-thumb:active {
   background: #29abe2;
   border: 8px solid grey;
 }
+
 ::-webkit-scrollbar-track {
   background: #ffffff;
-//   border: 2px solid grey;
   border-radius: 10px;
 }
+
 ::-webkit-scrollbar-track:hover {
-//   background: #666666;
   background: white;
-//   border: 2px solid grey;
 }
+
 ::-webkit-scrollbar-track:active {
-//   background: #666666;
   background: white;
-//   border: 2px solid grey;
 }
+
 ::-webkit-scrollbar-corner {
   background: transparent;
 }

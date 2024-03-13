@@ -52,6 +52,7 @@ export class AddTaskComponent {
     this.subtaskService.subtasksList = [];
     this.subtaskService.activeForm = this.addForm;
     this.prioBtnService.resetPrio();
+    this. resetAssignTo();
   }
 
 

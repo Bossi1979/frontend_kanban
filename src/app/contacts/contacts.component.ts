@@ -57,18 +57,29 @@ export class ContactsComponent {
   }
 
 
+  /**
+   * Asynchronously deletes a contact by its ID and updates the UI accordingly.
+   * 
+   * @param {number} id - The ID of the contact to delete.
+   * @param {number} index - The index of the contact in the list.
+   * @returns {Promise<void>} A Promise that resolves when the contact is successfully deleted.
+   */
   async deleteContact(id: number, index: number): Promise<void> {
     const response = await this.auth.deleteContact(id);
     console.log(response);
     if (response.error == 'none'){
       this.data.allContacts.splice(index, 1);
       this.data.assignedToList.splice(index, 1);
-      console.log(this.data.allContacts);
       this.startDeleteContactDoneView();
     }
   }
 
 
+  /**
+   * Initiates the "delete contact done" view with animations and overlays.
+   * 
+   * @returns {void}
+   */
   startDeleteContactDoneView(): void {
     this.data.selectedMessageIndex = 2;
     this.data.messageOverlayView = true;
@@ -78,7 +89,4 @@ export class ContactsComponent {
       this.data.messageOverlayView = false;
     }, 2600);
   }
-
-
-  
 }

@@ -24,7 +24,6 @@
                 </div>   
             </div>
         </div>
-
     </div>
 </div>
 <div class="detailView">
@@ -46,13 +45,13 @@
                     <div class="btnEdit" (click)="startEditContactView()" 
                     *ngIf="data.allContacts[this.data.selectedContact].id_user == data.loggedUserData[0].id || 
                     !this.data.allContacts[this.data.selectedContact].has_account">
-                        <span class="material-symbols-outlined icon">
+                        <span class="material-symbols-outlined">
                             edit
                         </span>
                         <p>Edit</p>
                     </div>
                     <div class="btnDelete" *ngIf="!data.allContacts[data.selectedContact].has_account" (click)="deleteContact(data.allContacts[data.selectedContact].id, data.selectedContact)">
-                        <span class="material-symbols-outlined icon" (click)="startAddContactDoneView()">
+                        <span class="material-symbols-outlined" (click)="startAddContactDoneView()">
                             delete
                         </span>
                         <p>Delete</p>

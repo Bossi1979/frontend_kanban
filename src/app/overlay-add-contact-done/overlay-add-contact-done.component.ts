@@ -8,7 +8,6 @@ import { DataService } from '../services/data.service';
   styleUrl: './overlay-add-contact-done.component.scss'
 })
 export class OverlayAddContactDoneComponent {
-
   messageArray: string[] = [
     'Contact succesfully created',
     'Contact succesfully updated',
@@ -16,6 +15,5 @@ export class OverlayAddContactDoneComponent {
   ];
 
   
-
   constructor(public data: DataService) { }
 }

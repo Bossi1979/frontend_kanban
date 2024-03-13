@@ -3,7 +3,6 @@ import { AuthService } from '../services/auth.service';;
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { HttpResponse } from '@angular/common/http';
 
 
 @Component({
@@ -34,7 +33,11 @@ export class LoginComponent {
   ];
 
 
-  constructor(private as: AuthService, private router: Router, private data: DataService) { }
+  constructor(
+    private as: AuthService,
+    private router: Router,
+    private data: DataService
+  ) { }
 
 
   /**

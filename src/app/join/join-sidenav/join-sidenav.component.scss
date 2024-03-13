@@ -36,6 +36,7 @@
                 box-sizing: border-box;
                 color: #cdcdcd;
                 cursor: pointer;
+
                 &:hover {
                     transition: background-color 100ms ease-in-out;
                     transition: color 100ms ease-in-out;
@@ -85,13 +86,14 @@
             text-align: left;
             color: #a8a8a8;
             cursor: pointer;
+
             &:hover {
                 transition: color 100ms ease-in-out;
                 color: #29abe2;
             }
         }
 
-        .isSelected{
+        .isSelected {
             background-color: #091931;
             color: #a8a8a8;
         }

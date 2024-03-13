@@ -34,12 +34,12 @@ export class OverlayEditTaskComponent {
 
 
   constructor(
-    public data: DataService, 
-    private auth: AuthService, 
-    public subtaskService: SubtasksService, 
+    public data: DataService,
+    private auth: AuthService,
+    public subtaskService: SubtasksService,
     public prioBtnService: PrioBtnService,
     public assignedToService: AssignedToService
-    ) {
+  ) {
     this.subtaskService.subtasksList = [];
     this.assignedToService.resetAssignTo();
     this.taskCard.setTaskCardData(this.data.selectedTask);
@@ -47,19 +47,19 @@ export class OverlayEditTaskComponent {
     this.setAssignedToList();
     this.subtaskService.subtasksList = JSON.parse(JSON.stringify(this.data.selectedTask['subtask']));
     this.subtaskService.activeForm = this.editForm;
-   }
+  }
 
 
-   /**
-    * Sets the status of assigned contacts based on users found in `taskCard.assignTo`.
-    * 
-    * @returns {void}
-    */
-  setAssignedToList(): void{
+  /**
+   * Sets the status of assigned contacts based on users found in `taskCard.assignTo`.
+   * 
+   * @returns {void}
+   */
+  setAssignedToList(): void {
     let list = this.data.assignedToList;
     this.taskCard.assignTo.forEach(assigned => {
       let userId = assigned.id_user;
-      let foundIndex = list.findIndex(contact =>  contact.id_user === userId );
+      let foundIndex = list.findIndex(contact => contact.id_user === userId);
       if (foundIndex != -1) this.data.assignedToList[foundIndex].checked = true;
     });
   }
@@ -83,7 +83,7 @@ export class OverlayEditTaskComponent {
    * @returns {Promise<void>} - A promise indicating the completion of the operation.
    */
   async changeSubtaskCheckbox(subIndex: number): Promise<void> {
-    this.taskCard.subtask[subIndex].checked =!this.taskCard.subtask[subIndex].checked;
+    this.taskCard.subtask[subIndex].checked = !this.taskCard.subtask[subIndex].checked;
     this.data.taskList[this.data.selectedTaskIndex].subtask[subIndex].checked = this.taskCard.subtask[subIndex].checked;
     let response = await this.auth.updateTask(this.taskCard);
     console.log(response);
@@ -99,7 +99,7 @@ export class OverlayEditTaskComponent {
     this.closeTaskEditView();
     const response = await this.auth.deleteTask(this.taskCard.id);
     console.log(response);
-    if (response.message == 'Task deleted successfully'){
+    if (response.message == 'Task deleted successfully') {
       this.data.taskList.splice(this.data.selectedTaskIndex, 1);
     }
   }
@@ -174,6 +174,6 @@ export class OverlayEditTaskComponent {
         assignedList.push(user);
       }
     });
-    return assignedList
+    return assignedList;
   }
 }

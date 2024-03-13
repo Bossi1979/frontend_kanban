@@ -36,7 +36,10 @@ export class DataService {
   //overlay
   selectedMessageIndex: number = 1;
 
-  constructor(private as: AuthService) {
+
+  constructor(
+    private as: AuthService
+  ) {
     if (localStorage.getItem('userData')) {
       this.loggedUserData = JSON.parse(localStorage.getItem('userData'));
       this.loadDatas();
@@ -45,7 +48,6 @@ export class DataService {
 
 
   async loadDatas() {
-    console.log('Loading data...');
     await this.getContacts();
     await this.generatedAssignedList();
     await this.generateTaskList();
@@ -76,7 +78,6 @@ export class DataService {
     const response: any = await this.as.getAllContacts();
     this.allContacts = response;
     this.setUserBackgroundColor();
-    console.log('contacts', this.allContacts);
   }
 
 
@@ -103,7 +104,5 @@ export class DataService {
   async generateTaskList(): Promise<void> {
     const response: any = await this.as.getAllTasks();
     this.taskList = response;
-    console.log('task List: ', this.taskList);
   }
-
 }

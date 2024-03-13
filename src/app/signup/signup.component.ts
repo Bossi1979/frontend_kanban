@@ -43,7 +43,10 @@ export class SignupComponent {
   signupData: Signup = new Signup();
 
 
-  constructor(private router: Router, private as: AuthService) { }
+  constructor(
+    private router: Router,
+    private as: AuthService
+  ) { }
 
 
   /**
@@ -94,7 +97,6 @@ export class SignupComponent {
    */
   signupErrorAction(error: any): void {
     alert('Signup failed! Please try again later.');
-    // this.signupData = new Signup();
   }
 
 

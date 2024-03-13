@@ -10,9 +10,12 @@ export class MenuService {
   boardScr: string = "../../../assets/img/sidenav/board.png";
   contactsScr: string = "../../../assets/img/sidenav/contacts.png";
   selectedMenu: number = 0;
+  headerSubmenuView: boolean = false;
 
 
-  constructor(private data: DataService) { }
+  constructor(
+    private data: DataService
+  ) { }
 
 
   /**
@@ -77,9 +80,13 @@ export class MenuService {
   }
 
 
-  headerSubmenuView: boolean = false;
-
+  /**
+   * Toggles the visibility of the header submenu.
+   * This method toggles the value of the headerSubmenuView property, which controls the visibility of the submenu.
+   * 
+   * @returns {void}
+   */
   toggleHeaderSubmenu(): void {
-    this.headerSubmenuView =!this.headerSubmenuView;
+    this.headerSubmenuView = !this.headerSubmenuView;
   }
 }

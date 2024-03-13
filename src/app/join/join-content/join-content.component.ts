@@ -8,6 +8,6 @@ import { DataService } from '../../services/data.service';
 })
 export class JoinContentComponent {
 
-  constructor(public data: DataService) { }
 
+  constructor(public data: DataService) { }
 }

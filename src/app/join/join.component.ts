@@ -18,5 +18,4 @@ export class JoinComponent {
     this.menuService.mouseEnter(1);
     this.menuService.selectMenu(1);
   }
-
 }

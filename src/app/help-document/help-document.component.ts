@@ -10,9 +10,19 @@ import { MenuService } from '../services/menu.service';
 export class HelpDocumentComponent {
 
 
-  constructor(public data: DataService, private menuService: MenuService){}
+  constructor(
+    public data: DataService,
+    private menuService: MenuService
+  ) { }
 
-  backToSummary(){
+
+  /**
+   * Navigates back to the summary by triggering mouse enter and selecting the menu.
+   * This method is typically used for navigation purposes.
+   * 
+   * @returns {void}
+   */
+  backToSummary(): void {
     this.menuService.mouseEnter(1);
     this.menuService.selectMenu(1);
   }

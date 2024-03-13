@@ -10,20 +10,20 @@ export class Task {
     id: number;
 
 
-    constructor(obj?: any){
+    constructor(obj?: any) {
         this.title = obj ? obj.title : '';
         this.description = obj ? obj.description : '';
         this.assignTo = obj ? obj.assignTo : [];
-        this.dueDate = obj ? obj.dueDate: '';
+        this.dueDate = obj ? obj.dueDate : '';
         this.category = obj ? obj.category : '';
         this.subtask = obj ? obj.subtask : '';
         this.prio = obj ? obj.prio : 0;
         this.processingStatus = obj ? obj.processingStatus : 0;
-        this.id = obj? obj.id : 0;
+        this.id = obj ? obj.id : 0;
     }
 
 
-    createTaskObject(){
+    createTaskObject() {
         return {
             title: this.title,
             description: this.description,
@@ -37,7 +37,7 @@ export class Task {
         }
     }
 
-    setTaskCardData(task: any){
+    setTaskCardData(task: any) {
         this.title = task.title;
         this.description = task.description;
         this.assignTo = task.assigned_to;
@@ -49,7 +49,7 @@ export class Task {
         this.id = task.id;
     }
 
-    createTaskListItem(){
+    createTaskListItem() {
         return {
             title: this.title,
             description: this.description,

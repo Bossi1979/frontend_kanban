@@ -6,7 +6,6 @@
             </span>
         </div>
     </div>
-
     <div class="formField">
         <span class="head">Title</span>
         <div class="formInputs">
@@ -15,7 +14,6 @@
             </div>
         </div>
     </div>
-
     <div class="formField">
         <span class="head">Description</span>
         <textarea class="formTextarea" placeholder="Enter a Desription" formControlName="description"></textarea>
@@ -30,24 +28,23 @@
             </div>
         </div>
     </div>
-
     <div class="prioBtnDiv">
         <p>Prio</p>
         <div class="prioBtnContent">
-            <div class="prioBtn" [class.urgentBtn]="!prioBtnService.urgentSelected" [class.urgentBtnSelected]="prioBtnService.urgentSelected"
-                (click)="prioBtnService.selectedPrio(1)">
+            <div class="prioBtn" [class.urgentBtn]="!prioBtnService.urgentSelected"
+                [class.urgentBtnSelected]="prioBtnService.urgentSelected" (click)="prioBtnService.selectedPrio(1)">
                 <p>Urgent</p>
                 <span class="material-symbols-outlined urgent">keyboard_double_arrow_up</span>
             </div>
-            <div class="prioBtn" [class.mediumBtn]="!prioBtnService.mediumSelected" [class.mediumBtnSelected]="prioBtnService.mediumSelected"
-                (click)="prioBtnService.selectedPrio(2)">
+            <div class="prioBtn" [class.mediumBtn]="!prioBtnService.mediumSelected"
+                [class.mediumBtnSelected]="prioBtnService.mediumSelected" (click)="prioBtnService.selectedPrio(2)">
                 <p>Medium</p>
                 <span class="material-symbols-outlined medium">
                     equal
                 </span>
             </div>
-            <div class="prioBtn" [class.lowBtn]="!prioBtnService.lowSelected" [class.lowBtnSelected]="prioBtnService.lowSelected"
-                (click)="prioBtnService.selectedPrio(3)">
+            <div class="prioBtn" [class.lowBtn]="!prioBtnService.lowSelected"
+                [class.lowBtnSelected]="prioBtnService.lowSelected" (click)="prioBtnService.selectedPrio(3)">
                 <p>Low</p>
                 <span class="material-symbols-outlined low">
                     keyboard_double_arrow_down
@@ -55,7 +52,6 @@
             </div>
         </div>
     </div>
-
     <div class="formField">
         <span class="head">Assigned to</span>
         <div class="formInputs">
@@ -63,8 +59,9 @@
                 <input type="text" value="Select contacts to assign" *ngIf="assignedToService.assignBtnDisabled"
                     (focus)="assignedToService.openAssignToDropdown()" formControlName="assignTo">
                 <input type="text" *ngIf="!assignedToService.assignBtnDisabled" formControlName="assignToSelect">
-                <img src="../../assets/img/add_task/arrow_drop_downaa.png" [class.rotate180deg]="!assignedToService.assignBtnDisabled"
-                    style="cursor: pointer;" (click)="assignedToService.toggleAssignToDropdown()">
+                <img src="../../assets/img/add_task/arrow_drop_downaa.png"
+                    [class.rotate180deg]="!assignedToService.assignBtnDisabled" style="cursor: pointer;"
+                    (click)="assignedToService.toggleAssignToDropdown()">
                 <div class="dropAssign" *ngIf="!assignedToService.assignBtnDisabled">
                     <div *ngFor="let contact of data.assignedToList; let i = index;">
                         <div class="contactLine">
@@ -77,14 +74,13 @@
                                         *ngIf="data.loggedUserData[0].id == contact.id_user">(Du)</span>
                                 </p>
                             </div>
-                            <input type="checkbox" [id]="'checked' + i" (click)="assignedToService.selectionCheckbox('checked' + i, i)"
+                            <input type="checkbox" [id]="'checked' + i"
+                                (click)="assignedToService.selectionCheckbox('checked' + i, i)"
                                 [checked]="data.assignedToList[i].checked">
                         </div>
-
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <div class="assignToList">
@@ -94,7 +90,6 @@
             </div>
         </div>
     </div>
-
     <div class="formField">
         <span class="head">Subtask</span>
         <div class="formInputs">
@@ -121,7 +116,9 @@
         <div class="subtaskList">
             <div class="subtaskItem" *ngFor="let item of subtaskService.subtasksList; let i= index;"
                 (mouseenter)="subtaskService.subtaskHovered(i)" (mouseleave)="subtaskService.subtaskNotHovered()"
-                (dblclick)="subtaskService.editSubtaskList(i)" [style.background-color]="subtaskService.hoveredSubtask==i && subtaskService.subtaskListEditActive != i ? 'grey' : 'white'" [style.border-bottom]="subtaskService.subtaskListEditActive == i ? '2px solid #29abe2' : 'unset'">
+                (dblclick)="subtaskService.editSubtaskList(i)"
+                [style.background-color]="subtaskService.hoveredSubtask==i && subtaskService.subtaskListEditActive != i ? 'grey' : 'white'"
+                [style.border-bottom]="subtaskService.subtaskListEditActive == i ? '2px solid #29abe2' : 'unset'">
                 <li *ngIf="subtaskService.subtaskListEditActive != i">
                     <span>{{item.subtask}}</span>
                 </li>
@@ -143,14 +140,13 @@
 
         </div>
     </div>
-
     <div>
-        <button type="button" [class.primaryBtn]="editForm.valid" [class.disabledBtn]="!editForm.valid" (click)="saveTaskChanges()">
+        <button type="button" [class.primaryBtn]="editForm.valid" [class.disabledBtn]="!editForm.valid"
+            (click)="saveTaskChanges()">
             Ok
             <span class="material-symbols-outlined">
                 done
             </span>
         </button>
     </div>
-
 </form>

@@ -29,7 +29,6 @@
         width: 976.25px;
         height: 424px;
         gap: 138px;
-        // border: 1px solid red;
 
         .formular {
             display: flex;
@@ -94,7 +93,6 @@
                     display: flex; 
                     flex-direction:row;
                     width: 100%; 
-                    // gap: 8px; 
                     margin-top: -30px; 
                     margin-left: 2px; 
                     flex-wrap: wrap;
@@ -202,6 +200,7 @@
                             transition: background-color 100ms ease-in-out;
                             background-color: #ff3d00 !important;
                             color: white;
+
                             &:hover {
                                 transition: box-shadow 100ms ease-in-out;
                                 box-shadow: 0px 4px 4px 0px #00000040;
@@ -214,6 +213,7 @@
 
                         .mediumBtn {
                             cursor: pointer;
+
                             &:hover {
                                 transition: box-shadow 100ms ease-in-out;
                                 box-shadow: 0px 4px 4px 0px #00000040;
@@ -229,6 +229,7 @@
                             transition: background-color 100ms ease-in-out;
                             background-color: #ffa800 !important;
                             color: white;
+
                             &:hover {
                                 transition: box-shadow 100ms ease-in-out;
                                 box-shadow: 0px 4px 4px 0px #00000040;
@@ -311,7 +312,6 @@
             p {
                 display: flex;
                 align-items: end;
-                // height: 56.78px;
                 height: 100%;
                 font-family: Inter;
                 font-size: 16px;
@@ -424,7 +424,6 @@
     box-shadow: 0px 0px 14px 3px #0000000A;
     z-index: 2;
 
-    
     p{
         font-family: Inter; 
         font-size: 20px; 
@@ -445,27 +444,30 @@
 }
 
 .subtask{
+    cursor: pointer;
+
     &:hover {
         transition: color 100ms ease-in-out;
         color: #29abe2;
     }
-    cursor: pointer;
 }
 
 .closeSubtask{
+    cursor: pointer;
+
     &:hover {
         transition: color 100ms ease-in-out;
         color: #29abe2;
     }
-    cursor: pointer;
 }
 
 .addSubtask{
+    cursor: pointer;
+
     &:hover {
         transition: color 100ms ease-in-out;
         color: #29abe2;
     }
-    cursor: pointer;
 }
 
 .subtaskList{
@@ -496,8 +498,6 @@
             text-align: left;
             width: calc(100%  - 58px);
 
-            
-
             span{
                 font-family: Inter;
                 font-size: 16px;
@@ -526,19 +526,22 @@
             gap: 4px;
 
             .iconPen{
+                cursor: pointer;
+
                 &:hover{
                     transition: color 100ms ease-in-out;
                     color: #29abe2;
                 }
-                cursor: pointer;
             }
 
             .iconTrash{
+                cursor: pointer;
+
                 &:hover{
                     transition: color 100ms ease-in-out;
                     color: #29abe2;
                 }
-                cursor: pointer;
+                
             }
 
             .subtaskDivider{
@@ -546,8 +549,6 @@
                 border-left: 1px solid #D1D1D1;
             }
         }
-
-       
     }
 }
 

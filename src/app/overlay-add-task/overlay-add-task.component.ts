@@ -1,11 +1,6 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { DataService } from '../services/data.service';
-// import { AssignedToService } from '../services/assigned-to.service';
-// import { PrioBtnService } from '../services/prio-btn.service';
-// import { AddTaskService } from '../services/add-task.service';
-// import { SubtasksService } from '../services/subtasks.service';
-// import { AuthService } from '../services/auth.service';
-// import { Task } from '../models/task.model';
+
 
 @Component({
   selector: 'app-overlay-add-task',

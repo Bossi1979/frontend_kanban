@@ -12,8 +12,6 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        // padding: 110px 96px 0px 96px;
-        // box-sizing: border-box;
         padding-bottom: 32px;
 
         h3 {
@@ -37,9 +35,9 @@
             border-radius: 100%;
             margin: 3px;
 
-            &:hover{
+            &:hover {
                 transition: background-color 100ms ease-in-out;
-                background-color: #EEEEEE;
+                background-color: #eeeeee;
                 cursor: pointer;
             }
         }
@@ -89,7 +87,6 @@
             }
 
             .text {
-
                 h5 {
                     font-family: Inter;
                     font-size: 20px;
@@ -116,7 +113,6 @@
     }
 }
 
-
-::-webkit-scrollbar{
+::-webkit-scrollbar {
     width: 0px;
 }

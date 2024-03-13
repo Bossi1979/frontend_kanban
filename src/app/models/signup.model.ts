@@ -7,17 +7,17 @@ export class Signup {
     cPassword: string;
 
 
-    constructor(obj?: any){
+    constructor(obj?: any) {
         this.firstname = obj ? obj.firstname : '';
         this.lastname = obj ? obj.lastname : '';
-        this.username = obj? obj.username : '';
-        this.email = obj? obj.email : '';
+        this.username = obj ? obj.username : '';
+        this.email = obj ? obj.email : '';
         this.password = obj ? obj.password : '';
-        this.cPassword = obj ? obj.cPassword: '';
+        this.cPassword = obj ? obj.cPassword : '';
     }
-    
 
-    createSignupObject(){
+
+    createSignupObject() {
         return {
             firstname: this.firstname,
             lastname: this.lastname,

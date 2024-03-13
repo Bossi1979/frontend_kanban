@@ -12,7 +12,7 @@ export class JoinSidenavComponent {
 
 
   constructor(
-    public data: DataService, 
+    public data: DataService,
     public menuService: MenuService
-    ){ }
+  ) { }
 }

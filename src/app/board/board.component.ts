@@ -36,9 +36,20 @@ export class BoardComponent {
     const subtasks: any[] = this.data.taskList[taskIndex].subtask;
     let doneCounter = 0;
     subtasks.forEach(sub => {
-      if (sub.checked == true) doneCounter++;
+      if (this.subTaskDone(sub)) doneCounter++;
     });
     return doneCounter;
+  }
+
+
+  /**
+   * Checks if a subtask is marked as done.
+   * 
+   * @param {Object} sub - The subtask object to check.
+   * @returns {boolean} True if the subtask is marked as done, otherwise false.
+   */
+  subTaskDone(sub: any): boolean{
+    return sub.checked == true;
   }
 
 
@@ -146,6 +157,7 @@ export class BoardComponent {
 
   /**
    * Update the tasks findings list based on the search term.
+   * 
    * @param {string} searchTerm - The search term to match against task titles and descriptions.
    * @returns {void}
    */
@@ -161,14 +173,15 @@ export class BoardComponent {
   }
 
 
+  /**
+   * Opens the add task popup and initializes necessary data.
+   * 
+   * @returns {void}
+   */
   openAddTaskPopup(): void {
     this.data.startBoardAddTaskView = true;
     this.data.shadowView = true;
     this.searchInput = '';
     this.data.tasksFindingsList = this.data.taskList.slice();
   }
-
-
-
-
 }
