@@ -8,6 +8,16 @@ header {
     box-sizing: border-box;
     background-color: white;
 
+    .menuBtn{
+        display: none;
+        cursor: pointer;
+
+        &:hover{
+            transition: color 100ms ease-in-out;
+            color: #29abe2;
+        }
+    }
+
     h3 {
         font-family: Inter;
         font-size: 20px;
@@ -105,5 +115,13 @@ header {
                 }
             }
         }
+    }
+}
+
+
+@media (max-width: 1100px) {
+    .menuBtn{
+        display: flex !important;
+        z-index: 5;
     }
 }

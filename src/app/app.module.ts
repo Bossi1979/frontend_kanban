@@ -27,6 +27,7 @@ import { HelpDocumentComponent } from './help-document/help-document.component';
 import { PrivacyDocumentComponent } from './privacy-document/privacy-document.component';
 import { LegalDocumentComponent } from './legal-document/legal-document.component';
 import { OverlayAddTaskComponent } from './overlay-add-task/overlay-add-task.component';
+import { MobilBottomMenuComponent } from './mobil-bottom-menu/mobil-bottom-menu.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { OverlayAddTaskComponent } from './overlay-add-task/overlay-add-task.com
     HelpDocumentComponent,
     PrivacyDocumentComponent,
     LegalDocumentComponent,
-    OverlayAddTaskComponent
+    OverlayAddTaskComponent,
+    MobilBottomMenuComponent
   ],
   imports: [
     BrowserModule,

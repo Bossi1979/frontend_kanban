@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, HostListener } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Task } from '../models/task.model';
 
@@ -35,6 +35,8 @@ export class DataService {
 
   //overlay
   selectedMessageIndex: number = 1;
+
+  innerWidth: number;
 
 
   constructor(

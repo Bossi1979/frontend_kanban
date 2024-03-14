@@ -1,29 +1,42 @@
-<div class="sidenav">
-    <div class="sidenavTop">
-        <div class="logo">
-            <img src="../../../assets/img/sidenav/logo.png" alt="">
+<div style="display: flex; flex-direction:row;" [class.hideSideNav]="menuService.slideOutSidebar && data.innerWidth <= 1100" class="sidenavTab">
+
+    <div class="sidenav" >
+        <div class="sidenavTop">
+            <div class="logo">
+                <img src="../../../assets/img/sidenav/logo.png" alt="">
+            </div>
+            <div class="menu">
+                <div class="menuItem" (mouseenter)="menuService.mouseEnter(1)" (mouseleave)="menuService.mouseLeave(1)"
+                    (click)="menuService.selectMenu(1)" [class.selected]="data.selectedMenu == 1">
+                    <img [src]="menuService.summaryScr">
+                    <span>Summary</span>
+                </div>
+                <div class="menuItem" (mouseenter)="menuService.mouseEnter(2)" (mouseleave)="menuService.mouseLeave(2)"
+                    (click)="menuService.selectMenu(2)" [class.selected]="data.selectedMenu == 2">
+                    <img [src]="menuService.addScr">
+                    <span>Add Task</span>
+                </div>
+                <div class="menuItem" (mouseenter)="menuService.mouseEnter(3)" (mouseleave)="menuService.mouseLeave(3)"
+                    (click)="menuService.selectMenu(3)" [class.selected]="data.selectedMenu == 3">
+                    <img [src]="menuService.boardScr">
+                    <span>Board</span>
+                </div>
+                <div class="menuItem" (mouseenter)="menuService.mouseEnter(4)" (mouseleave)="menuService.mouseLeave(4)"
+                    (click)="menuService.selectMenu(4)" [class.selected]="data.selectedMenu == 4">
+                    <img [src]="menuService.contactsScr">
+                    <span>Contacts</span>
+                </div>
+            </div>
         </div>
-        <div class="menu">
-            <div class="menuItem" (mouseenter)="menuService.mouseEnter(1)" (mouseleave)="menuService.mouseLeave(1)" (click)="menuService.selectMenu(1)" [class.selected]="data.selectedMenu == 1">
-                <img [src]="menuService.summaryScr">
-                <span>Summary</span>
-            </div>
-            <div class="menuItem" (mouseenter)="menuService.mouseEnter(2)" (mouseleave)="menuService.mouseLeave(2)" (click)="menuService.selectMenu(2)" [class.selected]="data.selectedMenu == 2">
-                <img [src]="menuService.addScr">
-                <span>Add Task</span>
-            </div>
-            <div class="menuItem" (mouseenter)="menuService.mouseEnter(3)" (mouseleave)="menuService.mouseLeave(3)" (click)="menuService.selectMenu(3)" [class.selected]="data.selectedMenu == 3">
-                <img [src]="menuService.boardScr">
-                <span>Board</span>
-            </div>
-            <div class="menuItem" (mouseenter)="menuService.mouseEnter(4)" (mouseleave)="menuService.mouseLeave(4)" (click)="menuService.selectMenu(4)" [class.selected]="data.selectedMenu == 4">
-                <img [src]="menuService.contactsScr">
-                <span>Contacts</span>
-            </div>
+        <footer>
+            <span (click)="menuService.selectMenu(5)" [class.isSelected]="data.selectedMenu == 5">Privacy Policy</span>
+            <span (click)="menuService.selectMenu(6)" [class.isSelected]="data.selectedMenu == 6">Legal Notice</span>
+        </footer>
+    </div>
+    <div class="tabDiv" *ngIf="data.innerWidth <= 1100">
+        <div class="tabMenu" (click)="menuService.toggleSideNav()">
+            <img src="../../../assets/img/sidenav/logo.png">
         </div>
     </div>
-    <footer>
-        <span (click)="menuService.selectMenu(5)" [class.isSelected]="data.selectedMenu == 5">Privacy Policy</span>
-        <span (click)="menuService.selectMenu(6)" [class.isSelected]="data.selectedMenu == 6">Legal Notice</span>
-    </footer>
+
 </div>

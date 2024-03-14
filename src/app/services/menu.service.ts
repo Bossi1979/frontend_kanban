@@ -11,6 +11,7 @@ export class MenuService {
   contactsScr: string = "../../../assets/img/sidenav/contacts.png";
   selectedMenu: number = 0;
   headerSubmenuView: boolean = false;
+  slideOutSidebar: boolean = true;
 
 
   constructor(
@@ -60,6 +61,10 @@ export class MenuService {
       this.mouseLeave(3);
       this.mouseLeave(4);
     }
+    if(this.data.innerWidth <= 1100){
+      this.slideOutSidebar= true;
+      this.data.shadowView = false;
+    }
     this.loadData(menuNo);
   }
 
@@ -88,5 +93,15 @@ export class MenuService {
    */
   toggleHeaderSubmenu(): void {
     this.headerSubmenuView = !this.headerSubmenuView;
+  }
+
+
+  toggleSideNav(): void{
+    this.slideOutSidebar=!this.slideOutSidebar;
+    if(this.slideOutSidebar){
+      this.data.shadowView = false;
+    } else {
+      this.data.shadowView = true;
+    }
   }
 }

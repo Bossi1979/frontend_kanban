@@ -1,0 +1,51 @@
+.bottomMenu{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 80px;
+    width: 100vw;
+    overflow: hidden;
+    background-color: #2A3647;
+    position: absolute;
+    top: calc(100vh - 80px);
+    left: 0px;
+
+    .menuItem {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        height: 76px;
+        width: 80px;
+        gap: 8px;
+        padding: 8px 1px 8px 1px;
+        box-sizing: border-box;
+        color: #cdcdcd;
+        cursor: pointer;
+
+        &:hover {
+            transition: background-color 100ms ease-in-out;
+            transition: color 100ms ease-in-out;
+            background-color: #091931;
+            color: white;
+        }
+
+        img {
+            width: auto;
+            height: 30px;
+        }
+
+        span {
+            font-family: Inter;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 19px;
+            letter-spacing: 0em;
+            text-align: left;
+        }
+    }
+}
+
+.selected {
+    background-color: #091931 !important;
+    color: white !important;
+}

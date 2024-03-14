@@ -1,5 +1,5 @@
 <div class="home">
-    <app-join-sidenav></app-join-sidenav>
+    <app-join-sidenav *ngIf="data.innerWidth > 769"></app-join-sidenav>
     <div class="contentRight">
         <app-join-header></app-join-header>
         <app-join-content></app-join-content>
@@ -14,5 +14,6 @@
     <div class="messageOverlay" *ngIf="data.messageOverlayView">
         <app-overlay-add-contact-done *ngIf="data.addContactDoneView"></app-overlay-add-contact-done>
     </div>
+    <app-mobil-bottom-menu *ngIf="data.innerWidth <= 769"></app-mobil-bottom-menu>
 </div>
 
