@@ -1,7 +1,8 @@
 <header>
-    <h3>Kanban Project Management Tool</h3>
+    <h3 *ngIf="data.innerWidth > 600">Kanban Project Management Tool</h3>
+    <img src="../../../assets/img/header/logo.png" alt="" *ngIf="data.innerWidth <= 600">
     <div class="headerRight">
-        <div *ngIf="data.selectedMenu < 5">
+        <div *ngIf="data.selectedMenu < 5 && data.innerWidth > 600">
             <img src="../../../assets/img/header/help.png" alt="" (click)="menuService.selectMenu(7)">
         </div>
         <div class="userIcon" [style.background-color]="data.userBackgroundColor"

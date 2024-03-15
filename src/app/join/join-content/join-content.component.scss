@@ -18,3 +18,13 @@
 ::-webkit-scrollbar{
   width: 0px;
 }
+
+
+@media (max-width: 769px) {
+  .padding{
+      justify-content: center;
+      align-items: center;
+      padding: unset;
+      height: calc(100vh - 160px) !important;
+  }
+}
