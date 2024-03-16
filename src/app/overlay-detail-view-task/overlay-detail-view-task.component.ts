@@ -53,6 +53,7 @@ export class OverlayDetailViewTaskComponent {
    */
   async deleteTask(): Promise<void> {
     this.closeTaskDetailView();
+    this.startDeleteDoneView();
     const response = await this.auth.deleteTask(this.taskCard.id);
     console.log(response);
     if (response.message == 'Task deleted successfully') {
@@ -75,5 +76,16 @@ export class OverlayDetailViewTaskComponent {
         this.data.startEditTaskView = true;
       }, 100);
     }, 1100);
+  }
+
+
+  startDeleteDoneView(): void {
+    this.data.selectedMessageIndex = 5;
+    this.data.messageOverlayView = true;
+    this.data.addContactDoneView = true;
+    setTimeout(() => {
+      this.data.addContactDoneView = false;
+      this.data.messageOverlayView = false;
+    }, 2600);
   }
 }

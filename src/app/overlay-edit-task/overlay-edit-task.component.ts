@@ -99,14 +99,15 @@ export class OverlayEditTaskComponent {
    * 
    * @returns {Promise<void>} - A promise indicating the completion of the operation.
    */
-  async deleteTask(): Promise<void> {
-    this.closeTaskEditView();
-    const response = await this.auth.deleteTask(this.taskCard.id);
-    console.log(response);
-    if (response.message == 'Task deleted successfully') {
-      this.data.taskList.splice(this.data.selectedTaskIndex, 1);
-    }
-  }
+  // async deleteTask(): Promise<void> {
+  //   this.closeTaskEditView();
+  //   const response = await this.auth.deleteTask(this.taskCard.id);
+  //   console.log(response);
+  //   this.startDeleteDoneView();
+  //   if (response.message == 'Task deleted successfully') {
+  //     this.data.taskList.splice(this.data.selectedTaskIndex, 1);
+  //   }
+  // }
 
 
   /**
@@ -122,7 +123,7 @@ export class OverlayEditTaskComponent {
     this.closeTaskEditView();
     this.prioBtnService.isSaving = false;
     let response = await this.auth.updateTask(this.taskCard);
-    this.startAddTaskDoneView();
+    this.startEditDoneView();
     console.log(response);
   }
 
@@ -188,7 +189,7 @@ export class OverlayEditTaskComponent {
    * 
    * @returns {void}
    */
-  startAddTaskDoneView(): void {
+  startEditDoneView(): void {
     this.data.selectedMessageIndex = 4;
     this.data.messageOverlayView = true;
     this.data.addContactDoneView = true;

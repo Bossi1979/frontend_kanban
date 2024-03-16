@@ -14,6 +14,7 @@ export class OverlayAddContactDoneComponent {
     'Contact succesfully deleted',
     'Tasks succesfully created',
     'Tasks succesfully updated',
+    'Tasks succesfully deleted'
   ];
 
   
