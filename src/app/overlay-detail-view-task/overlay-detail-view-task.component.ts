@@ -24,11 +24,11 @@ export class OverlayDetailViewTaskComponent {
    */
   closeTaskDetailView(): void {
     this.data.slideOut = true;
-      setTimeout(() => {
-        this.data.startDetailTaskView = false;
-        this.data.shadowView = false;
-        this.data.slideOut = false;
-      }, 1100);
+    setTimeout(() => {
+      this.data.startDetailTaskView = false;
+      this.data.shadowView = false;
+      this.data.slideOut = false;
+    }, 1100);
   }
 
 
@@ -67,7 +67,13 @@ export class OverlayDetailViewTaskComponent {
    * @returns {void}
    */
   startEditTaskView(): void {
-    this.data.startDetailTaskView = false;
-    this.data.startEditTaskView = true;
+    this.data.slideOut = true;
+    setTimeout(() => {
+      this.data.startDetailTaskView = false;
+      this.data.slideOut = false;
+      setTimeout(() => {
+        this.data.startEditTaskView = true;
+      }, 100);
+    }, 1100);
   }
 }

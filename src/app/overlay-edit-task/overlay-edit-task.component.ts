@@ -71,8 +71,12 @@ export class OverlayEditTaskComponent {
    * @returns {void}
    */
   closeTaskEditView(): void {
-    this.data.startEditTaskView = false;
-    this.data.shadowView = false;
+    this.data.slideOut = true;
+      setTimeout(() => {
+        this.data.startEditTaskView  = false;
+        this.data.shadowView = false;
+        this.data.slideOut = false;
+      }, 1100);
   }
 
 
@@ -118,6 +122,7 @@ export class OverlayEditTaskComponent {
     this.closeTaskEditView();
     this.prioBtnService.isSaving = false;
     let response = await this.auth.updateTask(this.taskCard);
+    this.startAddTaskDoneView();
     console.log(response);
   }
 
@@ -175,5 +180,21 @@ export class OverlayEditTaskComponent {
       }
     });
     return assignedList;
+  }
+
+
+  /**
+   * Starts the view for adding a task with a done message overlay.
+   * 
+   * @returns {void}
+   */
+  startAddTaskDoneView(): void {
+    this.data.selectedMessageIndex = 4;
+    this.data.messageOverlayView = true;
+    this.data.addContactDoneView = true;
+    setTimeout(() => {
+      this.data.addContactDoneView = false;
+      this.data.messageOverlayView = false;
+    }, 2600);
   }
 }

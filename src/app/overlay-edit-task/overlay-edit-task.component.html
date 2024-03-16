@@ -1,4 +1,4 @@
-<form class="taskCard" [formGroup]="editForm">
+<form class="taskCard" [formGroup]="editForm" [class.slideOut]="data.slideOut">
     <div class="closeLine">
         <div class="closeDiv" (click)="closeTaskEditView()">
             <span class="material-symbols-outlined closeIcon">
