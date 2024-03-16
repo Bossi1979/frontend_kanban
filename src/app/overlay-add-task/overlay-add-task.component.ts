@@ -18,7 +18,11 @@ export class OverlayAddTaskComponent {
 
 
     closeAddTaskPopup(): void{
-      this.data.startBoardAddTaskView = false;
-      this.data.shadowView = false;
+      this.data.slideOut = true;
+      setTimeout(() => {
+        this.data.startBoardAddTaskView = false;
+        this.data.shadowView = false;
+        this.data.slideOut = false;
+      }, 1100);
     }
 }

@@ -45,8 +45,12 @@ export class OverlayEditContactComponent {
    * @returns {void}
    */
   closeEditContactView(): void {
-    this.data.startEditContactView = false;
-    this.data.shadowView = false;
+    this.data.slideOut = true;
+    setTimeout(() => {
+      this.data.startEditContactView = false;
+      this.data.shadowView = false;
+      this.data.slideOut = false;
+    }, 1100);
   }
 
 
@@ -68,9 +72,9 @@ export class OverlayEditContactComponent {
    * @returns {Promise<void>} A Promise that resolves when the edited contact is saved.
    */
   async saveEditContact(): Promise<void> {
+    this.closeEditContactView();
     await this.contactService.trimInputs(this.editContactForm);
     await this.editContact(this.contact);
-    this.closeEditContactView();
   }
 
 
@@ -105,6 +109,41 @@ export class OverlayEditContactComponent {
    */
   startEditContactDoneView(): void {
     this.data.selectedMessageIndex = 1;
+    this.data.messageOverlayView = true;
+    this.data.addContactDoneView = true;
+    setTimeout(() => {
+      this.data.addContactDoneView = false;
+      this.data.messageOverlayView = false;
+    }, 2600);
+  }
+
+
+  /**
+   * Asynchronously deletes a contact by its ID and updates the UI accordingly.
+   * 
+   * @param {number} id - The ID of the contact to delete.
+   * @param {number} index - The index of the contact in the list.
+   * @returns {Promise<void>} A Promise that resolves when the contact is successfully deleted.
+   */
+  async deleteContact(id: number, index: number): Promise<void> {
+    this.closeEditContactView();
+    const response = await this.auth.deleteContact(id);
+    console.log(response);
+    if (response.error == 'none'){
+      this.data.allContacts.splice(index, 1);
+      this.data.assignedToList.splice(index, 1);
+      this.startDeleteContactDoneView();
+    }
+  }
+
+
+  /**
+   * Initiates the "delete contact done" view with animations and overlays.
+   * 
+   * @returns {void}
+   */
+  startDeleteContactDoneView(): void {
+    this.data.selectedMessageIndex = 2;
     this.data.messageOverlayView = true;
     this.data.addContactDoneView = true;
     setTimeout(() => {

@@ -12,7 +12,7 @@ export class OverlayDetailViewTaskComponent {
   taskCard: Task = new Task();
 
 
-  constructor(private data: DataService, private auth: AuthService) {
+  constructor(public data: DataService, private auth: AuthService) {
     this.taskCard.setTaskCardData(this.data.selectedTask);
   }
 
@@ -23,8 +23,12 @@ export class OverlayDetailViewTaskComponent {
    * @returns {void}
    */
   closeTaskDetailView(): void {
-    this.data.startDetailTaskView = false;
-    this.data.shadowView = false;
+    this.data.slideOut = true;
+      setTimeout(() => {
+        this.data.startDetailTaskView = false;
+        this.data.shadowView = false;
+        this.data.slideOut = false;
+      }, 1100);
   }
 
 

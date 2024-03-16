@@ -48,8 +48,12 @@ export class OverlayAddContactComponent {
    * @returns {void}
    */
   closeAddContactView(): void {
-    this.data.startAddContactView = false;
-    this.data.shadowView = false;
+    this.data.slideOut = true;
+    setTimeout(() => {
+      this.data.startAddContactView = false;
+      this.data.shadowView = false;
+      this.data.slideOut = false;
+    }, 1100);
   }
 
 

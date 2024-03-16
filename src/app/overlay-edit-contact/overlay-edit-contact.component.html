@@ -1,4 +1,4 @@
-<div class="editContactPopup">
+<div class="editContactPopup" [class.slideOut]="data.slideOut">
     <div class="leftContainer">
         <img src="../../assets/img/sidenav/logo.png" alt="">
         <div class="title">
@@ -65,7 +65,7 @@
                         </div>
                     </div>
                     <div class="btnDiv">
-                        <button type="button" class="secondaryBtn">
+                        <button type="button" class="secondaryBtn" (click)="deleteContact(data.allContacts[data.selectedContact].id, data.selectedContact)">
                             Delete
                         </button>
                         <button type="submit" class="primaryBtn" [disabled]="!editContactForm.valid"

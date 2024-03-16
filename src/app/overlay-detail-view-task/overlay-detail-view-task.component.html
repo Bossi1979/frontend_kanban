@@ -1,4 +1,4 @@
-<div class="taskCard">
+<div class="taskCard" [class.slideOut]="data.slideOut">
     <div>
         <p class="category" [style.background-color]="taskCard.category == 'Technical Task' ? '#0038ff' : '#1fd7c1'">
             {{taskCard.category}}

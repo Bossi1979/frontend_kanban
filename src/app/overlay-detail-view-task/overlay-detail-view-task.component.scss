@@ -11,6 +11,7 @@
     box-shadow: 0px 0px 4px 0px #00000029;
     overflow: hidden;
     overflow-y: scroll;
+    animation: slideIn 1000ms forwards;
 
     div {
         display: flex;
@@ -300,4 +301,33 @@
 
 ::-webkit-scrollbar {
     width: 0px;
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(+200vw);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut {
+    0% {
+        opacity: 0;
+        transform: translateX(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(+200vw);
+    }
+}
+
+
+.slideOut{
+    animation: slideOut 1000ms forwards;
 }

@@ -122,8 +122,10 @@ export class AddTaskComponent {
     if (this.data.selectedMenu == 2) {
       await this.data.generateTaskList();
       this.data.tasksFindingsList = this.data.taskList.slice();
+      this.startAddTaskDoneView();
     } else if (this.data.selectedMenu == 3) {
       this.closeAddTaskPopup();
+      this.startAddTaskDoneView();
       await this.data.generateTaskList();
       this.data.tasksFindingsList = this.data.taskList.slice();
     }
@@ -137,8 +139,12 @@ export class AddTaskComponent {
    * @returns {void} This function does not return anything.
    */
   closeAddTaskPopup(): void {
-    this.data.startBoardAddTaskView = false;
-    this.data.shadowView = false;
+    this.data.slideOut = true;
+      setTimeout(() => {
+        this.data.startBoardAddTaskView = false;
+        this.data.shadowView = false;
+        this.data.slideOut = false;
+      }, 1100);
   }
 
 
@@ -230,6 +236,22 @@ export class AddTaskComponent {
   closeAddSubtask(): void {
     this.subtaskService.closeAddSubtask();
     this.subtaskInput.nativeElement.blur();
+  }
+
+
+  /**
+   * Starts the view for adding a task with a done message overlay.
+   * 
+   * @returns {void}
+   */
+  startAddTaskDoneView(): void {
+    this.data.selectedMessageIndex = 3;
+    this.data.messageOverlayView = true;
+    this.data.addContactDoneView = true;
+    setTimeout(() => {
+      this.data.addContactDoneView = false;
+      this.data.messageOverlayView = false;
+    }, 2600);
   }
 }
 
