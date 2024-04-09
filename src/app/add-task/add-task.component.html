@@ -1,4 +1,4 @@
-<div class="addTask">
+<div class="addTask" [class.margin10px]="data.innerWidth <=769 && data.selectedMenu == 2">
     <header *ngIf="!this.data.startBoardAddTaskView">
         <h3>Add Task</h3>
     </header>

@@ -33,6 +33,7 @@ export class JoinHeaderComponent {
       let response = await this.as.logout();
       console.log(response.message);
       if (response.message == 'logout successfully') localStorage.clear();
+      this.data.greetingDone = false;
     } catch (err) {
       alert('logout error');
     }

@@ -255,9 +255,9 @@ export class SummaryComponent {
   async determineTheTimeOfDay(): Promise<void> {
     const actualDate: Date = new Date();
     const actualTimeHours: number = actualDate.getHours();
-    if (actualTimeHours >= 5 && actualTimeHours < 11) this.greeting = 'Good Morning';
-    else if (actualTimeHours >= 11 && actualTimeHours < 18) this.greeting = 'Good afternoon';
-    else if (actualTimeHours >= 18 && actualTimeHours < 22) this.greeting = 'Good evening';
-    else this.greeting = 'Welcome';
+    if (actualTimeHours >= 5 && actualTimeHours < 11) this.greeting = 'Good morning,';
+    else if (actualTimeHours >= 11 && actualTimeHours < 18) this.greeting = 'Good afternoon,';
+    else if (actualTimeHours >= 18 && actualTimeHours < 22) this.greeting = 'Good evening,';
+    else this.greeting = 'Welcome,';
   }
 }

@@ -1,4 +1,4 @@
-<div style="display: flex; flex-direction:row;" [class.hideSideNav]="menuService.slideOutSidebar && data.innerWidth <= 1100" class="sidenavTab">
+<div style="display: flex; flex-direction:row;" [class.hideSideNav]="menuService.slideOutSidebar && data.innerWidth <= 1400" class="sidenavTab">
     <div class="sidenav" >
         <div class="sidenavTop">
             <div class="logo">
@@ -32,7 +32,7 @@
             <span (click)="menuService.selectMenu(6)" [class.isSelected]="data.selectedMenu == 6">Legal Notice</span>
         </footer>
     </div>
-    <div class="tabDiv" *ngIf="data.innerWidth <= 1100">
+    <div class="tabDiv" *ngIf="data.innerWidth <= 1400">
         <div class="tabMenu" (click)="menuService.toggleSideNav()">
             <img src="../../../assets/img/sidenav/logo.png">
         </div>

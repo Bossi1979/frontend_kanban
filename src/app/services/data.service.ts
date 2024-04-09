@@ -36,6 +36,7 @@ export class DataService {
   //overlay
   selectedMessageIndex: number = 1;
   slideOut: boolean = false;
+  greetingDone: boolean = false;
 
   innerWidth: number;
 

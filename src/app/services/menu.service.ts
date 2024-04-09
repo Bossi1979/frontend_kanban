@@ -61,7 +61,7 @@ export class MenuService {
       this.mouseLeave(3);
       this.mouseLeave(4);
     }
-    if(this.data.innerWidth <= 1100){
+    if(this.data.innerWidth <= 1400){
       this.slideOutSidebar= true;
       this.data.shadowView = false;
     }

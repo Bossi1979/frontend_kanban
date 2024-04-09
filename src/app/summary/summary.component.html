@@ -72,9 +72,9 @@
                 </div>
             </div>
         </div>
-        <div class="greeting" *ngIf="data.innerWidth >= 1300">
+        <div class="greeting" *ngIf="data.innerWidth >= 1100">
             <span>{{greeting}}</span>
-            <span>{{data.loggedUserData[0].username}}</span>
+            <span class="name">{{data.loggedUserData[0].username}}</span>
         </div>
     </div>
 </div>

@@ -2,6 +2,9 @@
     <div class="headline">
         <h3>
             Board
+            <span class="material-symbols-outlined addCrossMobile" (click)="openAddTaskPopup()" *ngIf="data.innerWidth <= 900">
+                add
+            </span>
         </h3>
         <div class="subheadline">
             <div class="authInputs">
@@ -11,7 +14,7 @@
                 </div>
             </div>
 
-            <button type="button" class="primaryBtn" style="width: 226px !important;" (click)="openAddTaskPopup()">
+            <button type="button" class="primaryBtn" style="width: 226px !important;" (click)="openAddTaskPopup()" *ngIf="data.innerWidth > 900">
                 Add Task
                 <span class="material-symbols-outlined">
                     add
@@ -31,7 +34,7 @@
                 <div *ngFor="let task of data.taskList; let i=index;">
                     <div class="task" 
                     (click)="clickTaskCard(i)"
-                    draggable="true" 
+                    draggable="true"
                     (dragstart)="startDragging(i)"
                     *ngIf="task.processing_status == 0 && data.tasksFindingsList.includes(task)">
                         <p class="category backgroundA" *ngIf="task.category == 'Technical Task'">{{task.category}}</p>

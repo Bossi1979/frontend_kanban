@@ -28,3 +28,10 @@
       height: calc(100vh - 160px) !important;
   }
 }
+
+
+@media (max-width: 1250px){
+  .padding{
+    justify-content: center;
+  }
+}

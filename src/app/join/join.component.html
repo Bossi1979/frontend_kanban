@@ -14,6 +14,11 @@
     <div class="messageOverlay" *ngIf="data.messageOverlayView">
         <app-overlay-add-contact-done *ngIf="data.addContactDoneView"></app-overlay-add-contact-done>
     </div>
+    <div class="d-none" [class.greetingShadow]="data.innerWidth <= 1100 && data.selectedMenu == 1 && !data.greetingDone">
+        <div class="greeting">
+            <span>{{greetingResponsiv}}</span>
+            <span class="name">{{data.loggedUserData[0].username}}</span>
+        </div>
+    </div>
     <app-mobil-bottom-menu *ngIf="data.innerWidth <= 769"></app-mobil-bottom-menu>
 </div>
-
