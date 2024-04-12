@@ -89,4 +89,9 @@ export class ContactsComponent {
       this.data.messageOverlayView = false;
     }, 2600);
   }
+
+  backToListView(): void {
+    this.data.selectedContact = -1;
+    console.log(this.data.selectedContact);
+  }
 }

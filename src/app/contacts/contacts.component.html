@@ -1,36 +1,54 @@
-<div class="contactsList">
-    <div *ngFor="let contact of data.allContacts; let i = index;">
-        <div class="contactBox sticky" *ngIf="i == 0">
-            <button class="addContactBtn" (click)="startShadowView()">
-                Add new contact
-                <span class="material-symbols-outlined">
-                    person_add
-                </span>
-            </button>
-        </div>
-        <div class="contactBox" *ngIf="i == 0 || (data.allContacts[i].name_abbreviation[1] != data.allContacts[i - 1].name_abbreviation[1])" [class.topMargin]="i == 0">
-            <div class="contactItem">
-                <p class="alphabet">{{contact.name_abbreviation[1]}}</p>
-            </div>
-        </div>
-        <div class="contactBox">
-            <div class="contactItem" (click)="selectContact(i)" [class.hover]="data.selectedContact != i" [class.selected]="data.selectedContact == i">
-                <div class="bageItem" [style.background-color]="contact.background_color">
-                    <span >{{contact.name_abbreviation}}</span>
-                </div>
-                <div class="contactData">
-                    <p class="username" [class.nameSelected]="data.selectedContact == i">{{contact.firstname}} {{contact.lastname}}</p>
-                    <p href="" class="email">{{contact.email}}</p>
-                </div>   
-            </div>
-        </div>
+<div class="contactsList" [class.width100Percent]="data.innerWidth <= 769 && data.selectedContact == -1" *ngIf="(data.innerWidth <= 769 && data.selectedContact == -1) || data.innerWidth > 769">
+
+    <div class="addContact" *ngIf="data.innerWidth > 769">
+        <button class="addContactBtn" (click)="startShadowView()">
+            Add new contact
+            <span class="material-symbols-outlined">
+                person_add
+            </span>
+        </button>
     </div>
+
+    <div style="overflow-y: scroll;">
+        <div *ngFor="let contact of data.allContacts; let i = index;">
+            <div class="contactBox" *ngIf="i == 0 || (data.allContacts[i].name_abbreviation[1] != data.allContacts[i - 1].name_abbreviation[1])">
+                <div class="contactItem">
+                    <p class="alphabet">{{contact.name_abbreviation[1]}}</p>
+                </div>
+            </div>
+            <div class="contactBox">
+                <div class="contactItem" (click)="selectContact(i)" [class.hover]="data.selectedContact != i" [class.selected]="data.selectedContact == i">
+                    <div class="bageItem" [style.background-color]="contact.background_color">
+                        <span >{{contact.name_abbreviation}}</span>
+                    </div>
+                    <div class="contactData">
+                        <div style="display: flex; flex-wrap: wrap;">
+                            <p class="username" [class.nameSelected]="data.selectedContact == i" style="margin-right: 8px;">{{contact.firstname}}</p>
+                            <p class="username" [class.nameSelected]="data.selectedContact == i">{{contact.lastname}}</p>
+                        </div>
+                        
+                        <p href="" class="email">{{contact.email}}</p>
+                    </div>   
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
 </div>
-<div class="detailView">
+
+<div class="detailView" *ngIf="data.innerWidth > 769 || (data.innerWidth <= 769 && data.selectedContact != -1)" [class.width100Percent]="data.innerWidth <= 769 && data.selectedContact != -1">
     <header>
-        <h3>Contacts</h3>
+        <div [class.width100Percent]="data.innerWidth <= 769">
+            <h3>Contacts </h3>
+            <span class="material-symbols-outlined" *ngIf="data.innerWidth <= 769" (click)="backToListView()">
+                arrow_left_alt
+            </span>
+
+        </div>
+        
         <div class="divider"></div>
-        <span>Better with a team</span>
+        <span class="subtitle">Better with a team</span>
     </header>
     <div class="contactDetails" *ngIf="data.selectedContact != -1">
         <div class="headline">
