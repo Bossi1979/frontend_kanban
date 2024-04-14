@@ -1,4 +1,10 @@
 <div class="contactsList" [class.width100Percent]="data.innerWidth <= 769 && data.selectedContact == -1" *ngIf="(data.innerWidth <= 769 && data.selectedContact == -1) || data.innerWidth > 769">
+    <div class="addIcon" *ngIf="data.innerWidth <=769" (click)="startShadowView()">
+        <span class="material-symbols-outlined">
+            person_add
+        </span>
+    </div>
+
 
     <div class="addContact" *ngIf="data.innerWidth > 769">
         <button class="addContactBtn" (click)="startShadowView()">
@@ -9,7 +15,7 @@
         </button>
     </div>
 
-    <div style="overflow-y: scroll;">
+    <div style="overflow-y: scroll; margin-bottom: 96px;" [style.margin-bottom]="data.innerWidth <=769 ? '78px' : '0px'">
         <div *ngFor="let contact of data.allContacts; let i = index;">
             <div class="contactBox" *ngIf="i == 0 || (data.allContacts[i].name_abbreviation[1] != data.allContacts[i - 1].name_abbreviation[1])">
                 <div class="contactItem">
