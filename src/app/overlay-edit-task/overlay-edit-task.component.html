@@ -1,4 +1,5 @@
 <form class="taskCard" [formGroup]="editForm" [class.slideOut]="data.slideOut">
+    
     <div class="closeLine">
         <div class="closeDiv" (click)="closeTaskEditView()">
             <span class="material-symbols-outlined closeIcon">
@@ -6,6 +7,7 @@
             </span>
         </div>
     </div>
+
     <div class="formField">
         <span class="head">Title</span>
         <div class="formInputs">
@@ -140,6 +142,8 @@
 
         </div>
     </div>
+
+
     <div>
         <button type="button" [class.primaryBtn]="editForm.valid" [class.disabledBtn]="!editForm.valid"
             (click)="saveTaskChanges()">
