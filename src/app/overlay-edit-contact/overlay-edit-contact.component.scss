@@ -170,3 +170,122 @@
 .slideOut{
     animation: slideOut 1000ms forwards;
 }
+
+
+@media (max-width: 1360px) {
+    .editContactPopup {
+        position: absolute;
+        top: calc(50vh - 387px);
+        left: 75px;
+        width: calc(100% - 150px);
+        height: unset;
+        flex-direction: column;
+
+        .leftContainer {
+            width: 100%;
+            border-radius: 30px 30px 0px 0px;
+            padding: 66px 24px;
+
+            .closeDiv {
+                display: flex;
+                justify-content: flex-end;
+                margin-top: -40px;
+    
+                .closeIcon {
+                    font-size: 32px;
+                    color: white;
+    
+                    &:hover {
+                        cursor: pointer;
+                        color: #29abe2;
+                        transition: color 100ms ease-in-out;
+                    }
+                }
+            }
+        }
+
+        .rightContainer {
+            width: 100%;
+            border-radius: 0px 0px 30px 30px;
+            padding: 66px 24px;
+
+            .closeDiv {
+                display: none;
+            }
+
+            .content {
+                flex-direction: column;
+
+                .contentLeft {
+                    height: unset;
+                    margin-top: -132.5px;
+                    margin-bottom: 45px;
+                    width: 100%;
+                }
+                .contentRight {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 769px) {
+    .editContactPopup {
+        width: calc(100% - 20px);
+        max-width: 396px;
+        position: unset;
+        margin-left: 10px;
+        margin-right: 10px;
+
+        .leftContainer {
+            .title {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+
+                h3 {
+                    font-size: 47px;
+                    font-weight: 700;
+                    line-height: 56.4px;
+                }
+
+                p {
+                    font-size: 20px;
+                    line-height: 24px;
+                }
+            }
+        }
+
+        .rightContainer {
+            .content{
+                form{ 
+                    gap: 20px !important;
+                }
+            }
+        }
+    }
+
+    .btnDiv {
+        justify-content: center;
+    }
+
+    .disabledBtn {
+        padding: 18px 10px;
+    }
+
+    .primaryBtn {
+        padding: 18px 10px;
+    }
+
+    .warnContainer{
+        width: 100%;
+        left: 0px;
+    } 
+}
+
+@media (max-width: 404px) {
+    .warnContainer{
+        font-size: 13px;
+    }
+}

@@ -1,6 +1,11 @@
 <div class="editContactPopup" [class.slideOut]="data.slideOut">
     <div class="leftContainer">
-        <img src="../../assets/img/sidenav/logo.png" alt="">
+        <div class="closeDiv"  *ngIf="data.innerWidth <= 1360">
+            <span  class="material-symbols-outlined closeIcon" (click)="closeEditContactView()">
+                close
+            </span>
+        </div>
+        <img src="../../assets/img/sidenav/logo.png" alt="" *ngIf="data.innerWidth > 1360">
         <div class="title">
             <h3>Edit Contact</h3>
         </div>
