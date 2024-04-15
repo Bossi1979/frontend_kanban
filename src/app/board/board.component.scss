@@ -70,6 +70,7 @@
             width: 25%;
             height: 100%;
             max-width: 255px;
+            position: relative;
 
             header {
                 display: flex;
@@ -284,6 +285,48 @@
 //     width: 0px;
 // }
 
+.scrollButtonLeft {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    left: 0px;
+    bottom: 24px;
+    background-color: #29abe2;
+    font-size: 20px !important;
+    color: white;
+    border-radius: 100%;
+    cursor: pointer;
+
+    .icon {
+        font-size: 20px;
+        color: white;
+    }
+}
+
+.scrollButtonRight {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    right: 0px;
+    bottom: 24px;
+    background-color: #29abe2;
+    font-size: 20px !important;
+    color: white;
+    border-radius: 100%;
+    cursor: pointer;
+
+    .icon {
+        font-size: 20px;
+        color: white;
+    }
+}
+
 @media (max-width: 1200px) {
     .boardContent {
         padding: 0px 75px 20px 75px !important;
@@ -303,8 +346,9 @@
     }
 
     .task {
-        max-width: 255px !important;
+        width: 200px !important;
         margin-right: 20px !important;
+        margin-bottom: unset !important;
         height: 213px !important;
         width: 100%;
         cursor: grab;

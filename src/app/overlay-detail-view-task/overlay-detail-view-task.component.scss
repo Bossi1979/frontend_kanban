@@ -63,7 +63,10 @@
         overflow: hidden;
         overflow-y: scroll;
         margin-bottom: 48px;
-        cursor: all-scroll;
+        cursor: pointer;
+        background-color: #F6F7F8;
+        padding: 5px;
+        box-sizing: border-box;
 
         .title {
             font-family: Inter;
@@ -209,6 +212,7 @@
             flex-direction: column;
             align-items: flex-start;
             gap: 8px;
+            background-color: #F6F7F8;
 
             h6 {
                 font-family: Inter;

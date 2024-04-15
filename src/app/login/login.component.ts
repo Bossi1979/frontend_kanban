@@ -112,4 +112,11 @@ export class LoginComponent {
   resetWarning(): void {
     this.loginFailed = false;
   }
+
+
+  // GuestLogin: guest@guest.de, Guest+Login-0815, Max Mustermann
+  guestLogin(): void {
+    this.loginForm.value.email = 'guest@guest.de';
+    this.loginForm.value.password = 'Guest+Login-0815';
+  }
 }

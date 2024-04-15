@@ -59,7 +59,7 @@
             </div>
             <div class="btnDiv">
                 <button [disabled]="!loginForm.valid" [class.disabledBtn]="!loginForm.valid" [class.primaryBtn]="loginForm.valid">Log in</button>
-                <button class="secondaryBtn">Guest Log in</button>
+                <button class="secondaryBtn" (click)="guestLogin()">Guest Log in</button>
             </div>
     
         </form>
