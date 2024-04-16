@@ -116,3 +116,14 @@
 ::-webkit-scrollbar {
     width: 0px;
 }
+
+@media (max-width: 769px) {
+    .doc{
+        padding: 110px 20px 0px 20px;
+    }
+
+    .icon{
+        top: 100px !important;
+        right: 20px !important;
+    }
+}

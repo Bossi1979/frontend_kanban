@@ -281,10 +281,6 @@
     }
 }
 
-// ::-webkit-scrollbar {
-//     width: 0px;
-// }
-
 .scrollButtonLeft {
     display: flex;
     justify-content: center;
@@ -294,7 +290,6 @@
     position: absolute;
     left: 0px;
     bottom: 24px;
-    // background-color: #29abe2;
     background-color: rgba(41, 171, 226, 0.5);
     font-size: 20px !important;
     color: white;
@@ -316,7 +311,6 @@
     position: absolute;
     right: 0px;
     bottom: 24px;
-    // background-color: #29abe2;
     background-color: rgba(41, 171, 226, 0.5);
     font-size: 20px !important;
     color: white;

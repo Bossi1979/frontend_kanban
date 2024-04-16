@@ -31,14 +31,11 @@
                 </span>
             </header>
             <div class="tasksList" (drop)="drop(0)" (dragover)="allowDrop($event); enableHigligthedDopArea(0)" (dragleave)="disableHighligthedDopArea()" [style.background-color]="highligtedProcessingIndex == 0 ? 'rgba(0, 0, 0, 0.1)' : 'unset'">
-
                 <div class="scrollButtonLeft" (click)="scroll.scrollLeft('toDoTasks', 0)" *ngIf="data.innerWidth <=1200 && scroll.toDoCounter != 0">
                     <span class="material-symbols-outlined icon" >
                         arrow_back_ios
                     </span>
                 </div>
-                
-
                 <div *ngFor="let task of data.taskList; let i=index;">
                     <div class="task toDoTasks" id="toDoTask{{i}}"
                     (click)="clickTaskCard(i)"
@@ -85,7 +82,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="scrollButtonRight" *ngIf="data.innerWidth <=1200 && data.counterToDo() -1 > scroll.toDoCounter && (scroll.maxVisualTasksInLine() < data.counterToDo())">
                     <span class="material-symbols-outlined icon" (click)="scroll.scrollRight('toDoTasks', 0)">
                         arrow_forward_ios
@@ -103,13 +99,11 @@
                 </span>
             </header>
             <div class="tasksList" (drop)="drop(1)" (dragover)="allowDrop($event); enableHigligthedDopArea(1)" (dragleave)="disableHighligthedDopArea()" [style.background-color]="highligtedProcessingIndex == 1 ? 'rgba(0, 0, 0, 0.1)' : 'unset'">
-                
                 <div class="scrollButtonLeft" (click)="scroll.scrollLeft('progressID', 1)" *ngIf="data.innerWidth <=1200 && scroll.progressCounter != 0">
                     <span class="material-symbols-outlined icon" >
                         arrow_back_ios
                     </span>
                 </div>
-
                 <div *ngFor="let task of data.taskList; let i=index;">
                     <div class="task progressID"  id="progress{{i}}"
                     (click)="clickTaskCard(i)" 
@@ -179,7 +173,6 @@
                         arrow_back_ios
                     </span>
                 </div>
-                
                 <div *ngFor="let task of data.taskList; let i=index;">
                     <div class="task feedback" id="feedback{{i}}"
                     (click)="clickTaskCard(i)"
@@ -232,7 +225,6 @@
                         arrow_forward_ios
                     </span>
                 </div>
-
             </div>
         </div>
         <div class="tasksContainer">
@@ -243,13 +235,11 @@
                 </span>
             </header>
             <div class="tasksList" (drop)="drop(3)" (dragover)="allowDrop($event); enableHigligthedDopArea(3)" (dragleave)="disableHighligthedDopArea()" [style.background-color]="highligtedProcessingIndex == 3 ? 'rgba(0, 0, 0, 0.1)' : 'unset'">
-                
                 <div class="scrollButtonLeft" (click)="scroll.scrollLeft('done', 3)" *ngIf="data.innerWidth <=1200 && scroll.doneCounter != 0">
                     <span class="material-symbols-outlined icon" >
                         arrow_back_ios
                     </span>
                 </div>
-
                 <div *ngFor="let task of data.taskList; let i=index;">
                     <div class="task done" id="done{{i}}"
                     (click)="clickTaskCard(i)"
@@ -297,7 +287,6 @@
                     </div>
                 
                 </div>
-
                 <div class="scrollButtonRight" (click)="scroll.scrollRight('done', 3)" *ngIf="data.innerWidth <=1200 && (data.counterDone() -1 > scroll.doneCounter) && (scroll.maxVisualTasksInLine() < data.counterDone())">
                     <span class="material-symbols-outlined icon" (click)="scroll.scrollRight('done', 3)">
                         arrow_forward_ios

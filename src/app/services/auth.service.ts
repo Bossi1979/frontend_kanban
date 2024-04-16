@@ -16,6 +16,13 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
 
+  /**
+   * Logs in with email and password.
+   * @param email The user's email address.
+   * @param password The user's password.
+   * 
+   * @returns A Promise that resolves with the login response.
+   */
   public async loginWithEmailAndPassword(email: string, password: string): Promise<any> {
     const url = environment.baseUrl + "/login/";
     const body = {
@@ -61,6 +68,11 @@ export class AuthService {
   }
 
 
+  /**
+   * Retrieves all tasks.
+   * 
+   * @returns A Promise that resolves with the response containing all tasks.
+   */
   public async getAllTasks(): Promise<any> {
     const url = environment.baseUrl + "/add_task/";
     return lastValueFrom(this.http.get(url));
@@ -117,6 +129,12 @@ export class AuthService {
   }
 
 
+  /**
+   * Updates a task.
+   * 
+   * @param task The task object to update.
+   * @returns A Promise that resolves with the response of the update operation.
+   */
   public async updateTask(task: Task): Promise<any> {
     const url = environment.baseUrl + "/add_task/";
     const body = task.createTaskObject();
@@ -124,11 +142,14 @@ export class AuthService {
   }
 
 
+  /**
+   * Deletes a task by ID.
+   * 
+   * @param taskId The ID of the task to delete.
+   * @returns A Promise that resolves with the response of the delete operation.
+   */
   public async deleteTask(taskId: number): Promise<any> {
     const url = `${environment.baseUrl}/add_task/${taskId}`;
     return lastValueFrom(this.http.delete(url));
   }
-
-
-
 }

@@ -76,12 +76,8 @@ export class MenuService {
    * @returns {Promise<void>}
    */
   async loadData(menuNo: number): Promise<void> {
-    if (menuNo == 2 && this.data.allContacts.length != this.data.assignedToList.length) {
-      await this.data.generatedAssignedList();
-    }
-    if (menuNo == 3 && this.data.taskList.length == 0) {
-      await this.data.generateTaskList();
-    }
+    if (menuNo == 2 && this.data.allContacts.length != this.data.assignedToList.length) await this.data.generatedAssignedList();
+    if (menuNo == 3 && this.data.taskList.length == 0) await this.data.generateTaskList();
   }
 
 
@@ -96,12 +92,14 @@ export class MenuService {
   }
 
 
+  /**
+   * Toggles the visibility of the side navigation bar and updates the shadow view accordingly.
+   * 
+   * @returns {void}
+   */
   toggleSideNav(): void{
     this.slideOutSidebar=!this.slideOutSidebar;
-    if(this.slideOutSidebar){
-      this.data.shadowView = false;
-    } else {
-      this.data.shadowView = true;
-    }
+    if(this.slideOutSidebar) this.data.shadowView = false;
+    else this.data.shadowView = true;
   }
 }
