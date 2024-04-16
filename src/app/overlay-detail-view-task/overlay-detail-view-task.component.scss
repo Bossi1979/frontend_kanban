@@ -63,8 +63,7 @@
         overflow: hidden;
         overflow-y: scroll;
         margin-bottom: 48px;
-        cursor: pointer;
-        background-color: #F6F7F8;
+        background-color: #f6f7f8;
         padding: 5px;
         box-sizing: border-box;
 
@@ -212,7 +211,7 @@
             flex-direction: column;
             align-items: flex-start;
             gap: 8px;
-            background-color: #F6F7F8;
+            background-color: #f6f7f8;
 
             h6 {
                 font-family: Inter;
@@ -257,110 +256,78 @@
                 }
             }
         }
-
-        // .options {
-        //     display: flex;
-        //     justify-content: flex-end;
-        //     width: 100%;
-        //     gap: 16px;
-
-        //     .btnEdit {
-        //         display: flex;
-        //         gap: 8px;
-        //         color: #2a3647;
-        //         width: fit-content;
-
-        //         &:hover {
-        //             color: #29abe2 !important;
-        //             transition: color 100ms ease-in-out;
-        //             cursor: pointer;
-        //         }
-
-        //         .icon {
-        //         }
-
-        //         p {
-        //             font-family: Inter;
-        //             font-size: 16px;
-        //             font-weight: 400;
-        //             line-height: 19px;
-        //             letter-spacing: 0em;
-        //             text-align: left;
-        //             margin-block-start: 0px;
-        //             margin-block-end: 0px;
-        //         }
-        //     }
-
-        //     .btnDelete {
-        //         display: flex;
-        //         gap: 8px;
-        //         color: #2a3647;
-        //         width: fit-content;
-
-        //         &:hover {
-        //             color: #29abe2 !important;
-        //             transition: color 100ms ease-in-out;
-        //             cursor: pointer;
-        //         }
-
-        //         p {
-        //             font-family: Inter;
-        //             font-size: 16px;
-        //             font-weight: 400;
-        //             line-height: 19px;
-        //             letter-spacing: 0em;
-        //             text-align: left;
-        //             margin-block-start: 0px;
-        //             margin-block-end: 0px;
-        //         }
-
-        //         .icon {
-        //         }
-        //     }
-        // }
     }
 
     .options {
         display: flex;
-        justify-content: flex-end;
-        width: 100%;
+        justify-content: space-between;
+        width: calc(100% - 80px);
         position: fixed;
         bottom: 48px;
         right: 40px;
         gap: 16px;
 
-        .btnEdit {
+        div {
             display: flex;
-            gap: 8px;
-            color: #2a3647;
-            width: fit-content;
+            gap: 16px;
+            .btnEdit {
+                display: flex;
+                gap: 8px;
+                color: #2a3647;
+                width: fit-content;
 
-            &:hover {
-                color: #29abe2 !important;
-                transition: color 100ms ease-in-out;
-                cursor: pointer;
+                &:hover {
+                    color: #29abe2 !important;
+                    transition: color 100ms ease-in-out;
+                    cursor: pointer;
+                }
+
+                .icon {
+                }
+
+                p {
+                    font-family: Inter;
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: 19px;
+                    letter-spacing: 0em;
+                    text-align: left;
+                    margin-block-start: 0px;
+                    margin-block-end: 0px;
+                }
             }
 
-            .icon {
-            }
+            .btnDelete {
+                display: flex;
+                gap: 8px;
+                color: #2a3647;
+                width: fit-content;
 
-            p {
-                font-family: Inter;
-                font-size: 16px;
-                font-weight: 400;
-                line-height: 19px;
-                letter-spacing: 0em;
-                text-align: left;
-                margin-block-start: 0px;
-                margin-block-end: 0px;
+                &:hover {
+                    color: #29abe2 !important;
+                    transition: color 100ms ease-in-out;
+                    cursor: pointer;
+                }
+
+                p {
+                    font-family: Inter;
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: 19px;
+                    letter-spacing: 0em;
+                    text-align: left;
+                    margin-block-start: 0px;
+                    margin-block-end: 0px;
+                }
+
+                .icon {
+                }
             }
         }
 
-        .btnDelete {
+        .moveMenuOuter {
             display: flex;
-            gap: 8px;
-            color: #2a3647;
-            width: fit-content;
+            position: relative;
 
             &:hover {
                 color: #29abe2 !important;
@@ -368,18 +335,36 @@
                 cursor: pointer;
             }
 
-            p {
-                font-family: Inter;
-                font-size: 16px;
-                font-weight: 400;
-                line-height: 19px;
-                letter-spacing: 0em;
-                text-align: left;
-                margin-block-start: 0px;
-                margin-block-end: 0px;
-            }
+            .moveMenu {
+                display: flex;
+                flex-direction: column;
+                width: 250px;
+                position: absolute;
+                top: -157px;
+                left: 20px;
+                background-color: #2a3647;
+                border-radius: 20px 20px 20px 0px;
+                padding: 10px;
+                box-sizing: border-box;
+                
+                span {
+                    width: 100%;
+                    padding: 8px 16px 8px 16px;
+                    box-sizing: border-box;
+                    font-family: Inter;
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: 19px;
+                    letter-spacing: 0em;
+                    text-align: left;
+                    color: #cdcdcd;
 
-            .icon {
+                    &:hover {
+                        cursor: pointer;
+                        transition: color 100ms ease-in-out;
+                        color: #29abe2;
+                    }
+                }
             }
         }
     }
@@ -417,22 +402,20 @@
     animation: slideOut 1000ms forwards;
 }
 
-
-@media(max-width: 565px) {
-    .taskCard{
+@media (max-width: 565px) {
+    .taskCard {
         min-width: 300px;
         margin: 0px 20px;
         padding: 28px 20px 28px 20px;
 
         .options {
             display: flex;
-            justify-content: flex-end;
-            width: 100%;
+            justify-content: space-between;
+            width: calc(100% - 40px);
             position: fixed;
             bottom: 28px;
             right: 20px;
             gap: 16px;
         }
     }
-
 }

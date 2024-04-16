@@ -1,4 +1,4 @@
-import { Injectable, HostListener } from '@angular/core';
+import { Injectable, HostListener, } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Task } from '../models/task.model';
 
@@ -42,14 +42,14 @@ export class DataService {
 
 
   constructor(
-    private as: AuthService
+    private as: AuthService,
   ) {
     if (localStorage.getItem('userData')) {
       this.loggedUserData = JSON.parse(localStorage.getItem('userData'));
       this.loadDatas();
     }
   }
-
+  
 
   async loadDatas() {
     await this.getContacts();
@@ -113,7 +113,7 @@ export class DataService {
 
 
   // Für Summary und Board
-  
+
   /**
    * Counts the number of tasks that are still to be done.
    * 

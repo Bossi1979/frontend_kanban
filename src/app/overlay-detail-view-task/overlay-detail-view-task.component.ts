@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { Task } from '../models/task.model';
 import { AuthService } from '../services/auth.service';
+import { MenuService } from '../services/menu.service';
 
 @Component({
   selector: 'app-overlay-detail-view-task',
@@ -10,9 +11,10 @@ import { AuthService } from '../services/auth.service';
 })
 export class OverlayDetailViewTaskComponent {
   taskCard: Task = new Task();
+  moveOptionMenuVisual: boolean = false;
 
 
-  constructor(public data: DataService, private auth: AuthService) {
+  constructor(public data: DataService, private auth: AuthService, private menuService: MenuService) {
     this.taskCard.setTaskCardData(this.data.selectedTask);
   }
 
@@ -79,8 +81,55 @@ export class OverlayDetailViewTaskComponent {
   }
 
 
+  /**
+   * Initiates the process of deleting the "Done" view.
+   * 
+   * @returns {void}
+   */
   startDeleteDoneView(): void {
     this.data.selectedMessageIndex = 5;
+    this.data.messageOverlayView = true;
+    this.data.addContactDoneView = true;
+    setTimeout(() => {
+      this.data.addContactDoneView = false;
+      this.data.messageOverlayView = false;
+    }, 2600);
+  }
+
+
+  /**
+   * Toggles the visibility of the move option menu.
+   * 
+   * @returns {void}
+   */
+  toggleMoveOptionMenu(): void{
+    this.moveOptionMenuVisual =!this.moveOptionMenuVisual;
+  }
+
+
+  /**
+   * Changes the processing status of the task.
+   * 
+   * @param processingStatus The new processing status to set.
+   * @returns A Promise that resolves when the processing status is updated.
+   */
+  async changeProcessingStatus(processingStatus: number): Promise<void> {
+    this.taskCard.processingStatus = processingStatus;
+    this.data.taskList[this.data.selectedTaskIndex].processing_status = processingStatus;
+    let response = await this.auth.updateTask(this.taskCard);
+    this.moveOptionMenuVisual = false;
+    this.closeTaskDetailView();
+    this.startEditDoneView();
+  }
+
+
+  /**
+   * Starts the view for adding a task with a done message overlay.
+   * 
+   * @returns {void}
+   */
+  startEditDoneView(): void {
+    this.data.selectedMessageIndex = 4;
     this.data.messageOverlayView = true;
     this.data.addContactDoneView = true;
     setTimeout(() => {

@@ -52,7 +52,7 @@ import { MobilBottomMenuComponent } from './mobil-bottom-menu/mobil-bottom-menu.
     PrivacyDocumentComponent,
     LegalDocumentComponent,
     OverlayAddTaskComponent,
-    MobilBottomMenuComponent
+    MobilBottomMenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +60,7 @@ import { MobilBottomMenuComponent } from './mobil-bottom-menu/mobil-bottom-menu.
     FormsModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
     {

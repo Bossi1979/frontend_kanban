@@ -4,6 +4,7 @@ import { Task } from '../models/task.model';
 import { AuthService } from '../services/auth.service';
 import { ScrollService } from '../services/scroll.service';
 
+
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -22,7 +23,7 @@ export class BoardComponent {
   constructor(
     public data: DataService,
     private auth: AuthService,
-    public scroll: ScrollService
+    public scroll: ScrollService,
   ) {
     this.data.tasksFindingsList = this.data.taskList.slice();
   }
