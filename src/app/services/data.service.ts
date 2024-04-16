@@ -109,4 +109,64 @@ export class DataService {
     const response: any = await this.as.getAllTasks();
     this.taskList = response;
   }
+
+
+
+  // Für Summary und Board
+  
+  /**
+   * Counts the number of tasks that are still to be done.
+   * 
+   * @returns {number} The number of tasks that are still to be done.
+   */
+  counterToDo(): number {
+    let counter = 0;
+    this.taskList.forEach(task => {
+      if (task.processing_status === 0) counter++;
+    });
+    return counter;
+  }
+
+
+  /**
+   * Counts the number of tasks that are done.
+   * 
+   * @returns {number} The number of tasks that are done.
+   */
+  counterDone(): number {
+    let counter: number = 0;
+    this.taskList.forEach(task => {
+      if (task.processing_status === 3) counter++;
+    });
+    return counter;
+  }
+
+
+
+  /**
+   * Counts the number of tasks that are in progress.
+   * 
+   * @returns {number} The number of tasks that are in progress.
+   */
+  countertaskInProgress(): number {
+    let counter: number = 0;
+    this.taskList.forEach(task => {
+      if (task.processing_status === 1) counter++;
+    });
+    return counter;
+  }
+
+
+  /**
+   * Counts the number of tasks awaiting feedback.
+   * 
+   * @returns {number} The number of tasks awaiting feedback.
+   */
+  countertaskAwaitingFeedback(): number {
+    let counter: number = 0;
+    this.taskList.forEach(task => {
+      if (task.processing_status === 2) counter++;
+    });
+    return counter;
+  }
 }

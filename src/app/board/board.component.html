@@ -32,7 +32,7 @@
             </header>
             <div class="tasksList" (drop)="drop(0)" (dragover)="allowDrop($event); enableHigligthedDopArea(0)" (dragleave)="disableHighligthedDopArea()" [style.background-color]="highligtedProcessingIndex == 0 ? 'rgba(0, 0, 0, 0.1)' : 'unset'">
 
-                <div class="scrollButtonLeft" (click)="scrollLeft('toDoTasks', 0)">
+                <div class="scrollButtonLeft" (click)="scroll.scrollLeft('toDoTasks', 0)" *ngIf="data.innerWidth <=1200 && scroll.toDoCounter != 0">
                     <span class="material-symbols-outlined icon" >
                         arrow_back_ios
                     </span>
@@ -86,8 +86,8 @@
                     </div>
                 </div>
 
-                <div class="scrollButtonRight">
-                    <span class="material-symbols-outlined icon" (click)="scrollRight('toDoTasks', 0)">
+                <div class="scrollButtonRight" *ngIf="data.innerWidth <=1200 && data.counterToDo() -1 > scroll.toDoCounter && (scroll.maxVisualTasksInLine() < data.counterToDo())">
+                    <span class="material-symbols-outlined icon" (click)="scroll.scrollRight('toDoTasks', 0)">
                         arrow_forward_ios
                     </span>
                 </div>
@@ -104,7 +104,7 @@
             </header>
             <div class="tasksList" (drop)="drop(1)" (dragover)="allowDrop($event); enableHigligthedDopArea(1)" (dragleave)="disableHighligthedDopArea()" [style.background-color]="highligtedProcessingIndex == 1 ? 'rgba(0, 0, 0, 0.1)' : 'unset'">
                 
-                <div class="scrollButtonLeft" (click)="scrollLeft('progressID', 1)">
+                <div class="scrollButtonLeft" (click)="scroll.scrollLeft('progressID', 1)" *ngIf="data.innerWidth <=1200 && scroll.progressCounter != 0">
                     <span class="material-symbols-outlined icon" >
                         arrow_back_ios
                     </span>
@@ -157,7 +157,7 @@
                     </div>
                 </div>
 
-                <div class="scrollButtonRight" (click)="scrollRight('progressID', 1)">
+                <div class="scrollButtonRight" (click)="scroll.scrollRight('progressID', 1)" *ngIf="data.innerWidth <=1200 && (data.countertaskInProgress() -1 > scroll.progressCounter) && (scroll.maxVisualTasksInLine() < data.countertaskInProgress())">
                     <span class="material-symbols-outlined icon">
                         arrow_forward_ios
                     </span>
@@ -174,7 +174,7 @@
             </header>
             <div class="tasksList" (drop)="drop(2)" (dragover)="allowDrop($event); enableHigligthedDopArea(2)" (dragleave)="disableHighligthedDopArea()" [style.background-color]="highligtedProcessingIndex == 2 ? 'rgba(0, 0, 0, 0.1)' : 'unset'">
                 
-                <div class="scrollButtonLeft" (click)="scrollLeft('feedback', 2)">
+                <div class="scrollButtonLeft" (click)="scroll.scrollLeft('feedback', 2)" *ngIf="data.innerWidth <=1200 && scroll.feedbackCounter != 0">
                     <span class="material-symbols-outlined icon" >
                         arrow_back_ios
                     </span>
@@ -227,7 +227,7 @@
                     </div>
                 </div>
 
-                <div class="scrollButtonRight" (click)="scrollRight('feedback', 2)">
+                <div class="scrollButtonRight" (click)="scroll.scrollRight('feedback', 2)" *ngIf="data.innerWidth <=1200 && (data.countertaskAwaitingFeedback() -1 > scroll.feedbackCounter) && (scroll.maxVisualTasksInLine() < data.countertaskAwaitingFeedback())">
                     <span class="material-symbols-outlined icon">
                         arrow_forward_ios
                     </span>
@@ -244,7 +244,7 @@
             </header>
             <div class="tasksList" (drop)="drop(3)" (dragover)="allowDrop($event); enableHigligthedDopArea(3)" (dragleave)="disableHighligthedDopArea()" [style.background-color]="highligtedProcessingIndex == 3 ? 'rgba(0, 0, 0, 0.1)' : 'unset'">
                 
-                <div class="scrollButtonLeft" (click)="scrollLeft('done', 3)">
+                <div class="scrollButtonLeft" (click)="scroll.scrollLeft('done', 3)" *ngIf="data.innerWidth <=1200 && scroll.doneCounter != 0">
                     <span class="material-symbols-outlined icon" >
                         arrow_back_ios
                     </span>
@@ -298,12 +298,11 @@
                 
                 </div>
 
-                <div class="scrollButtonRight" (click)="scrollRight('done', 3)">
-                    <span class="material-symbols-outlined icon" (click)="scrollRight('done', 3)">
+                <div class="scrollButtonRight" (click)="scroll.scrollRight('done', 3)" *ngIf="data.innerWidth <=1200 && (data.counterDone() -1 > scroll.doneCounter) && (scroll.maxVisualTasksInLine() < data.counterDone())">
+                    <span class="material-symbols-outlined icon" (click)="scroll.scrollRight('done', 3)">
                         arrow_forward_ios
                     </span>
                 </div>
-
             </div>
         </div>
     </div>
