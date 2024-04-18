@@ -1,4 +1,6 @@
-<div class="signupPage">
+<app-privacy-document *ngIf="data.signupPrivacy"></app-privacy-document>
+<app-legal-document *ngIf="data.signupLegal"></app-legal-document>
+<div class="signupPage" *ngIf="!data.signupPrivacy && !data.signupLegal">
     <header>
         <img src="../../assets/img/login/join_logo.png" alt="">
     </header>
@@ -60,7 +62,7 @@
                     </div>
                 </div>
                 <div class="remember">
-                    <input type="checkbox" formControlName="agreeTerms"> <span>I accept the</span><span class="link">Privacy policy</span>
+                    <input type="checkbox" formControlName="agreeTerms"> <span>I accept the</span><span class="link" (click)="openPrivacy()">Privacy policy</span>
                 </div>
             </div>
         </div>
@@ -69,7 +71,7 @@
         </div>
     </form>
     <footer>
-        <span>Privacy Policy</span>
-        <span>Legal Notice</span>
+        <span (click)="openPrivacy()">Privacy Policy</span>
+        <span (click)="openLegal()">Legal Notice</span>
     </footer>
 </div>

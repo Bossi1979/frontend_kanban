@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuService } from '../services/menu.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-legal-document',
@@ -8,7 +9,10 @@ import { MenuService } from '../services/menu.service';
 })
 export class LegalDocumentComponent {
 
-  constructor(public menuService: MenuService){}
+  constructor(
+    public menuService: MenuService,
+    public data: DataService
+  ){}
 
 
   /**
@@ -18,7 +22,11 @@ export class LegalDocumentComponent {
    * @returns {void}
    */
   backToSummary(): void{
-    this.menuService.mouseEnter(1);
-    this.menuService.selectMenu(1);
+    if(!this.data.signupLegal){
+      this.menuService.mouseEnter(1);
+      this.menuService.selectMenu(1);
+    } else {
+      this.data.signupLegal = false;
+    }
   }
 }

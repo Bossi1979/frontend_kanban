@@ -119,6 +119,11 @@
     width: 0px;
 }
 
+.height100vh{
+    max-height: 100vh;
+    padding-bottom: 96px;
+}
+
 
 @media (max-width: 769px) {
     .doc{

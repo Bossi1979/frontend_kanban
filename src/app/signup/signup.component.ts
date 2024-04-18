@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/fo
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { Signup } from '../models/signup.model';
+import { DataService } from '../services/data.service';
 
 
 @Component({
@@ -45,7 +46,8 @@ export class SignupComponent {
 
   constructor(
     private router: Router,
-    private as: AuthService
+    private as: AuthService,
+    public data: DataService
   ) { }
 
 
@@ -139,5 +141,25 @@ export class SignupComponent {
     value = value.replace(value[0], value[0].toUpperCase());
     console.log('uppercase: ', value);
     return value;
+  }
+
+
+  /**
+   * Open the Privacy Policy Document
+   * 
+   * @retuns {void}
+   */
+  openPrivacy(): void {
+    this.data.signupPrivacy = true;
+  }
+
+
+  /**
+   * Open the Legal Document
+   * 
+   * @retuns {void}
+   */
+  openLegal(): void {
+    this.data.signupLegal = true;
   }
 }

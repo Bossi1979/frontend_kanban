@@ -11,6 +11,7 @@ import { Task } from '../models/task.model';
   providedIn: 'root'
 })
 export class AuthService {
+  rememberStatus: boolean = false;
 
 
   constructor(private http: HttpClient) { }

@@ -8,6 +8,8 @@ import { Task } from '../models/task.model';
 })
 export class DataService {
   selectedMenu: number = 0;
+  signupPrivacy: boolean = false;
+  signupLegal: boolean = false;
   loggedUserData: any[] = [];
   allContacts: any[] = [];
   allContacts$: any = [];
@@ -33,6 +35,7 @@ export class DataService {
   userBackgroundColor: string = '#000000';
 
 
+
   constructor(
     private as: AuthService,
   ) {
@@ -49,6 +52,7 @@ export class DataService {
    * @returns A Promise that resolves when data loading is complete.
    */
   async loadDatas() {
+    console.log(this.loggedUserData[0].id);
     await this.getContacts();
     await this.generatedAssignedList();
     await this.generateTaskList();
@@ -143,6 +147,7 @@ export class DataService {
   async generateTaskList(): Promise<void> {
     const response: any = await this.as.getAllTasks();
     this.taskList = response;
+    console.log('task list: ', this.taskList);
   }
 
 

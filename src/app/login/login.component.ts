@@ -21,6 +21,9 @@ export class LoginComponent {
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(6),
+    ]),
+    remember: new FormControl('', [
+      
     ])
   });
   localStorageItems: any[] = [
@@ -37,7 +40,9 @@ export class LoginComponent {
     private as: AuthService,
     private router: Router,
     private data: DataService
-  ) { }
+  ) { 
+    this.checkRememberStatusLocalStorage();
+  }
 
 
   /**
@@ -114,9 +119,34 @@ export class LoginComponent {
   }
 
 
-  // GuestLogin: guest@guest.de, Guest+Login-0815, Max Mustermann
+  /**
+   * Simulates a guest login by setting predefined email and password values in the login form.
+   * 
+   * @returns {void}
+   */
   guestLogin(): void {
     this.loginForm.value.email = 'guest@guest.de';
     this.loginForm.value.password = 'Guest+Login-0815';
+  }
+
+
+  rememberClicked(){
+    setTimeout(() => {
+      this.as.rememberStatus = this.loginForm.get('remember').value;
+      localStorage.setItem('remember status join:', this.as.rememberStatus.toString());
+      console.log(this.loginForm.get('remember').value);
+    }, 500);
+  }
+
+  checkRememberStatusLocalStorage(){
+    let rememberStatus = localStorage.getItem('remember status join:');
+    if (rememberStatus == 'true') {
+      this.as.rememberStatus = true;
+      this.loginForm.get('remember').setValue(true);
+      if (localStorage.getItem('email')) this.loginForm.get('email').setValue(localStorage.getItem('email'));
+    } else {
+      this.as.rememberStatus = false;
+      this.loginForm.get('remember').setValue(false);
+    }
   }
 }

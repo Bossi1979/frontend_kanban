@@ -27,13 +27,18 @@ export class JoinHeaderComponent {
    * 
    * @returns {Promise<void>} A Promise that resolves when the logout process is completed.
    */
-  async logout() {
+  async logout(): Promise<void> {
     try {
+      let email = localStorage.getItem('email');
       this.router.navigateByUrl('/login');
       let response = await this.as.logout();
       console.log(response.message);
       if (response.message == 'logout successfully') localStorage.clear();
+      localStorage.setItem('remember status join:', this.as.rememberStatus.toString());
       this.data.greetingDone = false;
+      if (this.as.rememberStatus == true){
+        localStorage.setItem('email', email);
+      }
     } catch (err) {
       alert('logout error');
     }

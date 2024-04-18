@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuService } from '../services/menu.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-privacy-document',
@@ -10,7 +11,8 @@ export class PrivacyDocumentComponent {
 
 
   constructor(
-    public menuService: MenuService
+    public menuService: MenuService,
+    public data: DataService
   ) { }
 
 
@@ -21,8 +23,13 @@ export class PrivacyDocumentComponent {
    * @returns {void}
    */
   backToSummary(): void {
-    this.menuService.mouseEnter(1);
-    this.menuService.selectMenu(1);
+    if(!this.data.signupPrivacy){
+      this.menuService.mouseEnter(1);
+      this.menuService.selectMenu(1);
+    } else {
+      this.data.signupPrivacy = false;
+    }
+   
   }
 
 }

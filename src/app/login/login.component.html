@@ -14,13 +14,6 @@
             <img src="../../assets/img/login/join_logo.png" alt="">
         </div>
     </header>
-
-
-
-
-
-
-
     <div class="loginContent">
         <form (ngSubmit)="login()" [formGroup]="loginForm">
             <h3>Log in</h3>
@@ -49,7 +42,7 @@
                     </div>
                 </div>
                 <div class="remember" style="position:relative">
-                    <input type="checkbox"> <span>Remember me</span>
+                    <input type="checkbox" formControlName="remember" (click)="rememberClicked()"> <span>Remember me</span>
                     <div *ngIf="loginFailed" class="warnContainer2">
                         <span>
                             *Email and/or Password wrong.
@@ -61,7 +54,6 @@
                 <button [disabled]="!loginForm.valid" [class.disabledBtn]="!loginForm.valid" [class.primaryBtn]="loginForm.valid">Log in</button>
                 <button class="secondaryBtn" (click)="guestLogin()">Guest Log in</button>
             </div>
-    
         </form>
     </div>
     <footer>
