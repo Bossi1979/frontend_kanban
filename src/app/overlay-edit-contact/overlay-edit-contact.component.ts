@@ -91,12 +91,11 @@ export class OverlayEditContactComponent {
         this.contact.hasAccount = this.data.allContacts[this.data.selectedContact].has_account;
         await this.contactService.setContactValues(this.contact, this.editContactForm);
         const response = await this.auth.editContact(this.contact);
-        console.log('Edit successful: ' + response);
         this.data.allContacts = response;
         await this.data.generatedAssignedList();
         this.startEditContactDoneView();
       } catch {
-        console.log('failed to edit contact');
+        alert('Failed to edit contact');
       }
     }
   }
@@ -128,7 +127,6 @@ export class OverlayEditContactComponent {
   async deleteContact(id: number, index: number): Promise<void> {
     this.closeEditContactView();
     const response = await this.auth.deleteContact(id);
-    console.log(response);
     if (response.error == 'none'){
       this.data.allContacts.splice(index, 1);
       this.data.assignedToList.splice(index, 1);

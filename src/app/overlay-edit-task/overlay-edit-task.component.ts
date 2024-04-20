@@ -90,24 +90,7 @@ export class OverlayEditTaskComponent {
     this.taskCard.subtask[subIndex].checked = !this.taskCard.subtask[subIndex].checked;
     this.data.taskList[this.data.selectedTaskIndex].subtask[subIndex].checked = this.taskCard.subtask[subIndex].checked;
     let response = await this.auth.updateTask(this.taskCard);
-    console.log(response);
   }
-
-
-  /**
-   * Deletes the current task.
-   * 
-   * @returns {Promise<void>} - A promise indicating the completion of the operation.
-   */
-  // async deleteTask(): Promise<void> {
-  //   this.closeTaskEditView();
-  //   const response = await this.auth.deleteTask(this.taskCard.id);
-  //   console.log(response);
-  //   this.startDeleteDoneView();
-  //   if (response.message == 'Task deleted successfully') {
-  //     this.data.taskList.splice(this.data.selectedTaskIndex, 1);
-  //   }
-  // }
 
 
   /**
@@ -124,7 +107,6 @@ export class OverlayEditTaskComponent {
     this.prioBtnService.isSaving = false;
     let response = await this.auth.updateTask(this.taskCard);
     this.startEditDoneView();
-    console.log(response);
   }
 
 

@@ -37,7 +37,6 @@ export class JoinComponent {
    */
   onResize(event)  {
     this.data.innerWidth = window.innerWidth;
-    console.log('resize event');
     this.resizeAction();
   }
 

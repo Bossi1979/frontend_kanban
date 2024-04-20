@@ -44,7 +44,6 @@ export class OverlayDetailViewTaskComponent {
     this.taskCard.subtask[subIndex].checked = !this.taskCard.subtask[subIndex].checked;
     this.data.taskList[this.data.selectedTaskIndex].subtask[subIndex].checked = this.taskCard.subtask[subIndex].checked;
     let response = await this.auth.updateTask(this.taskCard);
-    console.log(response);
   }
 
 
@@ -57,7 +56,6 @@ export class OverlayDetailViewTaskComponent {
     this.closeTaskDetailView();
     this.startDeleteDoneView();
     const response = await this.auth.deleteTask(this.taskCard.id);
-    console.log(response);
     if (response.message == 'Task deleted successfully') {
       this.data.taskList.splice(this.data.selectedTaskIndex, 1);
     }

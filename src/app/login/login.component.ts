@@ -139,7 +139,6 @@ export class LoginComponent {
     setTimeout(() => {
       this.as.rememberStatus = this.loginForm.get('remember').value;
       localStorage.setItem('remember status join:', this.as.rememberStatus.toString());
-      console.log(this.loginForm.get('remember').value);
     }, 500);
   }
 

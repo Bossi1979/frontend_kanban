@@ -60,7 +60,6 @@ export class SubtasksService {
       let newSubtask: string = subtask.trim();
       let checked: boolean = false;
       this.subtasksList.push({ subtask: newSubtask, checked: checked });
-      console.log('subtaskList: ', this.subtasksList);
       this.activeForm.get('subtask').setValue('');
       this.activatedSubtaskEdit();
     }
@@ -104,7 +103,6 @@ export class SubtasksService {
    * @returns {void}
    */
   btnPressed(event: any): void {
-    console.log(event.keyCode);
     if (this.enterBtnKeyup(event)) this.addSubtask();
     if (this.escBtnKeyup(event)) this.closeAddSubtask();
   }

@@ -118,7 +118,6 @@ export class AddTaskComponent {
   async saveTask(): Promise<void> {
     const taskData: any = await this.createTaskDataForSave();
     let response = await this.as.saveTask(taskData);
-    console.log(response);
     if (this.data.selectedMenu == 2) {
       await this.data.generateTaskList();
       this.data.tasksFindingsList = this.data.taskList.slice();

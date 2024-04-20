@@ -52,7 +52,6 @@ export class DataService {
    * @returns A Promise that resolves when data loading is complete.
    */
   async loadDatas() {
-    console.log(this.loggedUserData[0].id);
     await this.getContacts();
     await this.generatedAssignedList();
     await this.generateTaskList();
@@ -124,7 +123,6 @@ export class DataService {
     if (contactIndex >= 0) {
       this.userBackgroundColor = this.allContacts[contactIndex].background_color;
     }
-    console.log('contact Index: ', contactIndex)
   }
 
 
@@ -135,7 +133,6 @@ export class DataService {
    */
   async generatedAssignedList(): Promise<void> {
     this.assignedToList = this.allContacts.slice();
-    console.log('assigned to list: ', this.assignedToList);
   }
 
 
@@ -147,7 +144,6 @@ export class DataService {
   async generateTaskList(): Promise<void> {
     const response: any = await this.as.getAllTasks();
     this.taskList = response;
-    console.log('task list: ', this.taskList);
   }
 
 

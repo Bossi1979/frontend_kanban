@@ -69,7 +69,6 @@ export class ContactsComponent {
    */
   async deleteContact(id: number, index: number): Promise<void> {
     const response = await this.auth.deleteContact(id);
-    console.log(response);
     if (response.error == 'none'){
       this.data.allContacts.splice(index, 1);
       this.data.assignedToList.splice(index, 1);

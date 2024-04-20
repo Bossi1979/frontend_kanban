@@ -83,7 +83,7 @@ export class OverlayAddContactComponent {
         await this.data.generatedAssignedList();
         this.resetValues();
       } catch (err) {
-        console.log('failed to save newContact');
+        alert('Failed to save newContact');
       }
     }
   }
