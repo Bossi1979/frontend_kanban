@@ -32,13 +32,10 @@ export class JoinHeaderComponent {
       let email = localStorage.getItem('email');
       this.router.navigateByUrl('/login');
       let response = await this.as.logout();
-      console.log(response.message);
       if (response.message == 'logout successfully') localStorage.clear();
       localStorage.setItem('remember status join:', this.as.rememberStatus.toString());
       this.data.greetingDone = false;
-      if (this.as.rememberStatus == true){
-        localStorage.setItem('email', email);
-      }
+      if (this.as.rememberStatus == true) localStorage.setItem('email', email);
     } catch (err) {
       alert('logout error');
     }

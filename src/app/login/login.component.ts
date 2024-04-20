@@ -23,7 +23,7 @@ export class LoginComponent {
       Validators.minLength(6),
     ]),
     remember: new FormControl('', [
-      
+
     ])
   });
   localStorageItems: any[] = [
@@ -40,7 +40,7 @@ export class LoginComponent {
     private as: AuthService,
     private router: Router,
     private data: DataService
-  ) { 
+  ) {
     this.checkRememberStatusLocalStorage();
   }
 
@@ -53,10 +53,10 @@ export class LoginComponent {
   async login(): Promise<any> {
     try {
       let response = await this.as.loginWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password);
-      if (response['token'] != "undefined") this.loginSuccessAction(response);
+      if (response['token'] != undefined) this.loginSuccessAction(response);
       else if (response['error'] == 'Login failed') this.showEmailAndOrPasswordWrongMessage();
     } catch (e) {
-      alert('Login failed');
+      alert(e.statusText);
     }
   }
 
@@ -130,7 +130,12 @@ export class LoginComponent {
   }
 
 
-  rememberClicked(){
+  /**
+   * Function to update remember status after a delay.
+   * 
+   * @returns {void}
+   */
+  rememberClicked(): void {
     setTimeout(() => {
       this.as.rememberStatus = this.loginForm.get('remember').value;
       localStorage.setItem('remember status join:', this.as.rememberStatus.toString());
@@ -138,7 +143,13 @@ export class LoginComponent {
     }, 500);
   }
 
-  checkRememberStatusLocalStorage(){
+
+  /**
+   * Function to check remember status from local storage and update form accordingly.
+   * 
+   * @returns {void}
+   */
+  checkRememberStatusLocalStorage(): void {
     let rememberStatus = localStorage.getItem('remember status join:');
     if (rememberStatus == 'true') {
       this.as.rememberStatus = true;

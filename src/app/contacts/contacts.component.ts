@@ -10,7 +10,10 @@ import { AuthService } from '../services/auth.service';
 export class ContactsComponent {
 
 
-  constructor(public data: DataService, private auth: AuthService) { }
+  constructor(
+    public data: DataService, 
+    private auth: AuthService,
+  ) { }
 
 
   /**
@@ -90,8 +93,13 @@ export class ContactsComponent {
     }, 2600);
   }
 
+  
+  /**
+   * Resets the selected contact.
+   * 
+   * @returns {void}
+   */
   backToListView(): void {
     this.data.selectedContact = -1;
-    console.log(this.data.selectedContact);
   }
 }

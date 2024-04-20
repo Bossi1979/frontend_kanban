@@ -139,7 +139,6 @@ export class SignupComponent {
    */
   firstLetterToUpperCase(value: string): string {
     value = value.replace(value[0], value[0].toUpperCase());
-    console.log('uppercase: ', value);
     return value;
   }
 

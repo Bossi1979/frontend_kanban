@@ -8,21 +8,27 @@ import { DataService } from '../services/data.service';
   styleUrl: './overlay-add-task.component.scss'
 })
 export class OverlayAddTaskComponent {
-  
+
 
   constructor(
     public data: DataService,
-    ){
-      this.data.generatedAssignedList();
-    }
+  ) {
+    this.data.generatedAssignedList();
+  }
 
 
-    closeAddTaskPopup(): void{
-      this.data.slideOut = true;
-      setTimeout(() => {
-        this.data.startBoardAddTaskView = false;
-        this.data.shadowView = false;
-        this.data.slideOut = false;
-      }, 1100);
-    }
+  /**
+   * Closes the add task popup by setting slideOut to true, then after a delay of 1100 milliseconds,
+   * sets startBoardAddTaskView, shadowView, and slideOut to false to hide the popup.
+   * 
+   * @returns {void}
+   */
+  closeAddTaskPopup(): void {
+    this.data.slideOut = true;
+    setTimeout(() => {
+      this.data.startBoardAddTaskView = false;
+      this.data.shadowView = false;
+      this.data.slideOut = false;
+    }, 1100);
+  }
 }

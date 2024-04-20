@@ -28,19 +28,28 @@ export class JoinComponent {
 
 
   @HostListener('window:resize', ['$event'])
-  onResize(event) {
+
+  /**
+   * Handles the resize event by updating the innerWidth property with the current window inner width,
+   * logging the resize event to the console, and calling the resizeAction method.
+   * 
+   * @param event The resize event object.
+   */
+  onResize(event)  {
     this.data.innerWidth = window.innerWidth;
     console.log('resize event');
     this.resizeAction();
   }
 
 
+  /**
+   * Adjusts the view based on the innerWidth property.
+   * If the innerWidth is greater than 1400, sets shadowView to false and slideOutSidebar to true.
+   */
   resizeAction(){
     if (this.data.innerWidth > 1400){
       this.data.shadowView = false;
       this.menuService.slideOutSidebar = true;
-    } else {
-      
     }
   }
 

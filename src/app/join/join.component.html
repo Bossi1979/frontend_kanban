@@ -12,7 +12,7 @@
         <app-overlay-add-task *ngIf="data.startBoardAddTaskView"></app-overlay-add-task>
     </div>
     <div class="messageOverlay" *ngIf="data.messageOverlayView">
-        <app-overlay-add-contact-done *ngIf="data.addContactDoneView"></app-overlay-add-contact-done>
+        <app-sliding-messages *ngIf="data.addContactDoneView"></app-sliding-messages>
     </div>
     <div class="d-none" [class.greetingShadow]="data.innerWidth <= 1100 && data.selectedMenu == 1 && !data.greetingDone">
         <div class="greeting">

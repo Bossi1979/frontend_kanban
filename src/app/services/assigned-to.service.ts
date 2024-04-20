@@ -80,6 +80,8 @@ export class AssignedToService {
 
   /**
    * Resets the assigned contacts to their initial state and disables the assignment button.
+   * 
+   * @returns {void}
    */
   resetAssignTo(): void {
     this.assignBtnDisabled = true;

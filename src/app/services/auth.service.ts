@@ -19,9 +19,9 @@ export class AuthService {
 
   /**
    * Logs in with email and password.
+   * 
    * @param email The user's email address.
    * @param password The user's password.
-   * 
    * @returns A Promise that resolves with the login response.
    */
   public async loginWithEmailAndPassword(email: string, password: string): Promise<any> {

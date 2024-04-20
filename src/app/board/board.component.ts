@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { Task } from '../models/task.model';
 import { AuthService } from '../services/auth.service';

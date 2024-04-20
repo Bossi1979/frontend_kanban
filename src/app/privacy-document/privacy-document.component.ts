@@ -29,7 +29,5 @@ export class PrivacyDocumentComponent {
     } else {
       this.data.signupPrivacy = false;
     }
-   
   }
-
 }

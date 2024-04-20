@@ -8,6 +8,7 @@ import { DataService } from '../services/data.service';
   styleUrl: './legal-document.component.scss'
 })
 export class LegalDocumentComponent {
+  
 
   constructor(
     public menuService: MenuService,

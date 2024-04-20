@@ -14,5 +14,4 @@ export class MobilBottomMenuComponent {
     public menuService: MenuService,
     public data: DataService,
     ){ }
-
 }

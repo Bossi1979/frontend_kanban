@@ -26,5 +26,4 @@ export class HelpDocumentComponent {
     this.menuService.mouseEnter(1);
     this.menuService.selectMenu(1);
   }
-
 }
