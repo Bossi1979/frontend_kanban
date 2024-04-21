@@ -89,7 +89,7 @@
         <div class="assignToList">
             <div *ngFor="let contact of data.assignedToList; let i = index;">
                 <div class="bageItem" [style.background-color]="contact.background_color" *ngIf="contact.checked">
-                    <span>{{contact.name_abbreviation}}</span>
+                    <span [title]="contact.firstname + ' ' + contact.lastname + '\n' + contact.email">{{contact.name_abbreviation}}</span>
                 </div>
             </div>
         </div>

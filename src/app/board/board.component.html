@@ -65,7 +65,7 @@
                                 <div class="bage" *ngFor="let assigned of task.assigned_to; let x = index"
                                     [style.background-color]="assigned.background_color"
                                     [style.margin-left]="x !=0 ? '-10px' : '0px'">
-                                    <span>{{assigned.name_abbreviation}}</span>
+                                    <span [title]="assigned.firstname + ' ' + assigned.lastname + '\n' + assigned.email">{{assigned.name_abbreviation}}</span>
                                 </div>
                             </div>
                             <div class="prio">
@@ -133,7 +133,7 @@
                                 <div class="bage" *ngFor="let assigned of task.assigned_to; let x = index"
                                     [style.background-color]="assigned.background_color"
                                     [style.margin-left]="x !=0 ? '-10px' : '0px'">
-                                    <span>{{assigned.name_abbreviation}}</span>
+                                    <span [title]="assigned.firstname + ' ' + assigned.lastname + '\n' + assigned.email">{{assigned.name_abbreviation}}</span>
                                 </div>
                             </div>
                             <div class="prio">
@@ -202,7 +202,7 @@
                                 <div class="bage" *ngFor="let assigned of task.assigned_to; let x = index"
                                     [style.background-color]="assigned.background_color"
                                     [style.margin-left]="x !=0 ? '-10px' : '0px'">
-                                    <span>{{assigned.name_abbreviation}}</span>
+                                    <span [title]="assigned.firstname + ' ' + assigned.lastname + '\n' + assigned.email">{{assigned.name_abbreviation}}</span>
                                 </div>
                             </div>
                             <div class="prio">
@@ -269,7 +269,7 @@
                                 <div class="bage" *ngFor="let assigned of task.assigned_to; let x = index"
                                     [style.background-color]="assigned.background_color"
                                     [style.margin-left]="x !=0 ? '-10px' : '0px'">
-                                    <span>{{assigned.name_abbreviation}}</span>
+                                    <span [title]="assigned.firstname + ' ' + assigned.lastname + '\n' + assigned.email">{{assigned.name_abbreviation}}</span>
                                 </div>
                             </div>
                             <div class="prio">
