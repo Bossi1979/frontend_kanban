@@ -25,6 +25,7 @@ import { LegalDocumentComponent } from './legal-document/legal-document.componen
 import { OverlayAddTaskComponent } from './overlay-add-task/overlay-add-task.component';
 import { MobilBottomMenuComponent } from './mobil-bottom-menu/mobil-bottom-menu.component';
 import { SlidingMessagesComponent } from './sliding-messages/sliding-messages.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { SlidingMessagesComponent } from './sliding-messages/sliding-messages.co
       useClass: AuthInterceptorService,
       multi: true
      },
+     {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })

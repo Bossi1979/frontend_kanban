@@ -42,6 +42,7 @@ export class LoginComponent {
     private data: DataService
   ) {
     this.checkRememberStatusLocalStorage();
+    console.log('login initialized');
   }
 
 
